@@ -18,9 +18,9 @@ function Navigation() {
       </li>
       {user && (
         <li>
-          {user.profileUrl?
+          {user.profileImg?
           <img
-            src={user.profileUrl}
+            src={user.profileImg}
             style={{height: "70px", width: '70px', borderRadius: "50%"}}
           />: null}
         </li>
