@@ -42,8 +42,8 @@ app.use(
 );
 
 //apply middleware to allow for usage of static react app from build
-app.use(express.static(path.join(__dirname, "react-app")));
-app.use(express.static(path.join(__dirname, 'react-app/assets/favicon.ico')));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.use(express.static(path.join(__dirname, '../frontend/dist/favicon.ico')));
 
 
 app.use(routes); // Connect all the routes
