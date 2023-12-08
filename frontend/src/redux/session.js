@@ -79,29 +79,38 @@ export const thunkLogout = () => async (dispatch) => {
 
 export const updateUserThunk = (userId, form) => async (dispatch) => {
     const { img_url } = form
-    const formData = new FormData();
+    try{
 
-    formData.append("profile_url", img_url);
+        const formData = new FormData();
 
-    const option = {
-        method: "PUT",
-        body: formData
-    }
+        formData.append('userId', userId)
+        formData.append("image", img_url);
 
-    const response = await csrfFetch(`/api/users/${userId}/update`, option);
-    if (response.ok) {
-        const user = await response.json();
-        dispatch(editUser(user));
-
-    } else if (response.status < 500) {
-        const data = await response.json();
-        if (data.errors) {
-            return data;
-        } else {
-            return ['An error occured. Please try again.']
+        const option = {
+            method: "PUT",
+            headers: { 'Content-Type': 'multipart/form-data' },
+            body: formData
         }
+
+
+
+        const response = await csrfFetch(`/api/users/${userId}/update`, option);
+        if (response.ok) {
+            const user = await response.json();
+            dispatch(editUser(user));
+
+        } else if (response.status < 500) {
+            const data = await response.json();
+            if (data.errors) {
+                return data
+            } else {
+                throw new Error('An error occured. Please try again.')
+            }
+        }
+        return response;
+    } catch(e){
+        return e
     }
-    return response;
 }
 
 const initialState = { user: null };
@@ -115,7 +124,7 @@ function sessionReducer(state = initialState, action) {
             return { ...state, user: null };
         case EDIT_USER:
             newState = JSON.parse(JSON.stringify(initialState));
-            newState.user = action.payload.user
+            newState.user = action.payload
             return newState
         default:
             return state;
