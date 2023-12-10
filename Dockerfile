@@ -33,28 +33,23 @@ ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 # Fill out this out (or change node_env to development if running local docker testing) on render/docker
-ARG SCHEMA
+ARG SCHEMA=skely
 ENV SCHEMA=${SCHEMA}
 
 # Fill this out on render using internal db url, or external url if running locally on docker
-ARG DATABASE_URL
+ARG DATABASE_URL=postgres://anthony_database_user:7gPQb5LJmzndygVlo33nArPsaJwwyNXl@dpg-clihn6lkt82s73fctb90-a.ohio-postgres.render.com/anthony_database
+#schema for render
 ENV DATABASE_URL=${DATABASE_URL}
 
 # Fill this out on render/docker
-ARG JWT_SECRET
+ARG JWT_SECRET=secretkey
 ENV JWT_SECRET=${JWT_SECRET}
 
 # 1 week JWT. Pre-filled in to avoid having to do this in render
 ARG JWT_EXPIRES_IN=60400
 ENV JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
 
-#AWS
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
-ARG AWS_BUCKET_NAME
-
 WORKDIR /var/www
-
 
 COPY /backend/package.json .
 COPY /backend/.sequelizerc .
