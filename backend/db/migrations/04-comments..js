@@ -18,7 +18,6 @@ module.exports = {
             userId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-
             },
             postId: {
                 type: Sequelize.INTEGER,
