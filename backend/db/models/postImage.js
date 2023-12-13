@@ -10,13 +10,17 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            PostImage.belongsTo(models.Post, { foreignKey: "postId" })
         }
     }
     PostImage.init({
         postId: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'Posts',
+                key: 'id'
+            }
         },
         url: {
             type: DataTypes.STRING,

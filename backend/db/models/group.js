@@ -10,17 +10,26 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            Group.belongsTo(models.User, { foreignKey: 'userId' });
+            Group.hasMany(models.Post, { foreignKey: 'postId' });
         }
     }
     Group.init({
         userId: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'Users',
+                key: 'id'
+            }
         },
         postId: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'Posts',
+                key: 'id'
+            }
         },
         name: {
             type: DataTypes.STRING,
