@@ -3,6 +3,7 @@ const { restoreUser, requireAuth, setTokenCookie } = require('../../utils/auth.j
 const { User } = require('../../db/models');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const postsRouter = require('./posts.js');
 
 
 //You can use requireAuth as middleware for routes that require sign in
@@ -12,6 +13,7 @@ router.use(restoreUser);
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/posts', postsRouter);
 
 
 // Restore user

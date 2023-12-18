@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             Group.belongsTo(models.User, { foreignKey: 'userId' });
-            Group.hasMany(models.Post, { foreignKey: 'postId' });
+            Group.hasMany(models.Post, { foreignKey: 'categoryId' });
         }
     }
     Group.init({
@@ -20,14 +20,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             references: {
                 model: 'Users',
-                key: 'id'
-            }
-        },
-        postId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'Posts',
                 key: 'id'
             }
         },
