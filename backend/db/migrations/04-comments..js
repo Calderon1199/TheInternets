@@ -18,10 +18,24 @@ module.exports = {
             userId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                references: {
+                    model: {
+                        tableName: 'Users',
+                        schema: options.schema
+                    },
+                    key: 'id'
+                },
             },
             postId: {
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: {
+                        tableName: 'Posts',
+                        schema: options.schema
+                    },
+                    key: 'id'
+                },
             },
             comment: {
                 type: Sequelize.TEXT,
@@ -38,6 +52,18 @@ module.exports = {
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
             }
         });
+
+        // await queryInterface.addColumn('Posts', 'categoryId', {
+        //     type: Sequelize.INTEGER,
+        //     allowNull: false,
+        //     references: {
+        //         model: {
+        //             tableName: 'Groups',
+        //             schema: options.schema
+        //         },
+        //         key: 'id'
+        //     },
+        // });
     },
     async down(queryInterface, Sequelize) {
         await queryInterface.dropTable(options);

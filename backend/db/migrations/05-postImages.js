@@ -17,7 +17,14 @@ module.exports = {
             },
             postId: {
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: {
+                        tableName: 'Posts',
+                        schema: options.schema
+                    },
+                    key: 'id'
+                },
             },
             url: {
                 type: Sequelize.STRING,

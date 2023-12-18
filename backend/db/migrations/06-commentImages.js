@@ -17,7 +17,14 @@ module.exports = {
             },
             commentId: {
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: {
+                        tableName: 'Comments',
+                        schema: options.schema
+                    },
+                    key: 'id'
+                },
             },
             url: {
                 type: Sequelize.STRING,
