@@ -17,25 +17,21 @@ module.exports = {
         return queryInterface.bulkInsert(options, [
             {
                 userId: 1,
-                postId: 2,
                 name: 'computer community',
                 description: 'This is the computer community.'
             },
             {
                 userId: 2,
-                postId: 3,
                 name: 'cybersecurity community',
                 description: 'This is the cybersecurity community.'
             },
             {
                 userId: 2,
-                postId: 2,
                 name: 'dev ops community',
                 description: 'This is the dev ops community.'
             },
             {
-                userId: 5,
-                postId: 2,
+                userId: 3,
                 name: 'javascript community',
                 description: 'This is the js community.'
             },

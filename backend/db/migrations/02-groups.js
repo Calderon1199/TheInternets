@@ -1,9 +1,9 @@
 'use strict';
 
 let options = {};
-options.tableName = 'Posts';
+options.tableName = 'Groups';
 if (process.env.NODE_ENV === 'production') {
-    options.schema = process.env.SCHEMA;  // define your schema in options object
+    options.schema = process.env.SCHEMA;
 }
 
 module.exports = {
@@ -18,17 +18,19 @@ module.exports = {
             userId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-
+                references: {
+                    model: {
+                        tableName: 'Users',
+                        schema: options.schema
+                    },
+                    key: 'id'
+                },
             },
-            categoryId: {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            title: {
+            name: {
                 type: Sequelize.STRING,
                 allowNull: false
             },
-            postText: {
+            description: {
                 type: Sequelize.TEXT,
                 allowNull: false
             },
