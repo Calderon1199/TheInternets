@@ -90,7 +90,6 @@ export const editPost = (postId, newPostData) => async (dispatch) => {
         if (response.ok) {
             const updatedPost = await response.json();
             dispatch(EditPostById(updatedPost));
-            dispatch(getPosts())
             return updatedPost;
         }
     } catch (error) {
@@ -169,6 +168,9 @@ function postReducer(state = initialState, action) {
                 byId: {
                     ...state.byId,
                     [action.payload.id]: action.payload
+                },
+                singlePost: {
+                    [action.payload.id]: action.payload
                 }
             };
             return newState;
@@ -178,6 +180,12 @@ function postReducer(state = initialState, action) {
         case DELETE_POST_BY_ID:
             newState = {
                 ...state,
+                allPosts: state.allPosts.filter((post) => post.id !== action.payload),
+                byId: {
+                    ...state.byId,
+                    [action.payload.id]: action.payload
+                },
+                singlePost: state.singlePost.id === action.payload ? {} : state.singlePost,
                 userPosts: state.userPosts.filter((post) => post.id !== action.payload)
             };
             return newState;
