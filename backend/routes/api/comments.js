@@ -96,8 +96,8 @@ router.delete('/:comment_id', requireAuth, async (req, res, next) => {
         const commentId = req.params.comment_id;
         const commentToDelete = await Comment.findByPk(+commentId);
 
-        if (!commentToDelete) res.status(404).json({message: "Comment not found." });
-        if (commentToDelete.userId !== +userId) res.status(403).json({ message: "Forbidden" });
+        if (!commentToDelete) return res.status(404).json({message: "Comment not found." });
+        if (commentToDelete.userId !== +userId) return res.status(403).json({ message: "Forbidden" });
 
         await commentToDelete.destroy();
 
