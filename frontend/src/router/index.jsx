@@ -5,6 +5,7 @@ import CreatePostForm from '../components/MainPosts/CreatePostForm';
 import PostView from '../components/MainPosts/PostView/PostView';
 import Layout from './Layout';
 import Splash from '../components/Splash';
+import ProfilePage from '../components/ProfilePage';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "posts/:postId",
         element: <PostView />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
       },
     ],
   },

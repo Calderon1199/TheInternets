@@ -1,3 +1,38 @@
 .profile-dropdown {
     position: absolute;
 }
+
+.NavLink {
+    text-decoration: none;
+    color: white;
+}
+
+.Nav-Container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Nav-Options {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto 50px
+}
+
+
+.Right-Side-Navigation {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto 50px
+}
