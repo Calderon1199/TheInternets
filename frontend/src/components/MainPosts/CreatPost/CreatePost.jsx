@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-function CreatePostInput(user) {
+function CreatePostInput({ user }) {
     const navigate = useNavigate();
 
     const redirectToCreate = () => {
