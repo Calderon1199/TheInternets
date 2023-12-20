@@ -1,0 +1,11 @@
+.Main-Page {
+    margin: 0 auto;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    background-color: #313338;
+}
