@@ -5,6 +5,7 @@ const { Post } = require('../../db/models');
 const { Comment } = require('../../db/models');
 const { PostImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
+const { Group } = require('../../db/models');
 
 const router = express.Router();
 
@@ -50,6 +51,7 @@ router.get('/', async (req, res, next) => {
 
 });
 
+
 router.get('/user', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
@@ -63,7 +65,20 @@ router.get('/user', requireAuth, async (req, res, next) => {
     }
 })
 
-router.post('/submit', requireAuth, validatePost, async (req, res, next) => {
+router.get('/:post_id', async (req, res, next) => {
+    try {
+        const postId = req.params.post_id;
+        const singlePost = await Post.findByPk(+postId);
+
+        if (!singlePost) res.status(404).json({ message: "Post not found." })
+        res.status(200).json(singlePost);
+    } catch (error) {
+        next(error);
+    }
+
+});
+
+router.post('/submit', requireAuth, async (req, res, next) => {
     try {
         const { title, postText, categoryId} = req.body;
         const userId = req.user.id;
@@ -76,15 +91,18 @@ router.post('/submit', requireAuth, validatePost, async (req, res, next) => {
     }
 });
 
-router.put('/:post_id', requireAuth, validatePost, async (req, res, next) => {
+router.put('/:post_id', requireAuth, async (req, res, next) => {
     try {
         const postId = req.params.post_id;
         const userId = req.user.id;
         const newData = req.body;
 
-        const post = await Post.findByPk(+postId, { include: [Comment, Post]});
+        const post = await Post.findByPk(+postId);
+        const categoryCheck = await Group.findByPk(+newData.categoryId);
+
 
         if (!post) res.status(404).json({ message: "Post not found" })
+        if (!categoryCheck) res.status(404).json({ message: "Category not found"})
 
         if (post.userId !== userId) {
             return res.status(403).json({ message: "Forbidden" });
@@ -94,7 +112,7 @@ router.put('/:post_id', requireAuth, validatePost, async (req, res, next) => {
             ...newData,
         });
 
-        const updatedPost = await Post.findByPk(postId);
+        const updatedPost = await Post.findByPk(+postId);
 
         res.status(201).json(updatedPost);
     } catch(error) {
