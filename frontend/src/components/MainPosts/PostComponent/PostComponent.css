@@ -1,0 +1,12 @@
+.Post-Tile-Inner-Container {
+    height: 415px;
+    width: 600px;
+    background-color: #1a1a1b;
+    margin: 10px 0;
+}
+
+.Post-Tile-Container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
