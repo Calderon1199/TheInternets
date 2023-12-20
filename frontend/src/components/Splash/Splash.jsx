@@ -14,7 +14,7 @@ const Splash = () => {
   useEffect(() => {
     dispatch(getComments());
     dispatch(getPosts())
-  }, [])
+  }, [dispatch])
 
   const edit = () => {
     dispatch(createComment(5, { comment: commentText }))
