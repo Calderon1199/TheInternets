@@ -175,7 +175,10 @@ function commentReducer(state = initialState, action) {
                 byId: {
                     ...state.byId,
                     [action.payload.id]: action.payload
-                }
+                },
+                postComments: state.postComments.map((comment) =>
+                    comment.id === action.payload.id ? action.payload : comment
+                ),
             };
             return newState;
         case ADD_NEW_COMMENT:
