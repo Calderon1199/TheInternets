@@ -10,6 +10,7 @@ function CommentTile() {
   const [commentText, setCommentText] = useState({});
   const [isEditing, setIsEditing] = useState({});
   const comments = useSelector((state) => state.comments.postComments);
+  const user = useSelector((state) => state.session.user);
 
   const handleEditComment = (commentId) => {
     const updatedCommentData = {
@@ -59,20 +60,22 @@ function CommentTile() {
             ) : (
               <div>
                 <p>{comment.comment}</p>
-                <button
-                  onClick={() => {
-                    setCommentText((prevCommentText) => ({
-                      ...prevCommentText,
-                      [comment.id]: comment.comment,
-                    }));
-                    setIsEditing((prevIsEditing) => ({
-                      ...prevIsEditing,
-                      [comment.id]: true,
-                    }));
-                  }}
-                >
-                  Edit Comment
-                </button>
+                {user && user.id === comment.userId && (
+                    <button
+                    onClick={() => {
+                        setCommentText((prevCommentText) => ({
+                        ...prevCommentText,
+                        [comment.id]: comment.comment,
+                        }));
+                        setIsEditing((prevIsEditing) => ({
+                        ...prevIsEditing,
+                        [comment.id]: true,
+                        }));
+                    }}
+                    >
+                    Edit Comment
+                    </button>
+                )}
               </div>
             )}
           </div>

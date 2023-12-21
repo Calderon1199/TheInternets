@@ -36,6 +36,7 @@ module.exports = {
                     },
                     key: 'id'
                 },
+                onDelete: 'CASCADE'
             },
             comment: {
                 type: Sequelize.TEXT,
@@ -52,18 +53,6 @@ module.exports = {
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
             }
         });
-
-        // await queryInterface.addColumn('Posts', 'categoryId', {
-        //     type: Sequelize.INTEGER,
-        //     allowNull: false,
-        //     references: {
-        //         model: {
-        //             tableName: 'Groups',
-        //             schema: options.schema
-        //         },
-        //         key: 'id'
-        //     },
-        // });
     },
     async down(queryInterface, Sequelize) {
         await queryInterface.dropTable(options);
