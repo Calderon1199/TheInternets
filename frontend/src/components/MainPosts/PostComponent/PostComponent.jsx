@@ -1,9 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import CreatePostInput from '../CreatPost';
 import { deletePost, editPost } from '../../../redux/post';
 import './PostComponent.css';
-import CreatePostInput from '../CreatPost';
-import { useNavigate } from 'react-router-dom';
 
 function PostTile({posts}) {
     const dispatch = useDispatch();
