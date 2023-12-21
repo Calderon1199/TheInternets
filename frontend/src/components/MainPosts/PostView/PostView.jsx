@@ -3,6 +3,8 @@ import "./PostView.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { deletePost, editPost, getSinglePost } from '../../../redux/post';
+import CommentInputForm from '../../Comments/CommentInputForm';
+import CommentTile from '../../Comments/CommentTile';
 
 
 function PostView() {
@@ -13,7 +15,7 @@ function PostView() {
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(true);
     const [postText, setPostText] = useState("");
-    const post = useSelector(state => state.posts?.singlePost)
+    const post = useSelector(state => state.posts?.singlePost);
 
     useEffect(() => {
         dispatch(getSinglePost(+postId));
@@ -41,8 +43,8 @@ function PostView() {
 
 
     return (
-        <div className='Post-Tile-Container'>
-            <div className='Post-Tile-Inner-Container'>
+        <div className=''>
+            <div className=''>
                     <div>
                         <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>
 
@@ -63,6 +65,10 @@ function PostView() {
                             <button onClick={() => setEditing(true)}>Edit Post</button>
                         </div>
                     )}
+                </div>
+                <div>
+                    <CommentInputForm user={user} postId={postId} />
+                    <CommentTile />
                 </div>
         </div>
     );
