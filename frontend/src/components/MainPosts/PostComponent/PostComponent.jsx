@@ -10,7 +10,7 @@ function PostTile({posts}) {
     const [editing, setEditing] = useState(false);
     const [postText, setPostText] = useState("");
     const navigate = useNavigate();
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user);
 
     const visitPost = (postId) => {
         navigate(`/posts/${+postId}`)
@@ -50,7 +50,7 @@ function PostTile({posts}) {
                             <p onClick={() => visitPost(post.id)}>{post.postText}</p>
                         )}
                         <div>
-                            <button>{post.Comments.length}{post.Comments.length === 1 ? "Comment" : "Comments"}</button>
+                            <button onClick={() => visitPost(post.id)}>{post.Comments.length}{post.Comments.length === 1 ? "Comment" : "Comments"}</button>
                         </div>
                     </div>
                     {post.userId === user.id && (

@@ -42,17 +42,18 @@ router.get('/user', requireAuth, async (req, res, next) => {
     }
 });
 
-router.get('/:comment_id', async (req, res, next) => {
+router.get('/:post_id', async (req, res, next) => {
     try {
-        const commentId = req.params.comment_id;
-        const comment = await Comment.findByPk(+commentId);
+        const postId = req.params.post_id;
+        const comment = await Comment.findAll( { where: { postId: postId} });
 
         if (!comment) res.status(404).json({ message: "Comment not found" })
-        res.status(200).json(comment);
+        res.status(200).json({Comments: comment });
     } catch (error) {
         next(error);
     }
 });
+
 
 router.post('/:post_id', requireAuth, validateComment, async (req, res, next) => {
     try {

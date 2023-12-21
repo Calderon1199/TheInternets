@@ -4,11 +4,17 @@ import { csrfFetch } from './csrf';
 const ADD_NEW_COMMENT = 'session/ADD_NEW_COMMENT';
 const GET_ALL_COMMENTS = 'session/GET_ALL_COMMENTS';
 const GET_USER_COMMENTS = 'session/GET_USER_COMMENTS';
+const GET_POST_COMMENTS = 'session/GET_POST_COMMENTS';
 const EDIT_COMMENT_BY_ID = 'session/EDIT_COMMENT_BY_ID';
 const DELETE_COMMENT_BY_ID = 'session/DELETE_COMMENT_BY_ID';
 
 const loadAllComments = (comments) => ({
     type: GET_ALL_COMMENTS,
+    payload: comments
+});
+
+const loadPostComments = (comments) => ({
+    type: GET_POST_COMMENTS,
     payload: comments
 });
 
@@ -32,7 +38,7 @@ const DeleteCommentById = (deletedComment) => ({
     payload: deletedComment
 });
 
-const initialState = { allComments: [], byId: {} };
+const initialState = { allComments: [], byId: {}, postComments: [] };
 
 
 export const getComments = () => async (dispatch) => {
@@ -42,6 +48,19 @@ export const getComments = () => async (dispatch) => {
             const comments = await response.json();
             dispatch(loadAllComments(comments.Comments));
             return comments;
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getCommentsForPost = (postId) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/comments/${postId}`);
+        if (response.ok) {
+            const comments = await response.json();
+            dispatch(loadPostComments(comments.Comments));
+            return comments
         }
     } catch (error) {
         throw error;
@@ -127,6 +146,13 @@ function commentReducer(state = initialState, action) {
             } else {
                 return state;
             }
+        case GET_POST_COMMENTS:
+            if (action.payload) {
+                return {
+                    ...state,
+                    postComments: action.payload,
+                }
+            }
         case GET_USER_COMMENTS:
             if (action.payload) {
                 return {
@@ -159,7 +185,8 @@ function commentReducer(state = initialState, action) {
                 byId: {
                     ...state.byId,
                     [action.payload.id]: action.payload
-                }
+                },
+                postComments: [...state.postComments, action.payload]
             };
             return newState;
         case DELETE_COMMENT_BY_ID:
