@@ -1,0 +1,24 @@
+.Create-Post-Bar {
+    width: 100%;
+    background-color: #1a1a1b;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 60px;
+}
+
+/*
+.Post-Bar-Avatar */
+
+
+.Create-Post-Input input{
+    width: 450px;
+    height: 30px;
+    background-color: #272729;
+    border: 1px solid rgb(59, 59, 59);
+}
+
+.Create-Post-Input input::placeholder {
+    padding-left: 10px;
+}
