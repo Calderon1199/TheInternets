@@ -33,9 +33,9 @@ const CreateNewComment = (newComment) => ({
     payload: newComment
 });
 
-const DeleteCommentById = (deletedComment) => ({
+const DeleteCommentById = (deletedCommentId) => ({
     type: DELETE_COMMENT_BY_ID,
-    payload: deletedComment
+    payload: deletedCommentId
 });
 
 const initialState = { allComments: [], byId: {}, postComments: [] };
@@ -104,9 +104,8 @@ export const deleteComment = (commentId) => async (dispatch) => {
         });
         if (response.ok) {
             const deletedComment = await response.json();
-            dispatch(DeleteCommentById(deletedComment));
-            dispatch(getComments())
-            return deleteComment;
+            dispatch(DeleteCommentById(+commentId));
+            return deletedComment;
         }
     } catch (error) {
         throw error;
@@ -193,7 +192,16 @@ function commentReducer(state = initialState, action) {
             };
             return newState;
         case DELETE_COMMENT_BY_ID:
-            newState = { ...state };
+            newState = {
+                ...state,
+                allComments: state.allComments.filter((comment) => comment.id !== action.payload),
+                byId: {
+                    ...state.byId,
+                    [action.payload.id]: action.payload
+                },
+                postComments: state.postComments.filter((comment) => comment.id !== action.payload)
+            };
+            return newState;
         default:
             return state;
     }

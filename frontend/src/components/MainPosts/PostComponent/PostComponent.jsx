@@ -9,8 +9,13 @@ function PostTile({posts}) {
     const dispatch = useDispatch();
     const [editing, setEditing] = useState(false);
     const [postText, setPostText] = useState("");
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const user = useSelector(state => state.session.user);
+
+    useEffect(() => {
+        setLoading(false)
+    },[])
 
     const visitPost = (postId) => {
         navigate(`/posts/${+postId}`)
@@ -35,7 +40,7 @@ function PostTile({posts}) {
             {user && (
                 <CreatePostInput user={user}/>
             )}
-            {posts?.map((post) => (
+            {!loading && posts?.map((post) => (
                 <div className='Post-Tile-Inner-Container'>
                     <div>
                         <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>

@@ -7,18 +7,14 @@ import "./Splash.css";
 
 const Splash = () => {
   const dispatch = useDispatch();
-  const [commentText, setCommentText] = useState("");
   const allPosts = useSelector(state => state.posts?.allPosts);
-  console.log(allPosts, 'ALL POSTS/POST TILE COMPONENT');
 
   useEffect(() => {
     dispatch(getComments());
-    dispatch(getPosts())
+    dispatch(getPosts());
   }, [dispatch])
 
-  const edit = () => {
-    dispatch(createComment(5, { comment: commentText }))
-  }
+
 
   return (
     <div className='Main-Page'>
