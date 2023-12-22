@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 //Constants
 const ADD_NEW_POST = 'session/ADD_NEW_POST';
+const GET_USER_POSTS = 'session/GET_USER_POSTS';
 const GET_ALL_POSTS = 'session/GET_ALL_POSTS';
 const GET_POST_BY_ID = 'session/GET_POST_BY_ID';
 const EDIT_POST_BY_ID = 'session/EDIT_POST_BY_ID';
@@ -9,6 +10,11 @@ const DELETE_POST_BY_ID = 'session/DELETE_POST_BY_ID';
 
 const loadAllPosts = (posts) => ({
     type: GET_ALL_POSTS,
+    payload: posts
+});
+
+const loadUserPosts = (posts) => ({
+    type: GET_USER_POSTS,
     payload: posts
 });
 
@@ -27,12 +33,12 @@ const CreateNewPost = (newPost) => ({
     payload: newPost
 });
 
-const DeletePostById = (deletedPost) => ({
+const DeletePostById = (deletedPostId) => ({
     type: DELETE_POST_BY_ID,
-    payload: deletePost
+    payload: deletedPostId
 });
 
-const initialState = { allPosts: [], byId: {}, singlePost: {} };
+const initialState = { allPosts: [], byId: {}, singlePost: {}, userPosts: [] };
 
 
 export const getPosts = () => async (dispatch) => {
@@ -42,6 +48,19 @@ export const getPosts = () => async (dispatch) => {
             const posts = await response.json();
             dispatch(loadAllPosts(posts.posts));
             return posts;
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getUserPosts = () => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/posts/user`);
+        if (response.ok) {
+            const userPosts = await response.json();
+            dispatch(loadUserPosts(userPosts.posts));
+            return userPosts;
         }
     } catch (error) {
         throw error;
@@ -71,7 +90,6 @@ export const editPost = (postId, newPostData) => async (dispatch) => {
         if (response.ok) {
             const updatedPost = await response.json();
             dispatch(EditPostById(updatedPost));
-            dispatch(getPosts())
             return updatedPost;
         }
     } catch (error) {
@@ -86,8 +104,9 @@ export const deletePost = (postId) => async (dispatch) => {
         });
         if (response.ok) {
             const deletedPost = await response.json();
-            dispatch(DeletePostById(deletedPost));
+            dispatch(DeletePostById(+postId));
             dispatch(getPosts())
+            dispatch(getUserPosts())
             return deletedPost;
         }
     } catch (error) {
@@ -129,6 +148,15 @@ function postReducer(state = initialState, action) {
             } else {
                 return state;
             }
+        case GET_USER_POSTS:
+            if (action.payload) {
+                return {
+                    ...state,
+                    userPosts: action.payload,
+                };
+            } else {
+                return state;
+            }
         case GET_POST_BY_ID:
             return { ...state, singlePost: action.payload };
         case EDIT_POST_BY_ID:
@@ -140,6 +168,9 @@ function postReducer(state = initialState, action) {
                 byId: {
                     ...state.byId,
                     [action.payload.id]: action.payload
+                },
+                singlePost: {
+                    [action.payload.id]: action.payload
                 }
             };
             return newState;
@@ -147,7 +178,17 @@ function postReducer(state = initialState, action) {
             newState = { ...state };
             return newState;
         case DELETE_POST_BY_ID:
-            newState = { ...state };
+            newState = {
+                ...state,
+                allPosts: state.allPosts.filter((post) => post.id !== action.payload),
+                byId: {
+                    ...state.byId,
+                    [action.payload.id]: action.payload
+                },
+                singlePost: state.singlePost.id === action.payload ? {} : state.singlePost,
+                userPosts: state.userPosts.filter((post) => post.id !== action.payload)
+            };
+            return newState;
         default:
             return state;
     }
