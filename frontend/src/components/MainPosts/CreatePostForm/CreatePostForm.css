@@ -1,0 +1,96 @@
+.Create-Post-Backdrop {
+    background-color: #030303;
+    height:100vh;
+    width: 100%;
+    padding-top: 30px;
+}
+
+.Post-Form-Container {
+    margin: 0 auto;
+    max-width: 623px;
+    height: 510px;
+}
+
+.Create-Post-Header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #1a1a1b;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.Create-Post-Header h3{
+    font-family: IBMPlexSans, Arial, sans-serif;
+    font-size: 18px;
+    color: #d7dadc
+}
+
+.Post-Input-Container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 15px 30px 10px 15px;
+    border-radius: 2px;
+    background-color: #1a1a1b;
+    height: fit-content
+}
+
+.Title-Input {
+    background: none;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #484949;
+    border-radius: 2px;
+    padding-left: 10px;
+    color: white;
+}
+
+.Title-Input::placeholder {
+    font-family: IBMPlexSans, Arial, sans-serif;
+    font-size: 14px;
+    color: #484949;
+}
+
+.Text-Input {
+    background: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    height: 200px;
+    border: 1px solid #484949;
+    border-radius: 2px;
+    font-family: IBMPlexSans, Arial, sans-serif;
+    font-size: 14px;
+    color: white;
+}
+
+.Text-Input::placeholder {
+    color: #484949;
+}
+
+.Post-Submit-Button {
+    cursor: pointer;
+    margin-top: 15px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    border-top: 1px solid #484949;
+}
+
+.Post-Submit-Button button {
+    background-color: #e1e1e1;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    font-weight: bold;
+    border: none;
+    width: 60px;
+    height: 30px;
+}
