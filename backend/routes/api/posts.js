@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Post } = require('../../db/models');
 const { Comment } = require('../../db/models');
+const { User } = require('../../db/models');
 const { PostImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { Group } = require('../../db/models');
@@ -42,7 +43,20 @@ const validatePostImage = [
 
 router.get('/', async (req, res, next) => {
     try {
-        const postInstance = await Post.findAll({ include: [ Comment, PostImage] });
+        const postInstance = await Post.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Group,
+                    attributes: ['name'],
+                },
+                Comment,
+                PostImage,
+            ],
+        });
         res.status(200).json({ posts: postInstance });
 
     } catch (error) {
@@ -68,8 +82,7 @@ router.get('/user', requireAuth, async (req, res, next) => {
 router.get('/:post_id', async (req, res, next) => {
     try {
         const postId = req.params.post_id;
-        const singlePost = await Post.findByPk(+postId);
-
+        const singlePost = await Post.findByPk(+postId, { include: [User, Comment, PostImage]});
         if (!singlePost) res.status(404).json({ message: "Post not found." })
         res.status(200).json(singlePost);
     } catch (error) {

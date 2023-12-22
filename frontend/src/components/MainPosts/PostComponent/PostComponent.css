@@ -1,7 +1,10 @@
 .Post-Tile-Inner-Container {
-    height: 415px;
+    height:fit-content;
     width: 600px;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: #1a1a1b;
+    overflow: hidden;
     margin: 10px 0;
 }
 
@@ -9,4 +12,52 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+
+.Post-Info-Container {
+    cursor: pointer;
+    display: flex;
+    margin: 15px 0 0 0;
+    width: 62%;
+    height: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Post-Text {
+    word-wrap: break-word;
+    line-height: 25px;
+    overflow: hidden;
+    max-height: 265px;
+}
+
+.Post-Text-Tile-Container {
+    cursor: pointer;
+}
+
+.Post-Buttons {
+    display: flex;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    background-color: #1a1a1b;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px -10px 60px 40px #1a1a1b;
+}
+
+.Option-Button-Container button{
+    cursor: pointer;
+    color: white;
+    background: none;
+    width: 100px;
+    border: none;
+    height: 30px;
+    border-radius: 2px;
+}
+
+.Option-Button-Container button:hover {
+    background-color: #555657;
 }
