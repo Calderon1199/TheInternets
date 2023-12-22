@@ -4,6 +4,8 @@ import { editComment, getCommentsForPost } from '../../../redux/comment';
 import { useParams } from 'react-router-dom';
 import { useModal } from '../../../context/Modal';
 import DeleteCommentModal from '../DeleteCommentModal';
+import { calculateTimeDifference } from '../../MainPosts/PostComponent';
+import "./CommentTile.css";
 
 function CommentTile() {
   const { postId } = useParams();
@@ -46,6 +48,11 @@ function CommentTile() {
       {!loading &&
         comments?.map((comment) => (
           <div key={comment.id}>
+            <div className='User-Comment-Header'>
+                <h5>{comment.User?.username}</h5>
+                <span>&#8226;</span>
+                <p>{calculateTimeDifference(comment.createdAt)}</p>
+            </div>
             {isEditing[comment.id] ? (
               <div>
                 <label>
@@ -65,7 +72,7 @@ function CommentTile() {
                 </button>
               </div>
             ) : (
-              <div>
+              <div className='Comment-Section'>
                 <p>{comment.comment}</p>
                 {user && user.id === comment.userId && (
                     <div>

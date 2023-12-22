@@ -58,6 +58,10 @@
     border: none;
     height: 30px;
     border-radius: 2px;
+    font-family: IBMPlexSans, Arial, sans-serif;
+    color: #818384;
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .Option-Button-Container button:hover {

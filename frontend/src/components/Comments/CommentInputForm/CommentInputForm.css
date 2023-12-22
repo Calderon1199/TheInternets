@@ -1,0 +1,99 @@
+.Comment-Input-Container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Comment-Input-Container p {
+    font-family: IBMPlexSans, Arial, sans-serif;
+    color: #818384;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.Comment-User-Name {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    justify-content: space-between;
+}
+
+#userName {
+    font-family: "Noto Sans", Arial, sans-serif;
+    font-size: 12px;
+    color: #4fbcff;
+}
+
+.Comment-Input input{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    width: 70%;
+    height: 150px;
+    background: none;
+    border: 1px solid #4a4949;
+}
+
+.Comment-Input input::placeholder {
+    position: absolute;
+    top: 6%;
+    padding-left: 1%;
+}
+
+.Comment-Submit-Button {
+    width: 70.65%;
+    background-color: #272729;
+    height: 40px;
+    border-left: 1px solid #4a4949;
+    border-bottom: 1px solid #4a4949;
+    border-right: 1px solid #4a4949;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Comment-Submit-Button button {
+    background-color: #e1e1e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: gray;
+    font-weight: 500;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+
+.Search-Sort-Container {
+    margin-top: 30px;
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    padding-bottom: 10px;
+    margin-right: 50px;
+    border-bottom: 1px solid #4a4949;
+}
+
+.Search-Sort-Inner-Container {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.Search-Sort-Inner-Container select{
+    background: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    color: #4bb0ee;
+}
+
+#sort-label {
+    color: #4bb0ee;
+}
