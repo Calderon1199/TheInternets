@@ -55,6 +55,9 @@
     color: white;
     background: none;
     width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border: none;
     height: 30px;
     border-radius: 2px;

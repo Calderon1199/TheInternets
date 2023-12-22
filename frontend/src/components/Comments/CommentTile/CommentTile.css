@@ -4,9 +4,58 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 23%;
+    width: fit-content;
+}
+
+.User-Comment-Header span{
+    margin: 0px 5px;
+}
+
+.Comment-Section {
+    padding-bottom : 10px;
 }
 
 .Comment-Section p{
     margin: 0px;
+}
+
+.Button-Dropdown {
+    display: flex;
+    flex-direction: column;
+    width: 175px;
+    position: absolute;
+}
+
+.Comment-Option-Buttons {
+    width: 20%;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.fa-solid.fa-ellipsis  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    cursor: pointer;
+    width: 20px;
+}
+
+.fa-solid.fa-ellipsis:hover {
+    background-color: #555657;
+}
+.Button-Dropdown button{
+    height: 40px;
+    background-color: #1a1a1b;
+    border: 1px solid #4a4949;
+    box-shadow: 0px 0px 5px 0.5px whitesmoke;
+    display: flex;
+    align-items: center;
+}
+
+.Button-Dropdown button:hover {
+    background-color: #17232d;
+    cursor: pointer;
 }
