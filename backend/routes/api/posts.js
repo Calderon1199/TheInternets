@@ -82,7 +82,20 @@ router.get('/user', requireAuth, async (req, res, next) => {
 router.get('/:post_id', async (req, res, next) => {
     try {
         const postId = req.params.post_id;
-        const singlePost = await Post.findByPk(+postId, { include: [User, Comment, PostImage]});
+        const singlePost = await Post.findByPk(postId, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username', 'profileImg'],
+                },
+                {
+                    model: Group,
+                    attributes: ['name'],
+                },
+                Comment,
+                PostImage,
+            ],
+        });
         if (!singlePost) res.status(404).json({ message: "Post not found." })
         res.status(200).json(singlePost);
     } catch (error) {

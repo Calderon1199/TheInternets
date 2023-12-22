@@ -2,6 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Post } = require('../../db/models');
+const { User } = require('../../db/models');
 const { Comment } = require('../../db/models');
 const { PostImage } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
@@ -45,7 +46,15 @@ router.get('/user', requireAuth, async (req, res, next) => {
 router.get('/:post_id', async (req, res, next) => {
     try {
         const postId = req.params.post_id;
-        const comment = await Comment.findAll( { where: { postId: postId} });
+        const comment = await Comment.findAll({
+            where: { postId: postId },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username'], // Specify the attributes you want to include from the User model
+                }
+            ]
+        });
 
         if (!comment) res.status(404).json({ message: "Comment not found" })
         res.status(200).json({Comments: comment });

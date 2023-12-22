@@ -1,0 +1,12 @@
+.User-Comment-Header {
+    display: flex;
+    height: fit-content;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 23%;
+}
+
+.Comment-Section p{
+    margin: 0px;
+}

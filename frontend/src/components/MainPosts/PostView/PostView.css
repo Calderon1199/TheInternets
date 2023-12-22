@@ -1,0 +1,74 @@
+.Single-Post-Container {
+    color: white;
+    width: 700px;
+    padding-left: 40px;
+    display: flex;
+    position: relative;
+    margin: 0px auto;
+    height: fit-content;
+    background-color: #1a1a1b;
+    align-items: center;
+    justify-content: center;
+}
+
+.Post-Text-Tile-Container h3 {
+    font-family: IBMPlexSans, Arial, sans-serif;
+    font-size: 20px;
+    color: #d7dadc;
+}
+
+.Post-Back-Drop {
+    background-color: black;
+    width: 1300px;
+    height: 100vh;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+.Single-Post-Inner-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    background-color: #1a1a1b;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.Single-Post-Info-Container {
+    cursor: pointer;
+    display: flex;
+    margin: 15px 0 0 0;
+    width: 27%;
+    font-size: 12px;
+    height: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-family: IBMPlexSans,Arial,sans-serif;
+    color: #818384;
+}
+
+.Single-Post-Buttons {
+    display: flex;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Comment-Container {
+    width: 100%;
+}
+
+.Post-Text {
+    font-family: "Noto Sans", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 400;
+    color: #d7dadc;
+}

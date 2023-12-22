@@ -45,9 +45,9 @@ function PostTile({posts}) {
             {!loading && posts?.map((post) => (
                 <div className='Post-Tile-Inner-Container'>
                     <div className='Post-Info-Container'>
-                        <h5>{post.Group.name}</h5>
+                        <h5>{post.Group?.name}</h5>
                         <span>&#x2022;</span>
-                        <p>Posted by {post.User.username}</p>
+                        <p>Posted by {post.User?.username}</p>
                         <p>{calculateTimeDifference(post.createdAt)}</p>
                     </div>
                     <div className='Post-Text-Tile-Container'>
@@ -65,7 +65,7 @@ function PostTile({posts}) {
                     </div>
                     <div className='Post-Buttons'>
                         <div className='Option-Button-Container'>
-                            <button onClick={() => visitPost(post.id)}>{post.Comments.length}{post.Comments.length === 1 ? " Comment" : " Comments"}</button>
+                            <button onClick={() => visitPost(post.id)}>{post.Comments?.length}{post.Comments?.length === 1 ? " Comment" : " Comments"}</button>
                         </div>
                         {post.userId === user.id && (
                             <div className='Option-Button-Container'>
