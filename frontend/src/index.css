@@ -1,4 +1,6 @@
 /* TODO: Add sitewide styles */
 body {
     background-color: #313338;
+    margin: 0;
+    padding: 0;
 }
