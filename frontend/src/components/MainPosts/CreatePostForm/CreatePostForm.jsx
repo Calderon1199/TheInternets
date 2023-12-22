@@ -17,17 +17,23 @@ function CreatePostForm() {
 
 
     return (
-        <div className='Post-Form-Container'>
-            <h1>Create a post</h1>
-            <div className='Post-Input-Container'>
-                <label>
-                    <input type="text" onChange={(e) => setTitle(e.target.value)} placeholder='Title'/>
-                </label>
-                <label>
-                    <input type="text" onChange={(e) => setPostText(e.target.value)} placeholder='Text'/>
-                </label>
+        <div className='Create-Post-Backdrop'>
+            <div className='Post-Form-Container'>
+                <div className='Create-Post-Header'>
+                    <h3>Create a post</h3>
+                </div>
+                <div className='Post-Input-Container'>
+                    <label>
+                        <input type="text" className='Title-Input' onChange={(e) => setTitle(e.target.value)} placeholder='Title'/>
+                    </label>
+                    <label>
+                        <textarea type="text" className='Text-Input' onChange={(e) => setPostText(e.target.value)} placeholder='Text (optional)'/>
+                    </label>
+                    <div className='Post-Submit-Button'>
+                        <button onClick={handleSubmitPost}>Post</button>
+                    </div>
+                </div>
             </div>
-            <button onClick={handleSubmitPost}>Post</button>
         </div>
     );
 }
