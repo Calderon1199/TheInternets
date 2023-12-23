@@ -13,7 +13,7 @@ function PostTile({posts}) {
     const [postText, setPostText] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    const user = useSelector(state => state.session.user);
+    const user = useSelector(state => state.session?.user);
 
     useEffect(() => {
         setLoading(false)
@@ -67,7 +67,7 @@ function PostTile({posts}) {
                         <div className='Option-Button-Container'>
                             <button onClick={() => visitPost(post.id)}><i class="fa-regular fa-message"></i>{post.Comments?.length}{post.Comments?.length === 1 ? " Comment" : " Comments"}</button>
                         </div>
-                        {post.userId === user.id && (
+                        {post.userId === user?.id && (
                             <div className='Option-Button-Container'>
                                 <button onClick={() => deleteUserPost(post.id)}>Remove Post</button>
                                 <button onClick={() => setEditing(true)}>Edit Post</button>

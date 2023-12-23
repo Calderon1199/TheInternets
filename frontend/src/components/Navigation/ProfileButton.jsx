@@ -10,7 +10,7 @@ function ProfileButton() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const user = useSelector((store) => store.session.user);
+  const user = useSelector(state => state.session?.user);
   const ulRef = useRef();
 
   const visitProfile = () => {
@@ -48,9 +48,9 @@ function ProfileButton() {
     <div className="Profile-Button">
       <button className="profile-button" onClick={toggleMenu}>
         <div className="Profile-Button-Text">
-          <i class="fa-solid fa-user-astronaut"></i>{user?.username}
+          <i className="fa-solid fa-user-astronaut"></i>{user?.username}
         </div>
-        <i class="fa-solid fa-chevron-down"></i>
+        <i className="fa-solid fa-chevron-down"></i>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>

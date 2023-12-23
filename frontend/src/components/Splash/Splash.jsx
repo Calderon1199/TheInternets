@@ -4,13 +4,14 @@ import { createComment, deleteComment, editComment, getComments, getUserComments
 import ProductTile from "../MainPosts/PostComponent/";
 import { getPosts } from '../../redux/post';
 import "./Splash.css";
+import HomePageWidget from './HomePageWidget';
 
 const Splash = () => {
   const dispatch = useDispatch();
   const allPosts = useSelector(state => state.posts?.allPosts);
 
   useEffect(() => {
-    dispatch(getComments());
+    // dispatch(getComments());
     dispatch(getPosts());
   }, [dispatch])
 
@@ -19,6 +20,7 @@ const Splash = () => {
   return (
     <div className='Main-Page'>
         <ProductTile posts={allPosts}/>
+        <HomePageWidget />
     </div>
   );
 }
