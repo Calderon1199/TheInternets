@@ -17,7 +17,6 @@ function PostView() {
     const [loading, setLoading] = useState(true);
     const [postText, setPostText] = useState("");
     const post = useSelector(state => state.posts?.singlePost);
-    console.log(post, 'post')
 
     useEffect(() => {
         dispatch(getSinglePost(+postId));
