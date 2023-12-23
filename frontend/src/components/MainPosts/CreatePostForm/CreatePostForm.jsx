@@ -3,6 +3,7 @@ import "./CreatePostForm.css";
 import { useDispatch } from 'react-redux';
 import { createPost } from '../../../redux/post';
 import { useNavigate } from 'react-router-dom';
+import PostRules from '../PostRules';
 
 function CreatePostForm() {
     const [title, setTitle] = useState("");
@@ -18,21 +19,24 @@ function CreatePostForm() {
 
     return (
         <div className='Create-Post-Backdrop'>
-            <div className='Post-Form-Container'>
-                <div className='Create-Post-Header'>
-                    <h3>Create a post</h3>
-                </div>
-                <div className='Post-Input-Container'>
-                    <label>
-                        <input type="text" className='Title-Input' onChange={(e) => setTitle(e.target.value)} placeholder='Title'/>
-                    </label>
-                    <label>
-                        <textarea type="text" className='Text-Input' onChange={(e) => setPostText(e.target.value)} placeholder='Text (optional)'/>
-                    </label>
-                    <div className='Post-Submit-Button'>
-                        <button onClick={handleSubmitPost}>Post</button>
+            <div className='Create-Post-Container'>
+                <div className='Post-Form-Container'>
+                    <div className='Create-Post-Header'>
+                        <h3>Create a post</h3>
+                    </div>
+                    <div className='Post-Input-Container'>
+                        <label>
+                            <input type="text" className='Title-Input' onChange={(e) => setTitle(e.target.value)} placeholder='Title'/>
+                        </label>
+                        <label>
+                            <textarea type="text" className='Text-Input' onChange={(e) => setPostText(e.target.value)} placeholder='Text (optional)'/>
+                        </label>
+                        <div className='Post-Submit-Button'>
+                            <button onClick={handleSubmitPost}>Post</button>
+                        </div>
                     </div>
                 </div>
+                    <PostRules />
             </div>
         </div>
     );

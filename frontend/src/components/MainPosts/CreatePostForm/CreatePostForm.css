@@ -1,14 +1,23 @@
 .Create-Post-Backdrop {
     background-color: #030303;
+    display: flex;
+    justify-content: space-evenly;
     height:100vh;
     width: 100%;
     padding-top: 30px;
 }
 
 .Post-Form-Container {
-    margin: 0 auto;
-    max-width: 623px;
+    margin: 0 10px;
+    width: 680px;
+    max-width: 6680px;
     height: 510px;
+}
+
+.Create-Post-Container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }
 
 .Create-Post-Header {
