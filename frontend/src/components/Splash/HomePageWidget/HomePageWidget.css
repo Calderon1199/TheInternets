@@ -1,0 +1,67 @@
+.Home-Widget-Container {
+    margin-left: 2%;
+    display: flex;
+    background-color: #1a1a1b;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+    width: 20%;
+    height: 225px;
+    border-radius: 4px;
+    border: 1px solid #4a4949;
+    font-family: IBMPlexSans,
+        Arial,
+        sans-serif;;
+}
+
+.Home-Widget-Container h3{
+    margin: 0;
+}
+
+.Home-Widget-Text {
+    border-bottom: 1px solid #4a4949;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.Home-Widget-Buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.Home-Widget-Buttons button{
+    border: 2px solid #4a4949;
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    border-radius: 15px;
+    background: none;
+    border: 1px solid #4a4949;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#Post-Widget-Button {
+    background-color: #94e044;
+    color: black;
+}
+
+#Post-Widget-Button:hover {
+    background-color: #649e27;
+}
+
+#Community-Widget-Button {
+    background-color: #ff4500;
+    color: white;
+}
+
+#Community-Widget-Button:hover {
+    background-color: #c23400;
+}
