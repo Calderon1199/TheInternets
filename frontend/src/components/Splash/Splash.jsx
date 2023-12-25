@@ -5,15 +5,22 @@ import ProductTile from "../MainPosts/PostComponent/";
 import { getPosts } from '../../redux/post';
 import "./Splash.css";
 import HomePageWidget from './HomePageWidget';
+import { editCommunity, getCommunities, getSingleCommunity, getUserCommunities } from '../../redux/community';
 
 const Splash = () => {
   const dispatch = useDispatch();
   const allPosts = useSelector(state => state.posts?.allPosts);
 
   useEffect(() => {
-    // dispatch(getComments());
+    dispatch(getCommunities())
+    dispatch(getUserCommunities())
     dispatch(getPosts());
+    dispatch(getSingleCommunity(1));
   }, [dispatch])
+
+  const handleEditComm = () => {
+    dispatch(editCommunity(6, {name: "This is updated community name from dispatch frontend", description: "This is updated community description from dispatch frontend"}))
+  }
 
 
 
@@ -21,6 +28,9 @@ const Splash = () => {
     <div className='Main-Page'>
         <ProductTile posts={allPosts}/>
         <HomePageWidget />
+        <button onClick={() => handleEditComm()}>
+          Edit Community number 5
+        </button>
     </div>
   );
 }
