@@ -4,14 +4,17 @@ import { useSelector } from 'react-redux';
 import { useModal } from '../../../context/Modal';
 import { useNavigate } from 'react-router-dom';
 import LoginFormModal from '../../LoginFormModal';
+import CommunityCreateModal from '../../Communities/CommunityCreateModal';
 
 function HomePageWidget(props) {
     const user = useSelector(state => state.session?.user);
     const navigate = useNavigate();
     const { setModalContent } = useModal();
 
-    const visitCreate = () => {
-        if (user) {
+    const visitCreate = (type) => {
+        if (user && type === "community") {
+            return setModalContent(<CommunityCreateModal />);
+        } else if (user) {
             navigate("/posts/new")
         } else {
             return setModalContent(<LoginFormModal />)
@@ -29,7 +32,7 @@ function HomePageWidget(props) {
             </div>
             <div className='Home-Widget-Buttons'>
                 <button onClick={() => visitCreate()} id='Post-Widget-Button'>Create Post</button>
-                <button id='Community-Widget-Button'>Create Community</button>
+                <button onClick={() => visitCreate("community")} id='Community-Widget-Button'>Create Community</button>
             </div>
         </div>
     );
