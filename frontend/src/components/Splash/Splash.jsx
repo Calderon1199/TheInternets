@@ -5,7 +5,7 @@ import ProductTile from "../MainPosts/PostComponent/";
 import { getPosts } from '../../redux/post';
 import "./Splash.css";
 import HomePageWidget from './HomePageWidget';
-import { editCommunity, getCommunities, getSingleCommunity, getUserCommunities } from '../../redux/community';
+import { deleteCommunity, editCommunity, getCommunities, getSingleCommunity, getUserCommunities } from '../../redux/community';
 
 const Splash = () => {
   const dispatch = useDispatch();
@@ -22,6 +22,10 @@ const Splash = () => {
     dispatch(editCommunity(6, {name: "This is updated community name from dispatch frontend", description: "This is updated community description from dispatch frontend"}))
   }
 
+   const handleDeleteComm = () => {
+    dispatch(deleteCommunity(12))
+  }
+
 
 
   return (
@@ -30,6 +34,9 @@ const Splash = () => {
         <HomePageWidget />
         <button onClick={() => handleEditComm()}>
           Edit Community number 5
+        </button>
+        <button onClick={() => handleDeleteComm()}>
+          delete Community number 5
         </button>
     </div>
   );

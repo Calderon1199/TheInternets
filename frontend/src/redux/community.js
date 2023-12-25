@@ -97,37 +97,37 @@ export const editCommunity = (communityId, updatedCommunityData) => async (dispa
     }
 }
 
-// export const deleteComment = (commentId) => async (dispatch) => {
-//     try {
-//         const response = await csrfFetch(`/api/comments/${commentId}`, {
-//             method: "DELETE",
-//         });
-//         if (response.ok) {
-//             const deletedComment = await response.json();
-//             dispatch(DeleteCommentById(+commentId));
-//             return deletedComment;
-//         }
-//     } catch (error) {
-//         throw error;
-//     }
-// };
+export const deleteCommunity = (communityId) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/communities/${communityId}`, {
+            method: "DELETE",
+        });
+        if (response.ok) {
+            const deletedCommunity = await response.json();
+            dispatch(deleteCommunityById(+communityId));
+            return deletedCommunity;
+        }
+    } catch (error) {
+        throw error;
+    }
+};
 
-// export const createComment = (postId, commentData) => async (dispatch) => {
-//     try {
-//         const response = await csrfFetch(`/api/comments/${postId}`, {
-//             method: "POST",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify(commentData)
-//         });
-//         if (response.ok) {
-//             const newComment = await response.json();
-//             dispatch(CreateNewComment(newComment));
-//             return newComment;
-//         }
-//     } catch (error) {
-//         throw error;
-//     }
-// }
+export const createCommunity = (communityId, communityData) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/comments/${communityId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(communityData)
+        });
+        if (response.ok) {
+            const newCommunity = await response.json();
+            dispatch(createNewCommunity(newCommunity));
+            return newCommunity;
+        }
+    } catch (error) {
+        throw error;
+    }
+}
 
 function communityReducer(state = initialState, action) {
     let newState;
@@ -185,8 +185,49 @@ function communityReducer(state = initialState, action) {
                     singleCommunity: {
                         [action.payload.id]: action.payload
                     },
+                    userCommunities: state.userCommunities.map((community) =>
+                    community.id === action.payload.id ? action.payload : community
+                    )
                 }
+                return newState;
             }
+        case ADD_NEW_COMMUNITY:
+            if (action.payload) {
+                newState = {
+                    ...state,
+                    allCommunities: [ ...state.allCommunities, action.payload],
+                    byId: {
+                        ...state.byId,
+                        [action.payload.id]: action.payload
+                    },
+                    singleCommunity: {
+                        [action.payload.id]: action.payload
+                    },
+                    userCommunities: [...state.userCommunities, action.payload]
+                }
+                return newState;
+            }
+        case DELETE_COMMUNITY:
+            if (action.payload) {
+                newState = {
+                    ...state,
+                    allCommunities: state.allCommunities.filter(
+                        (community) => community.id !== action.payload
+                    ),
+                    byId: { ...state.byId },
+                    singleCommunity: { ...state.singleCommunity },
+                    userCommunities: state.userCommunities.filter((community =>
+                        community.id !== action.payload
+                    ))
+                };
+
+                delete newState.byId[action.payload];
+                delete newState.singleCommunity[action.payload];
+
+                return newState;
+            }
+            return state;
+
         default:
             return state;
     }
