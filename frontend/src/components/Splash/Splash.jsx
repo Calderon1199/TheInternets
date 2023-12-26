@@ -32,12 +32,6 @@ const Splash = () => {
     <div className='Main-Page'>
         <ProductTile posts={allPosts}/>
         <HomePageWidget />
-        <button onClick={() => handleEditComm()}>
-          Edit Community number 5
-        </button>
-        <button onClick={() => handleDeleteComm()}>
-          delete Community number 5
-        </button>
     </div>
   );
 }
