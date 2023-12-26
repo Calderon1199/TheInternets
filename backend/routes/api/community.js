@@ -24,6 +24,9 @@ const validateCommunity = [
             if (value && value.trimStart()[0] === ' ') {
                 throw new Error('Description cannot start with a space.');
             }
+            if (value && value.endsWith(' ')) {
+                throw new Error('Description cannot end with a space.');
+            }
             return true;
         }),
     handleValidationErrors,
