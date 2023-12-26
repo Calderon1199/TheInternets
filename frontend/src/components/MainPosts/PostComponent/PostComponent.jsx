@@ -12,12 +12,14 @@ function PostTile({posts}) {
     const [editing, setEditing] = useState(false);
     const [postText, setPostText] = useState("");
     const [loading, setLoading] = useState(true);
+    const [newPosts, setPosts] = useState();
     const navigate = useNavigate();
     const user = useSelector(state => state.session?.user);
 
     useEffect(() => {
+        setPosts(posts)
         setLoading(false)
-    },[])
+    },[posts])
 
     const visitPost = (postId) => {
         navigate(`/posts/${+postId}`)
@@ -37,12 +39,31 @@ function PostTile({posts}) {
         dispatch(deletePost(+postId));
     }
 
+    const sortNew = (type) => {
+        if (type === 'new') {
+            setPosts(posts.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        } else if (type === 'old') {
+            setPosts(posts.slice().sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)));
+        } else if (type === 'con'){
+            const sortedPosts = posts.slice().sort((a, b) => {
+          const commentsComparison = b.Comments?.length - a.Comments?.length;
+          return commentsComparison !== 0 ? commentsComparison : a.id % 2 === 0 ? 1 : -1;
+        })
+        setPosts(sortedPosts)
+        }
+    }
+
     return (
         <div className='Post-Tile-Container'>
             {user && (
                 <CreatePostInput user={user}/>
             )}
-            {!loading && posts?.map((post) => (
+            <div className='Sort-Button-Container'>
+                <button onClick={() => sortNew('new')}>New</button>
+                <button onClick={() => sortNew('old')}>Old</button>
+                <button onClick={() => sortNew('con')}>Contreversial</button>
+            </div>
+            {!loading && newPosts?.map((post) => (
                 <div className='Post-Tile-Inner-Container'>
                     <div className='Post-Info-Container'>
                         <h5>{post.Group?.name}</h5>
