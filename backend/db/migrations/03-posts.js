@@ -43,7 +43,7 @@ module.exports = {
             },
             postText: {
                 type: Sequelize.TEXT,
-                allowNull: false
+                allowNull: true
             },
             createdAt: {
                 allowNull: false,

@@ -11,7 +11,7 @@ import { calculateTimeDifference } from '../PostComponent';
 function PostView() {
     const {postId} = useParams();
     const navigate = useNavigate();
-    const user = useSelector(state => state.session?.user)
+    const user = useSelector(state => state.session?.user) || null;
     const dispatch = useDispatch();
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ function PostView() {
     useEffect(() => {
         dispatch(getSinglePost(+postId));
         setLoading(false)
-    }, [dispatch])
+    }, [dispatch, user])
 
     const editUserPost = () => {
         const updatedPostData = {
@@ -69,7 +69,7 @@ function PostView() {
                             <div className='Option-Button-Container'>
                                 <button onClick={() => visitPost(post.id)}><i class="fa-regular fa-message"></i>{post?.Comments?.length}{post?.Comments?.length === 1 ? " Comment" : " Comments"}</button>
                             </div>
-                            {post.userId === user.id && (
+                            {post.userId === user?.id && (
                                 <div className='Option-Button-Container'>
                                     <button onClick={() => deleteUserPost(post.id)}>Remove Post</button>
                                     <button onClick={() => setEditing(true)}>Edit Post</button>
@@ -78,7 +78,7 @@ function PostView() {
                         </div>
                     </div>
                     <div className='Comment-Container'>
-                        <CommentInputForm user={user} postId={postId} />
+                        <CommentInputForm postId={postId} />
                         <CommentTile />
                     </div>
                 </div>

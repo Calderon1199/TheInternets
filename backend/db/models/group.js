@@ -43,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
                     if (value && value.startsWith(' ')) {
                         throw new Error('Description cannot start with a space.');
                     }
+                    if (value && value.endsWith(' ')) {
+                        throw new Error('Description cannot end with a space.');
+                    }
                 },
             }
         }
