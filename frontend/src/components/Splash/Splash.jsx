@@ -18,13 +18,6 @@ const Splash = () => {
     dispatch(getSingleCommunity(1));
   }, [dispatch])
 
-  const handleEditComm = () => {
-    dispatch(editCommunity(6, {name: "This is updated community name from dispatch frontend", description: "This is updated community description from dispatch frontend"}))
-  }
-
-   const handleDeleteComm = () => {
-    dispatch(deleteCommunity(12))
-  }
 
 
 
