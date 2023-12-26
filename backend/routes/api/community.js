@@ -10,12 +10,25 @@ const router = express.Router();
 const validateCommunity = [
     check('name')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide a name.'),
+        .withMessage('Please provide a name.')
+        .custom((value) => {
+            if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+                throw new Error('Name can only contain numbers, letters, and underscores.');
+            }
+            return true
+        }),
     check('description')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide a description.'),
-    handleValidationErrors
+        .withMessage('Please provide a description.')
+        .custom((value) => {
+            if (value && value.trimStart()[0] === ' ') {
+                throw new Error('Description cannot start with a space.');
+            }
+            return true;
+        }),
+    handleValidationErrors,
 ];
+
 
 router.get('/', async (req, res, next) => {
     try {

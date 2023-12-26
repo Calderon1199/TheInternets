@@ -25,11 +25,26 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [4, 30],
+                noSpaces(value) {
+                    if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+                        throw new Error('Name can only contain numbers, letters, and underscores.');
+                    }
+                },
+            }
         },
         description: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true,
+            validate: {
+                noLeadingSpace(value) {
+                    if (value && value.startsWith(' ')) {
+                        throw new Error('Description cannot start with a space.');
+                    }
+                },
+            }
         }
     }, {
         sequelize,
