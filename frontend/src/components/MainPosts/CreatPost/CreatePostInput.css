@@ -3,6 +3,8 @@
     background-color: #1a1a1b;
     display: flex;
     flex-direction: row;
+    border-radius: 5px;
+    border: 1px solid #4a4949;
     justify-content: space-evenly;
     align-items: center;
     height: 60px;

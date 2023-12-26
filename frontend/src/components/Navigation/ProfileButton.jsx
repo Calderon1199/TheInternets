@@ -10,7 +10,7 @@ function ProfileButton() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-  const user = useSelector((store) => store.session.user);
+  const user = useSelector(state => state.session?.user);
   const ulRef = useRef();
 
   const visitProfile = () => {
@@ -45,23 +45,26 @@ function ProfileButton() {
   };
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <i className="fas fa-user-circle" />
+    <div className="Profile-Button">
+      <button className="profile-button" onClick={toggleMenu}>
+        <div className="Profile-Button-Text">
+          <i className="fa-solid fa-user-astronaut"></i>{user?.username}
+        </div>
+        <i className="fa-solid fa-chevron-down"></i>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
-            <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+            <div className="Dropdown-Info">
+              <li>{user?.username}</li>
+              <li>{user?.email}</li>
               <li>
-                <button onClick={visitProfile}>Profile</button>
+                <button className="dropdown-button" onClick={visitProfile}><i class="fa-regular fa-user"></i>Profile</button>
               </li>
               <li>
-                <button onClick={logout}>Log Out</button>
+                <button className="dropdown-button" onClick={logout}><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</button>
               </li>
-            </>
+            </div>
           ) : (
             <>
               <OpenModalMenuItem
@@ -78,7 +81,7 @@ function ProfileButton() {
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 

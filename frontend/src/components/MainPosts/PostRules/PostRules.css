@@ -1,0 +1,59 @@
+.Post-Rules-Container {
+    width: 300px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 15px 0 15px;
+    background-color: #1a1a1b;
+    border-radius: 4px;
+}
+
+.Rules-Header {
+    border-bottom: 1px solid #484949;
+    color: #d7dadc;
+    font-family: IBMPlexSans, Arial, sans-serif;
+    font-size: 16px;
+    width: 100%;
+}
+
+.Rules-Header h4 {
+    margin: 10px 0px;
+}
+
+.Rules-List {
+    width: 100%;
+    height: 95%;
+    margin: 0px 0px;
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Rules-List-ol {
+    padding-left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    color: #d7dadc;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: IBMPlexSans,
+        Arial,
+        sans-serif;;
+}
+
+.Rules-List-ol li {
+    width: 100%;
+    height: 13%;
+    padding-top: 10px;
+    border-bottom: 1px solid #484949;
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
+}

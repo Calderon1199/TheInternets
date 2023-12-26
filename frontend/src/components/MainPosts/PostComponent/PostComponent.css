@@ -1,12 +1,102 @@
 .Post-Tile-Inner-Container {
-    height: 415px;
+    height:fit-content;
     width: 600px;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: #1a1a1b;
+    overflow: hidden;
     margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #4a4949;
 }
 
 .Post-Tile-Container {
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+
+.Post-Info-Container {
+    cursor: pointer;
+    display: flex;
+    margin: 15px 0 0 0;
+    width: 62%;
+    height: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Post-Text {
+    word-wrap: break-word;
+    line-height: 25px;
+    overflow: hidden;
+    max-height: 265px;
+}
+
+.Post-Text-Tile-Container {
+    cursor: pointer;
+}
+
+.Post-Buttons {
+    display: flex;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    background-color: #1a1a1b;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px -10px 60px 40px #1a1a1b;
+}
+
+.Option-Button-Container button{
+    cursor: pointer;
+    color: white;
+    background: none;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    height: 30px;
+    border-radius: 2px;
+    font-family: IBMPlexSans, Arial, sans-serif;
+    color: #818384;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.Option-Button-Container button:hover {
+    background-color: #555657;
+}
+
+.Sort-Button-Container {
+    height: 60px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #4a4949;
+    background-color: #1a1a1b;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.Sort-Button-Container button {
+    cursor: pointer;
+    border: none;
+    height: 50%;
+    width: 20%;
+    margin: 0px 5px;
+    border-radius: 20px;
+    background: none;
+    color: #d7dadc;
+    font-family: "Noto Sans", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.Sort-Button-Container button:hover {
+   background-color: #555657;
 }

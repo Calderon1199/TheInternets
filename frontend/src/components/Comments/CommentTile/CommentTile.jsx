@@ -4,6 +4,8 @@ import { editComment, getCommentsForPost } from '../../../redux/comment';
 import { useParams } from 'react-router-dom';
 import { useModal } from '../../../context/Modal';
 import DeleteCommentModal from '../DeleteCommentModal';
+import { calculateTimeDifference } from '../../MainPosts/PostComponent';
+import "./CommentTile.css";
 
 function CommentTile() {
   const { postId } = useParams();
@@ -11,12 +13,20 @@ function CommentTile() {
   const { setModalContent } = useModal();
   const [loading, setLoading] = useState(true);
   const [commentText, setCommentText] = useState({});
+  const [optionMenu, setOptionMenu] = useState({});
   const [isEditing, setIsEditing] = useState({});
   const comments = useSelector((state) => state.comments.postComments);
   const user = useSelector((state) => state.session.user);
 
   const setModal = (comment) => {
     return setModalContent(<DeleteCommentModal comment={comment} />);
+  };
+
+  const ToggleOptionDropdown = (commentId) => {
+    setOptionMenu((prevOptionMenu) => ({
+      ...prevOptionMenu,
+      [commentId]: !prevOptionMenu[commentId],
+    }));
   };
 
   const handleEditComment = (commentId) => {
@@ -41,57 +51,67 @@ function CommentTile() {
 
   if (loading) return <h1>...loading comments</h1>;
 
-  return (
-    <div>
-      {!loading &&
-        comments?.map((comment) => (
-          <div key={comment.id}>
-            {isEditing[comment.id] ? (
-              <div>
-                <label>
-                  <input
-                    type="text"
-                    onChange={(e) =>
-                      setCommentText((prevCommentText) => ({
-                        ...prevCommentText,
-                        [comment.id]: e.target.value,
-                      }))
-                    }
-                    placeholder={comment.comment}
-                  />
-                </label>
-                <button onClick={() => handleEditComment(comment.id)}>
-                  Save Comment
-                </button>
-              </div>
-            ) : (
-              <div>
-                <p>{comment.comment}</p>
-                {user && user.id === comment.userId && (
+    return (
+        <div>
+            {!loading &&
+            comments?.map((comment) => (
+                <div key={comment.id}>
+                <div className='User-Comment-Header'>
+                    <h5>{comment.User?.username}</h5>
+                    <span>&#8226;</span>
+                    <p>{calculateTimeDifference(comment.createdAt)}</p>
+                </div>
+                {isEditing[comment.id] ? (
                     <div>
-                        <button
-                        onClick={() => {
+                    <label>
+                        <input
+                        type="text"
+                        onChange={(e) =>
                             setCommentText((prevCommentText) => ({
                             ...prevCommentText,
-                            [comment.id]: comment.comment,
-                            }));
-                            setIsEditing((prevIsEditing) => ({
-                            ...prevIsEditing,
-                            [comment.id]: true,
-                            }));
-                        }}
-                        >
-                        Edit Comment
-                        </button>
-                        <button onClick={() => setModal(comment)}>Delete Comment</button>
+                            [comment.id]: e.target.value,
+                            }))
+                        }
+                        placeholder={comment.comment}
+                        />
+                    </label>
+                    <button onClick={() => handleEditComment(comment.id)}>
+                        Save Comment
+                    </button>
+                    </div>
+                ) : (
+                    <div className='Comment-Section'>
+                    <p>{comment.comment}</p>
+                    {user && user.id === comment.userId && (
+                        <div className='Comment-Option-Buttons'>
+                        <i onClick={() => ToggleOptionDropdown(comment.id)} className="fa-solid fa-ellipsis"></i>
+                        {optionMenu[comment.id] && (
+                            <div className='Button-Dropdown'>
+                                <button
+                                    onClick={() => {
+                                    setCommentText((prevCommentText) => ({
+                                        ...prevCommentText,
+                                        [comment.id]: comment.comment,
+                                    }));
+                                    setIsEditing((prevIsEditing) => ({
+                                        ...prevIsEditing,
+                                        [comment.id]: true,
+                                    }));
+                                    }}
+                                ><i class="fa-regular fa-pen-to-square"></i>
+                                    Edit Comment
+                                </button>
+                                <button onClick={() => setModal(comment)}><i class="fa-regular fa-trash-can"></i>Delete Comment</button>
+                            </div>
+                        )}
+                        </div>
+                    )}
                     </div>
                 )}
-              </div>
-            )}
-          </div>
-        ))}
-    </div>
-  );
+                </div>
+            ))}
+        </div>
+    );
 }
 
 export default CommentTile;
