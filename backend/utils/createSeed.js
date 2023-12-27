@@ -27,17 +27,15 @@ const makeGroupSeeds = () => {
 
     let seeders = [];
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 4; i++) {
         let seed = {};
-        seed.name = faker.lorem.sentence()
-        seed.postText = faker.lorem.sentences(5);
-        seed.userId = random(1, 3)
-        seed.categoryId = random(1, 3)
+        seed.url = faker.image.urlLoremFlickr({ category: 'computers'})
+        seed.postId = random(1, 3);
         seeders.push(seed)
     }
 
     return seeders;
 }
 
-console.log(makePostSeeds())
+console.log(makeGroupSeeds())
 module.exports = { makePostSeeds }
