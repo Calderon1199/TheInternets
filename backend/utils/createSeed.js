@@ -22,5 +22,22 @@ const makePostSeeds = () => {
     return seeders;
 }
 
+
+const makeGroupSeeds = () => {
+
+    let seeders = [];
+
+    for (let i = 0; i < 100; i++) {
+        let seed = {};
+        seed.name = faker.lorem.sentence()
+        seed.postText = faker.lorem.sentences(5);
+        seed.userId = random(1, 3)
+        seed.categoryId = random(1, 3)
+        seeders.push(seed)
+    }
+
+    return seeders;
+}
+
 console.log(makePostSeeds())
 module.exports = { makePostSeeds }
