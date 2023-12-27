@@ -75,7 +75,7 @@ function PostTile({posts}) {
                         {post.PostImages.length > 0 ? (
                             <div>
                                 <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>
-                                <img className='Post-Img' src={post.PostImages[0].url} alt='Post Image'></img>
+                                <img className='Post-Img' src={post.PostImages.find((img) => img.preview === true).url} alt='Post Image'></img>
                             </div>
                         ) : (
                             <>

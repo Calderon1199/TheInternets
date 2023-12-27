@@ -23,24 +23,16 @@ function PostView() {
         setLoading(false)
     }, [dispatch, user])
 
-    const editUserPost = () => {
-        const updatedPostData = {
-            categoryId: 1,
-            postText,
-        }
-        dispatch(editPost(postId, updatedPostData));
-        dispatch(getSinglePost(+postId))
-        setEditing(false);
-    }
-
     const deleteUserPost = (postId) => {
         dispatch(deletePost(+postId));
         navigate("/profile");
     }
 
-    if (loading) (
+    if (loading) {
+        return (
         <h1>..loading</h1>
-    )
+        )
+    }
 
 
     return (
@@ -54,16 +46,10 @@ function PostView() {
                         </div>
                         <div className='Post-Text-Tile-Container'>
                             <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>
-                            {editing ? (
-                                <div>
-                                    <label>
-                                        <input type="text" onChange={(e) => setPostText(e.target.value)} defaultValue={post.postText}/>
-                                    </label>
-                                    <button onClick={() => editUserPost(post.id)}>Post</button>
-                                </div>
-                            ): (
-                                <p className='Post-Text' onClick={() => visitPost(post.id)}>{post.postText}</p>
+                            {post.PostImages?.length > 0 && (
+                                <img src={post.PostImages?.find((img) => img.preview === true)?.url} alt='Post Image'></img>
                             )}
+                            <p className='Post-Text' onClick={() => visitPost(post.id)}>{post.postText}</p>
                         </div>
                         <div className='Single-Post-Buttons'>
                             <div className='Option-Button-Container'>
@@ -72,7 +58,7 @@ function PostView() {
                             {post.userId === user?.id && (
                                 <div className='Option-Button-Container'>
                                     <button onClick={() => deleteUserPost(post.id)}>Remove Post</button>
-                                    <button onClick={() => setEditing(true)}>Edit Post</button>
+                                    <button onClick={() => navigate(`/posts/${post.id}`)}>Edit Post</button>
                                 </div>
                             )}
                         </div>
