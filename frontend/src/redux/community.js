@@ -112,9 +112,9 @@ export const deleteCommunity = (communityId) => async (dispatch) => {
     }
 };
 
-export const createCommunity = (communityId, communityData) => async (dispatch) => {
+export const createCommunity = (communityData) => async (dispatch) => {
     try {
-        const response = await csrfFetch(`/api/comments/${communityId}`, {
+        const response = await csrfFetch(`/api/communities/new`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(communityData)
@@ -150,10 +150,7 @@ function communityReducer(state = initialState, action) {
             if (action.payload) {
                 newState = {
                     ...state,
-                    userCommunities : action.payload.reduce((acc, community) => {
-                        acc[community.id] = community;
-                        return acc;
-                    }, {})
+                    userCommunities : action.payload
                 };
                 return newState;
             } else {

@@ -6,6 +6,7 @@ import PostView from '../components/MainPosts/PostView/PostView';
 import Layout from './Layout';
 import Splash from '../components/Splash';
 import ProfilePage from '../components/ProfilePage';
+import CommunityPage from '../components/Communities/CommunityPage';
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "communities/:communityId",
+        element: <CommunityPage />,
       },
     ],
   },
