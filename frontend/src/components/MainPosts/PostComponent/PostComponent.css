@@ -83,6 +83,14 @@
     justify-content: flex-start;
 }
 
+.Post-Img {
+    max-height: 400px;
+    border: 1px solid #4a4949;
+    border-radius: 5px;
+    width: 100%;
+    margin: 10px 0px;
+}
+
 .Sort-Button-Container button {
     cursor: pointer;
     border: none;
