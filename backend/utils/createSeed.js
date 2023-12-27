@@ -22,5 +22,20 @@ const makePostSeeds = () => {
     return seeders;
 }
 
-console.log(makePostSeeds())
+
+const makeGroupSeeds = () => {
+
+    let seeders = [];
+
+    for (let i = 0; i < 4; i++) {
+        let seed = {};
+        seed.url = faker.image.urlLoremFlickr({ category: 'computers'})
+        seed.postId = random(1, 3);
+        seeders.push(seed)
+    }
+
+    return seeders;
+}
+
+console.log(makeGroupSeeds())
 module.exports = { makePostSeeds }

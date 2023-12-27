@@ -16,29 +16,49 @@ module.exports = {
         options.tableName = "PostImages";
         return queryInterface.bulkInsert(options, [
             {
-                postId: 3,
-                url: "https://gratisography.com/wp-content/uploads/2023/06/gratisography-flying-squirrel-free-stock-photo-800x525.jpg",
+                url: 'https://loremflickr.com/640/480/computers?lock=8593428084424704',
+                postId: 1,
                 preview: true
             },
             {
+                url: 'https://loremflickr.com/640/480/computers?lock=8363757407305728',
                 postId: 1,
-                url: "https://cdn.pixabay.com/photo/2016/03/27/22/22/fox-1284512_640.jpg",
-                preview: true
-            },
-            {
-                postId: 1,
-                url: "https://i.pinimg.com/736x/7e/70/9c/7e709cb869fd392935815d90c287822e.jpg",
                 preview: false
             },
             {
+                url: 'https://loremflickr.com/640/480/computers?lock=2392958305304576',
+                postId: 1,
+                preview: false
+            },
+            {
+                url: 'https://loremflickr.com/640/480/computers?lock=3244580694654976',
                 postId: 2,
-                url: "https://i.pinimg.com/736x/63/32/fc/6332fc61c7ec917521c2994d5386636b.jpg",
                 preview: true
             },
             {
-                postId: 3,
-                url: "https://www.rd.com/wp-content/uploads/2018/12/50-Funny-Animal-Pictures-That-You-Need-In-Your-Life-2.jpg",
+                url: 'https://loremflickr.com/640/480/computers?lock=7860436445691904',
+                postId: 2,
                 preview: false
+            },
+            {
+                url: 'https://loremflickr.com/640/480/computers?lock=7439085719257088',
+                postId: 3,
+                preview: true
+            },
+            {
+                url: 'https://loremflickr.com/640/480/computers?lock=3464180269056000',
+                postId: 3,
+                preview: false
+            },
+            {
+                url: 'https://loremflickr.com/640/480/computers?lock=8911913924689920',
+                postId: 4,
+                preview: true
+            },
+            {
+                postId: 5,
+                url: "https://www.rd.com/wp-content/uploads/2018/12/50-Funny-Animal-Pictures-That-You-Need-In-Your-Life-2.jpg",
+                preview: true
             },
         ], {})
     },
