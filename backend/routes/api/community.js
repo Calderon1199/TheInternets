@@ -114,17 +114,6 @@ router.get('/:communityId', async (req, res, next) => {
     }
 });
 
-router.post('/new', validateCommunity, async (req, res, next) => {
-    try {
-        const { name, description } = req.body;
-        const userId = req.user.id;
-        const newCommunity = await Group.create({ userId, name, description });
-
-        res.status(200).json(newCommunity);
-    } catch (error) {
-        next(error);
-    }
-});
 
 router.delete('/:communityId', async (req, res, next) => {
     try {

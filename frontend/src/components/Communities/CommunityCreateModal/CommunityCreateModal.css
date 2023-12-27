@@ -1,0 +1,82 @@
+.Community-Modal-Container {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 525px;
+    background: none;
+    background-color: #1a1a1b;
+    overflow: hidden;
+    border: 1px solid #484949;
+    font-family: IBMPlexSans,
+        Arial,
+        sans-serif;
+}
+
+.Community-Modal-Header {
+    color: whitesmoke;
+    margin: 0px 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #484949;
+}
+
+.Community-Name-Container {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px;
+    height: 80px;
+}
+
+.Community-Name-Container h3{
+    margin: 0px;
+}
+
+.Community-Data-Input {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px;
+}
+
+.Community-Data-Input input {
+    width: 100%;
+    height: 40px;
+    background: none;
+    border: 1px solid #484949;
+    color: #d7dadc;
+    margin-bottom: 15px;
+}
+
+.Community-Data-Input textarea {
+    min-width: 100%;
+    max-width: 100%;
+    height: 200px;
+    background: none;
+    border: 1px solid #484949;
+    color: #d7dadc;
+}
+
+.Community-Modal-Buttons {
+    width: 100%;
+    background-color: #343536;
+    margin-top: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Community-Modal-Buttons button {
+    cursor: pointer;
+    height: 35px;
+    width: 30%;
+    border-radius: 20px;
+    border: 1px solid #484949;
+    background-color: #1a1a1b;
+    color: whitesmoke;
+    font-weight: 700;
+}
+
+#Create-Com-Button {
+    margin: 0px 20px;
+}
