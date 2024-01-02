@@ -12,11 +12,29 @@ const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
         .isEmail()
-        .withMessage('Please provide a valid email.'),
+        .withMessage('Please provide a valid email.')
+        .custom((value) => {
+            if (value && value.trimStart()[0] === ' ') {
+                throw new Error('Description cannot start with a space.');
+            }
+            if (value && value.endsWith(' ')) {
+                throw new Error('Description cannot end with a space.');
+            }
+            return true;
+        }),
     check('username')
         .exists({ checkFalsy: true })
         .isLength({ min: 4 })
-        .withMessage('Please provide a username with at least 4 characters.'),
+        .withMessage('Please provide a username with at least 4 characters.')
+        .custom((value) => {
+            if (value && value.trimStart()[0] === ' ') {
+                throw new Error('Description cannot start with a space.');
+            }
+            if (value && value.endsWith(' ')) {
+                throw new Error('Description cannot end with a space.');
+            }
+            return true;
+        }),
     check('username')
         .not()
         .isEmail()
