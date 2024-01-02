@@ -72,16 +72,25 @@ function PostTile({posts}) {
                         <p>{calculateTimeDifference(post.createdAt)}</p>
                     </div>
                     <div className='Post-Text-Tile-Container'>
-                        <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>
-                        {editing ? (
+                        {post.PostImages.length > 0 ? (
                             <div>
-                                <label>
-                                    <input type="text" onChange={(e) => setPostText(e.target.value)} defaultValue={post.postText}/>
-                                </label>
-                                <button onClick={() => editUserPost(post.id)}>Post</button>
+                                <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>
+                                <img className='Post-Img' src={post.PostImages.find((img) => img.preview === true).url} alt='Post Image'></img>
                             </div>
-                        ): (
-                            <p className='Post-Text' onClick={() => visitPost(post.id)}>{post.postText}</p>
+                        ) : (
+                            <>
+                                <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>
+                                {editing ? (
+                                    <div>
+                                        <label>
+                                            <input type="text" onChange={(e) => setPostText(e.target.value)} defaultValue={post.postText} />
+                                        </label>
+                                        <button onClick={() => editUserPost(post.id)}>Post</button>
+                                    </div>
+                                ) : (
+                                    <p className='Post-Text' onClick={() => visitPost(post.id)}>{post.postText}</p>
+                                )}
+                            </>
                         )}
                     </div>
                     <div className='Post-Buttons'>

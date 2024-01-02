@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createComment } from '../../../redux/comment';
 import './CommentInputForm.css';
 
-function CommentInputForm({user, postId}) {
+function CommentInputForm({postId}) {
     const dispatch = useDispatch();
     const [comment, setComment] = useState("");
+    const user = useSelector(state => state.session?.user);
 
     const handleCommentSubmit = () => {
         const newCommentData = { comment };
@@ -15,8 +16,14 @@ function CommentInputForm({user, postId}) {
     return (
         <div className='Comment-Input-Container'>
             <div className='Comment-User-Name'>
-                <p>Comment as </p>
-                <p id='userName'>{user.username}</p>
+                {user ? (
+                    <div>
+                        <p>Comment as </p>
+                        <p id='userName'>{user.username}</p>
+                    </div>
+                ) : (
+                    <p>Login to comment</p>
+                )}
             </div>
             <div className='Comment-Input'>
                 <label>

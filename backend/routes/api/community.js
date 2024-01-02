@@ -24,6 +24,9 @@ const validateCommunity = [
             if (value && value.trimStart()[0] === ' ') {
                 throw new Error('Description cannot start with a space.');
             }
+            if (value && value.endsWith(' ')) {
+                throw new Error('Description cannot end with a space.');
+            }
             return true;
         }),
     handleValidationErrors,
@@ -111,17 +114,6 @@ router.get('/:communityId', async (req, res, next) => {
     }
 });
 
-router.post('/new', validateCommunity, async (req, res, next) => {
-    try {
-        const { name, description } = req.body;
-        const userId = req.user.id;
-        const newCommunity = await Group.create({ userId, name, description });
-
-        res.status(200).json(newCommunity);
-    } catch (error) {
-        next(error);
-    }
-});
 
 router.delete('/:communityId', async (req, res, next) => {
     try {

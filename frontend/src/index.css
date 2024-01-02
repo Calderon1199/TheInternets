@@ -1,6 +1,11 @@
 /* TODO: Add sitewide styles */
 body {
-    background-color: #313338;
+    background-color: #0B1416;
     margin: 0;
     padding: 0;
+}
+
+.errorDiv {
+    color: orangered;
+    margin: 0px;
 }

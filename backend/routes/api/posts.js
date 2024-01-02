@@ -13,14 +13,28 @@ const router = express.Router();
 const validatePost = [
     check('title')
         .exists({ checkFalsy: true })
-        .withMessage('Please provide a title.'),
+        .withMessage('Please provide a title.')
+        .custom((value) => {
+            if (!/^[a-zA-Z0-9\s]+$/.test(value)) {
+                throw new Error('Title can only contain numbers, letters, and spaces.');
+            }
+            if (value && (value.startsWith(' ') || value.endsWith(' '))) {
+                throw new Error('Title cannot start or end with a space.');
+            }
+            return true;
+        }),
     check('postText')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a story.'),
+        .optional({ nullable: true, checkFalsy: true })
+        .custom((value) => {
+            if (value && (value.startsWith(' ') || value.endsWith(' '))) {
+                throw new Error('Post text cannot start or end with a space.');
+            }
+            return true;
+        }),
     check('categoryId')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a category.'),
-    handleValidationErrors
+    handleValidationErrors,
 ];
 
 const validatePostImage = [
@@ -33,9 +47,6 @@ const validatePostImage = [
             }
             return true;
         }),
-    check('preview')
-        .exists({ checkFalsy: true })
-        .withMessage('Please provide a story.'),
     handleValidationErrors
 ];
 
@@ -104,7 +115,7 @@ router.get('/:post_id', async (req, res, next) => {
 
 });
 
-router.post('/submit', requireAuth, async (req, res, next) => {
+router.post('/submit', validatePost, requireAuth, async (req, res, next) => {
     try {
         const { title, postText, categoryId} = req.body;
         const userId = req.user.id;
@@ -117,7 +128,7 @@ router.post('/submit', requireAuth, async (req, res, next) => {
     }
 });
 
-router.put('/:post_id', requireAuth, async (req, res, next) => {
+router.put('/:post_id', validatePost, requireAuth, async (req, res, next) => {
     try {
         const postId = req.params.post_id;
         const userId = req.user.id;
@@ -169,14 +180,12 @@ router.delete('/:post_id', requireAuth, async (req, res, next) => {
 
 router.post('/:post_id/images', validatePostImage, requireAuth, async (req, res, next) => {
     try {
-        const {url} = req.body;
+        const {url, preview} = req.body;
         const postId = req.params.post_id;
-        let preview;
 
         const userId = req.user.id;
         const post = await Post.findByPk(+postId, { include: [Comment, PostImage] });
 
-        post.PostImages.length < 1 ? preview = true : preview = false;
 
         if (!post) res.status(404).json({message: "Post not found." });
 

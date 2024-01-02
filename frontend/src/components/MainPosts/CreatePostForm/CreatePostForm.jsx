@@ -12,13 +12,16 @@ function CreatePostForm() {
   const [selectedCommunity, setSelectedCommunity] = useState(null);
   const communities = useSelector(state => state.communities?.allCommunities);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [infoType, setInfoType] = useState(true);
+  const [images, setImages] = useState(['', '', '']);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
 
   useEffect(() => {
     dispatch(getCommunities());
-  }, [])
+  }, []);
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -38,9 +41,61 @@ function CreatePostForm() {
     setShowDropdown(false);
   };
 
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, title: '' }));
+  };
+
+  const handleImageInputChange = (index, imageUrl) => {
+    setImages((prevImages) => {
+      const updatedImages = [...prevImages];
+      updatedImages[index] = imageUrl;
+      return updatedImages;
+    });
+  };
+
+  const handleChangePostText = (e) => {
+    setPostText(e.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, postText: '' }));
+  };
+
   const handleSubmitPost = async () => {
-    const post = await dispatch(createPost({ title, postText, categoryId: selectedCommunity?.id || 1 }));
-    navigate(`/posts/${post.id}`);
+      const errorCollector = {};
+
+      if (!title) {
+        errorCollector.title = 'Please provide a title.';
+      }
+
+      if (title.startsWith(' ') || title.endsWith(' ')) {
+        errorCollector.title = 'Title cannot start or end with spaces.';
+      }
+
+      if (selectedCommunity === null) {
+        errorCollector.community = 'Please choose a community.';
+      }
+
+      if (postText.startsWith(' ') || postText.endsWith(' ')) {
+        errorCollector.postText = 'Story cannot start or end with spaces.';
+      }
+
+      setErrors(errorCollector);
+
+    const postData = {
+      title,
+      postText,
+      categoryId: selectedCommunity?.id,
+      images: images.filter(Boolean),
+    };
+
+    console.log(postData, 'postData')
+
+    try {
+      const post = await dispatch(createPost(postData));
+
+      navigate(`/posts/${post.id}`);
+    } catch (error) {
+      console.error('Error creating post:', error);
+    }
   };
 
   return (
@@ -66,25 +121,50 @@ function CreatePostForm() {
               </div>
             )}
           </div>
-          <div className="Post-Input-Container">
-            <label>
-              <input
-                type="text"
-                className="Title-Input"
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Title"
-              />
-            </label>
-            <label>
-              <textarea
-                type="text"
-                className="Text-Input"
-                onChange={(e) => setPostText(e.target.value)}
-                placeholder="Text (optional)"
-              />
-            </label>
+            <button onClick={() => setInfoType(true)}>Text</button>
+            <button onClick={() => setInfoType(false)}>Image</button>
+         <div className="Post-Input-Container">
+            {infoType ? (
+                <>
+                    <label>
+                    <input
+                        type="text"
+                        className="Title-Input"
+                        onChange={handleChangeTitle}
+                        value={title}
+                        placeholder="Title"
+                        />
+                    </label>
+                    {errors && errors.community && <p className="errorDiv">{errors.community}</p>}
+                    {errors.title && <p className="errorDiv">{errors.title}</p>}
+                    <label>
+                    <textarea
+                        type="text"
+                        className="Text-Input"
+                        onChange={handleChangePostText}
+                        value={postText}
+                        placeholder="Text (optional)"
+                    />
+                    </label>
+                    {errors.postText && <p className="errorDiv">{errors.postText}</p>}
+                </>
+            ): (
+                <>
+                {images.map((imageUrl, index) => (
+                  <label key={index}>
+                    <input
+                      type="text"
+                      className="Title-Input"
+                      onChange={(e) => handleImageInputChange(index, e.target.value)}
+                      value={imageUrl}
+                      placeholder={`Image url ${index + 1}`}
+                    />
+                  </label>
+                ))}
+              </>
+            )}
             <div className="Post-Submit-Button">
-              <button onClick={handleSubmitPost}>Post</button>
+              <button onClick={() => handleSubmitPost()}>Post</button>
             </div>
           </div>
         </div>

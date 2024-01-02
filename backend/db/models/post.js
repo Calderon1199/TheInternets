@@ -36,11 +36,26 @@ module.exports = (sequelize, DataTypes) => {
         },
         title: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                isAlphanumeric: true,
+                hasNoLeadingTrailingSpace(value) {
+                    if (value && (value.startsWith(' ') || value.endsWith(' '))) {
+                        throw new Error('Title cannot start or end with a space.');
+                    }
+                },
+            }
         },
         postText: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true,
+            validate: {
+                hasNoLeadingTrailingSpace(value) {
+                    if (value && (value.startsWith(' ') || value.endsWith(' '))) {
+                        throw new Error('Title cannot start or end with a space.');
+                    }
+                },
+            }
         }
     }, {
         sequelize,
