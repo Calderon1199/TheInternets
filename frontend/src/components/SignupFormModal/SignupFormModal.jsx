@@ -14,14 +14,35 @@ function SignupFormModal() {
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
+  const newErrors = {};
+
+  if (password !== confirmPassword) {
+    newErrors.confirmPassword =
+      "Confirm Password field must be the same as the Password field";
+  }
+
+  if (password.length < 6) {
+    newErrors.password = 'Password must be 6 characters or more'
+  }
+
+  if (email.startsWith(' ') || email.endsWith(' ')) {
+    newErrors.email = 'Email cannot start or end with spaces.';
+  }
+
+  if (username.startsWith(' ') || username.endsWith(' ')) {
+    newErrors.username = 'Username cannot start or end with spaces.';
+  }
+
+  if (password.startsWith(' ') || password.endsWith(' ')) {
+    newErrors.password = 'Password cannot start or end with spaces.';
+  }
+
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+  } else {
+    setErrors({});
 
     const serverResponse = await dispatch(
       thunkSignup({
@@ -36,48 +57,50 @@ function SignupFormModal() {
     } else {
       closeModal();
     }
-  };
+  }
+};
+
 
   return (
-    <>
+    <div className="Signup-Modal-Container">
       <h1>Sign Up</h1>
       {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
-          Email
           <input
             type="text"
             value={email}
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
         <label>
-          Username
           <input
             type="text"
             value={username}
+            placeholder="Username"
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </label>
         {errors.username && <p>{errors.username}</p>}
         <label>
-          Password
           <input
             type="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
         <label>
-          Confirm Password
           <input
             type="password"
             value={confirmPassword}
+            placeholder="Confirm Password"
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
@@ -85,7 +108,7 @@ function SignupFormModal() {
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

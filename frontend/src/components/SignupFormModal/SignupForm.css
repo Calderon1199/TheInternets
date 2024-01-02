@@ -1,0 +1,45 @@
+.Signup-Modal-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 600px;
+    padding: 10px 50px;
+    color: white;
+    background-color: #1a282d;
+    width: 400px;
+    border-radius: 30px;
+}
+
+
+.Signup-Modal-Container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: whitesmoke;
+    justify-content: space-evenly;
+    height: 500px;
+    border-top: 1px solid #38454C;
+    width: 100%;
+}
+
+
+.Signup-Modal-Container form input {
+    width: 300px;
+    height: 40px;
+    border-radius: 25px;
+    background: none;
+    background-color: #38454C;
+    color: white;
+    border: none;
+    padding: 0px 10px;
+}
+
+.Signup-Modal-Container button {
+    cursor: pointer;
+    width: 200px;
+    height: 30px;
+    border-radius: 20px;
+    border: 1px solid #38454C;
+    font-size: 15px;
+    font-weight: 700;
+}
