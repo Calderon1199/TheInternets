@@ -27,7 +27,7 @@ function CommentInputForm({postId}) {
             </div>
             <div className='Comment-Input'>
                 <label>
-                    <input type="text" onChange={(e) => setComment(e.target.value)} placeholder='What are your thoughts?'/>
+                    <textarea type="text" onChange={(e) => setComment(e.target.value)} placeholder='What are your thoughts?'></textarea>
                 </label>
                 <div className='Comment-Submit-Button'>
                     <button type='submit' onClick={handleCommentSubmit}>Comment</button>
@@ -35,7 +35,7 @@ function CommentInputForm({postId}) {
             </div>
             <div className='Search-Sort-Container'>
                 <div className='Search-Sort-Inner-Container'>
-                    <label id ="sort-label" for="sort">Sort By:</label>
+                    <label id ="sort-label" htmlFor="sort">Sort By:</label>
                     <select name="sort" id="sort-comments">
                         <option value="Best">Best</option>
                         <option value="Recent">Recent</option>
