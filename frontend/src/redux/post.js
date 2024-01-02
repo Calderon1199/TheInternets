@@ -114,16 +114,15 @@ export const deletePost = (postId) => async (dispatch) => {
     }
 };
 
-export const createPost = (postData) => async (dispatch) => {
+export const createPostImage = (postId, imgData) => async (dispatch) => {
     try {
-        const response = await csrfFetch(`/api/posts/submit`, {
+        const response = await csrfFetch(`/api/posts/${postId}/images`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(postData)
+            body: JSON.stringify(imgData)
         });
         if (response.ok) {
             const newPost = await response.json();
-            dispatch(CreateNewPost(newPost));
             dispatch(getPosts());
             return newPost;
         }
@@ -131,6 +130,39 @@ export const createPost = (postData) => async (dispatch) => {
         throw error;
     }
 }
+
+export const createPost = (postData) => async (dispatch) => {
+    try {
+        const { images, ...textData } = postData;
+
+        const response = await csrfFetch('/api/posts/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(textData),
+        });
+
+        if (!response.ok) {
+            throw new Error('Error creating post');
+        }
+
+        const newPost = await response.json();
+        console.log(newPost, 'newpost');
+        console.log(images, 'images');
+
+        if (images && images.length > 0) {
+            for (let i = 0; i < images.length; i++) {
+                console.log(images[i], 'this is redux images')
+                await dispatch(createPostImage(newPost.id, { url: images[i], preview: i === 0 }));
+            }
+        }
+
+        dispatch(CreateNewPost(newPost));
+
+        return newPost;
+    } catch (error) {
+        throw error;
+    }
+};
 
 function postReducer(state = initialState, action) {
     let newState;
