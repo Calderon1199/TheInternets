@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { editComment, getCommentsForPost } from '../../../redux/comment';
 import { useParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { calculateTimeDifference } from '../../MainPosts/PostComponent';
 import "./CommentTile.css";
 
 function CommentTile() {
+    const dropdownRef = useRef(null);
   const { postId } = useParams();
   const dispatch = useDispatch();
   const { setModalContent } = useModal();
@@ -21,6 +22,21 @@ function CommentTile() {
   const setModal = (comment) => {
     return setModalContent(<DeleteCommentModal comment={comment} />);
   };
+
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setOptionMenu({});
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const ToggleOptionDropdown = (commentId) => {
     setOptionMenu((prevOptionMenu) => ({
@@ -81,11 +97,11 @@ function CommentTile() {
                     </div>
                 ) : (
                     <div className='Comment-Section'>
-                    <p>{comment.comment}</p>
-                    {user && user.id === comment.userId && (
-                        <div className='Comment-Option-Buttons'>
-                        <i onClick={() => ToggleOptionDropdown(comment.id)} className="fa-solid fa-ellipsis"></i>
-                        {optionMenu[comment.id] && (
+                        <p>{comment.comment}</p>
+                        {user && user.id === comment.userId && (
+                            <div className='Comment-Option-Buttons' ref={dropdownRef}>
+                            <i onClick={() => ToggleOptionDropdown(comment.id)} className="fa-solid fa-ellipsis"></i>
+                            {optionMenu[comment.id] && (
                             <div className='Button-Dropdown'>
                                 <button
                                     onClick={() => {
@@ -98,10 +114,10 @@ function CommentTile() {
                                         [comment.id]: true,
                                     }));
                                     }}
-                                ><i class="fa-regular fa-pen-to-square"></i>
+                                ><i className="fa-regular fa-pen-to-square"></i>
                                     Edit Comment
                                 </button>
-                                <button onClick={() => setModal(comment)}><i class="fa-regular fa-trash-can"></i>Delete Comment</button>
+                                <button onClick={() => setModal(comment)}><i className="fa-regular fa-trash-can"></i>Delete Comment</button>
                             </div>
                         )}
                         </div>

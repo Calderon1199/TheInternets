@@ -59,10 +59,10 @@ function ProfileButton() {
               <li>{user?.username}</li>
               <li>{user?.email}</li>
               <li>
-                <button className="dropdown-button" onClick={visitProfile}><i class="fa-regular fa-user"></i>Profile</button>
+                <button className="dropdown-button" onClick={visitProfile}><i className="fa-regular fa-user"></i>Profile</button>
               </li>
               <li>
-                <button className="dropdown-button" onClick={logout}><i class="fa-solid fa-arrow-right-from-bracket"></i>Log Out</button>
+                <button className="dropdown-button" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket"></i>Log Out</button>
               </li>
             </div>
           ) : (

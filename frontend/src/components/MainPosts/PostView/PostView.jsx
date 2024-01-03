@@ -53,7 +53,7 @@ function PostView() {
                         </div>
                         <div className='Single-Post-Buttons'>
                             <div className='Option-Button-Container'>
-                                <button onClick={() => visitPost(post.id)}><i class="fa-regular fa-message"></i>{post?.Comments?.length}{post?.Comments?.length === 1 ? " Comment" : " Comments"}</button>
+                                <button onClick={() => visitPost(post.id)}><i className="fa-regular fa-message"></i>{post?.Comments?.length}{post?.Comments?.length === 1 ? " Comment" : " Comments"}</button>
                             </div>
                             {post.userId === user?.id && (
                                 <div className='Option-Button-Container'>
