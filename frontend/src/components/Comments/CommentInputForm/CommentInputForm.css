@@ -24,12 +24,13 @@
     color: #4fbcff;
 }
 
-.Comment-Input input{
+.Comment-Input textarea{
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     width: 70%;
     height: 150px;
     background: none;
+    color: white;
     border: 1px solid #4a4949;
 }
 
