@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createComment, deleteComment, editComment, getComments, getUserComments } from '../../redux/comment';
-import ProductTile from "../MainPosts/PostComponent/";
+import { useEffect } from 'react';
+
+import {getCommunities, getSingleCommunity, getUserCommunities } from '../../redux/community';
 import { getPosts } from '../../redux/post';
-import "./Splash.css";
+
+import ProductTile from "../MainPosts/PostComponent/";
 import HomePageWidget from './HomePageWidget';
-import { deleteCommunity, editCommunity, getCommunities, getSingleCommunity, getUserCommunities } from '../../redux/community';
+import "./Splash.css";
 
 const Splash = () => {
-  const dispatch = useDispatch();
   const allPosts = useSelector(state => state.posts?.allPosts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCommunities())
@@ -23,7 +24,7 @@ const Splash = () => {
 
   return (
     <div className='Main-Page'>
-        <ProductTile posts={allPosts}/>
+        <ProductTile posts={allPosts} isProfile={false}/>
         <HomePageWidget />
     </div>
   );

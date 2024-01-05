@@ -1,27 +1,32 @@
-import React, { useEffect, useState, useRef } from 'react';
-import './CreatePostForm.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { createPost } from '../../../redux/post';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PostRules from '../PostRules';
+
 import { getCommunities } from '../../../redux/community';
+import { createPost } from '../../../redux/post';
+import PostRules from '../PostRules';
+
+import './CreatePostForm.css';
 
 function CreatePostForm() {
-  const [title, setTitle] = useState('');
-  const [postText, setPostText] = useState('');
-  const [selectedCommunity, setSelectedCommunity] = useState(null);
-  const communities = useSelector(state => state.communities?.allCommunities);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [infoType, setInfoType] = useState(true);
-  const [images, setImages] = useState(['', '', '']);
-  const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const dropdownRef = useRef(null);
+    const communities = useSelector(state => state.communities?.allCommunities);
+
+    const [selectedCommunity, setSelectedCommunity] = useState(null);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [images, setImages] = useState(['', '', '']);
+    const [infoType, setInfoType] = useState(true);
+    const [postText, setPostText] = useState('');
+    const [errors, setErrors] = useState({});
+    const [title, setTitle] = useState('');
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+
+    const dropdownRef = useRef(null);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCommunities());
-  }, []);
+  }, [dispatch]);
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -39,11 +44,13 @@ function CreatePostForm() {
   const handleCommunityClick = (community) => {
     setSelectedCommunity(community);
     setShowDropdown(false);
+    title.length > 5 && selectedCommunity ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
     setErrors((prevErrors) => ({ ...prevErrors, title: '' }));
+    title.length > 5 && selectedCommunity ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleImageInputChange = (index, imageUrl) => {
@@ -65,15 +72,12 @@ function CreatePostForm() {
       if (!title) {
         errorCollector.title = 'Please provide a title.';
       }
-
       if (title.startsWith(' ') || title.endsWith(' ')) {
         errorCollector.title = 'Title cannot start or end with spaces.';
       }
-
       if (selectedCommunity === null) {
         errorCollector.community = 'Please choose a community.';
       }
-
       if (postText.startsWith(' ') || postText.endsWith(' ')) {
         errorCollector.postText = 'Story cannot start or end with spaces.';
       }
@@ -87,11 +91,8 @@ function CreatePostForm() {
       images: images.filter(Boolean),
     };
 
-    console.log(postData, 'postData')
-
     try {
       const post = await dispatch(createPost(postData));
-
       navigate(`/posts/${post.id}`);
     } catch (error) {
       console.error('Error creating post:', error);
@@ -112,8 +113,8 @@ function CreatePostForm() {
             {showDropdown && (
               <div className="Community-Dropdown-Options">
                 {communities.map((community) => (
-                    <div className='Community-Name-Container'>
-                        <div key={community.id} className='Community-Name' onClick={() => handleCommunityClick(community)}>
+                    <div className='Community-Name-Container' key={community.id}>
+                        <div className='Community-Name' onClick={() => handleCommunityClick(community)}>
                             {community.name}
                         </div>
                     </div>
@@ -121,8 +122,10 @@ function CreatePostForm() {
               </div>
             )}
           </div>
-            <button onClick={() => setInfoType(true)}>Text</button>
-            <button onClick={() => setInfoType(false)}>Image</button>
+          <div className='Post-Type-Buttons'>
+            <button onClick={() => setInfoType(true)}><i className="fa-solid fa-font"></i></button>
+            <button onClick={() => setInfoType(false)}><i className="fa-solid fa-image"></i></button>
+          </div>
          <div className="Post-Input-Container">
             {infoType ? (
                 <>
@@ -164,7 +167,8 @@ function CreatePostForm() {
               </>
             )}
             <div className="Post-Submit-Button">
-              <button onClick={() => handleSubmitPost()}>Post</button>
+              <button className='cancel-button' onClick={() => navigate('/')}>Cancel</button>
+              <button className={buttonDisabled ? 'disabled': 'enabled'} onClick={() => handleSubmitPost()} disabled={buttonDisabled}>Post</button>
             </div>
           </div>
         </div>

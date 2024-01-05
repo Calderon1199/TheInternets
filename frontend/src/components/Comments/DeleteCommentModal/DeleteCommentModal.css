@@ -1,0 +1,4 @@
+.Delete-Post-Container {
+    display: flex;
+    flex-direction: column;
+}

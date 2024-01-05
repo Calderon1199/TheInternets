@@ -10,6 +10,19 @@
     height: 60px;
 }
 
+.fa-solid.fa-user {
+    cursor: pointer;
+    font-size: 25px;
+    margin: 0px;
+    padding: 0px;
+    color: #c061cb;
+}
+
+.fa-solid.fa-user:hover {
+    transition-duration: 300ms;
+    color: #f66151;
+}
+
 /*
 .Post-Bar-Avatar */
 
@@ -19,6 +32,10 @@
     height: 30px;
     background-color: #272729;
     border: 1px solid rgb(59, 59, 59);
+}
+
+.Create-Post-Input input:hover {
+    border: 1px solid white;
 }
 
 .Create-Post-Input input::placeholder {

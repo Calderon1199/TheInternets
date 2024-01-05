@@ -1,6 +1,4 @@
-import React from 'react';
 import "./PostRules.css";
-
 
 function PostRules() {
     return (

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
 import PostTile from '../MainPosts/PostComponent';
+
 import { getUserPosts } from '../../redux/post';
-import { useSelector } from 'react-redux';
 
 function ProfilePage() {
-    const dispatch = useDispatch();
+    const userPosts = useSelector(state => state.posts?.userPosts);
+
     const [loading, setLoading] = useState(true);
     const [hasPost, setHasPost] = useState(false);
-    const userPosts = useSelector(state => state.posts?.userPosts);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getUserPosts());
@@ -25,7 +28,7 @@ function ProfilePage() {
     return (
         <div>
             {userPosts.length > 0 ? (
-                <PostTile posts={userPosts} />
+                <PostTile posts={userPosts} isProfile={true}/>
             ): (
                 !hasPost && (
                     <h2>Create a post</h2>

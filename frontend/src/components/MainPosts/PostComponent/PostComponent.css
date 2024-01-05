@@ -1,8 +1,8 @@
 .Post-Tile-Inner-Container {
     height:fit-content;
     width: 600px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     background-color: #1a1a1b;
     overflow: hidden;
     margin: 10px 0;
@@ -16,12 +16,25 @@
     flex-direction: column;
 }
 
+.Post-Tile-Inner-Container:hover {
+    border: 1px solid white;
+
+}
+
+.Edit-Input {
+    height: 300px;
+    background: none;
+    color: white;
+    word-break: keep-all;
+    min-width: 95%;
+    max-width: 95%;
+}
+
 
 .Post-Info-Container {
-    cursor: pointer;
     display: flex;
     margin: 15px 0 0 0;
-    width: 62%;
+    width: calc(50% + 20px);
     height: 20px;
     flex-direction: row;
     align-items: center;
@@ -29,10 +42,26 @@
 }
 
 .Post-Text {
-    word-wrap: break-word;
+    word-break: keep-all;
     line-height: 25px;
     overflow: hidden;
     max-height: 265px;
+}
+
+#group-name:hover {
+    text-decoration: underline;
+}
+
+#post-owner-name:hover {
+    text-decoration: underline;
+}
+
+#group-name {
+    cursor: pointer;
+}
+
+#post-owner-name {
+    cursor: pointer;
 }
 
 .Post-Text-Tile-Container {

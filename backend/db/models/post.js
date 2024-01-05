@@ -38,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                isAlphanumeric: true,
                 hasNoLeadingTrailingSpace(value) {
                     if (value && (value.startsWith(' ') || value.endsWith(' '))) {
                         throw new Error('Title cannot start or end with a space.');
