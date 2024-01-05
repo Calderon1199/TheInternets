@@ -1,15 +1,17 @@
-import React from 'react';
-import "./HomePageWidget.css";
-import { useSelector } from 'react-redux';
-import { useModal } from '../../../context/Modal';
 import { useNavigate } from 'react-router-dom';
-import LoginFormModal from '../../LoginFormModal';
-import CommunityCreateModal from '../../Communities/CommunityCreateModal';
+import { useSelector } from 'react-redux';
 
-function HomePageWidget(props) {
-    const user = useSelector(state => state.session?.user);
-    const navigate = useNavigate();
+import { useModal } from '../../../context/Modal';
+import LoginFormModal from '../../LoginFormModal';
+
+import CommunityCreateModal from '../../Communities/CommunityCreateModal';
+import "./HomePageWidget.css";
+
+function HomePageWidget() {
+    const user = useSelector(state => state.session.user);
+    
     const { setModalContent } = useModal();
+    const navigate = useNavigate();
 
     const visitCreate = (type) => {
         if (user && type === "community") {

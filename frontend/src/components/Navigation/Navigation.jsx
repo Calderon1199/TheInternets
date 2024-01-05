@@ -1,16 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ProfileButton from "./ProfileButton";
-import "./Navigation.css";
+
 import { useModal } from "../../context/Modal";
 import LoginFormModal from "../LoginFormModal";
+import ProfileButton from "./ProfileButton";
+
+import "./Navigation.css";
 
 function Navigation() {
-  const user = useSelector((state) => state.session?.user);
+  const user = useSelector(state => state.session.user);
+
   const { setModalContent } = useModal();
   const navigate = useNavigate();
 
-  const urlPath = user ? "/posts/new" : null;
+  const urlPath = "/posts/new";
 
   const handleNavLinkClick = () => {
     if (!user) {

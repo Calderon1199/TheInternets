@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+
 import { createComment } from '../../../redux/comment';
+import { useModal } from '../../../context/Modal';
+import LoginFormModal from '../../LoginFormModal';
 import './CommentInputForm.css';
 
 function CommentInputForm({postId}) {
-    const dispatch = useDispatch();
-    const [comment, setComment] = useState("");
     const user = useSelector(state => state.session?.user);
+    const [comment, setComment] = useState("");
+    const { setModalContent } = useModal();
+    const dispatch = useDispatch();
 
     const handleCommentSubmit = () => {
         const newCommentData = { comment };
@@ -17,21 +21,21 @@ function CommentInputForm({postId}) {
         <div className='Comment-Input-Container'>
             <div className='Comment-User-Name'>
                 {user ? (
-                    <div>
+                    <div className='Comment-Input-True'>
                         <p>Comment as </p>
-                        <p id='userName'>{user.username}</p>
+                        <p id='userName'>{user?.username}</p>
+                        <div className='Comment-Input'>
+                            <label>
+                                <textarea type="text" onChange={(e) => setComment(e.target.value)} placeholder='What are your thoughts?'></textarea>
+                            </label>
+                            <div className='Comment-Submit-Button'>
+                                <button type='submit' onClick={handleCommentSubmit}>Comment</button>
+                            </div>
+                        </div>
                     </div>
                 ) : (
-                    <p>Login to comment</p>
+                    <p id='userName2' onClick={() => setModalContent(<LoginFormModal/>)}>Login to comment</p>
                 )}
-            </div>
-            <div className='Comment-Input'>
-                <label>
-                    <textarea type="text" onChange={(e) => setComment(e.target.value)} placeholder='What are your thoughts?'></textarea>
-                </label>
-                <div className='Comment-Submit-Button'>
-                    <button type='submit' onClick={handleCommentSubmit}>Comment</button>
-                </div>
             </div>
             <div className='Search-Sort-Container'>
                 <div className='Search-Sort-Inner-Container'>

@@ -128,7 +128,7 @@ router.post('/submit', validatePost, requireAuth, async (req, res, next) => {
     }
 });
 
-router.put('/:post_id', validatePost, requireAuth, async (req, res, next) => {
+router.put('/:post_id', requireAuth, async (req, res, next) => {
     try {
         const postId = req.params.post_id;
         const userId = req.user.id;

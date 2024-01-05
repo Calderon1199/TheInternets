@@ -5,12 +5,14 @@ import { Navigate, useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginFormPage() {
+  const sessionUser = useSelector((state) => state.session.user);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [email, setEmail] = useState("");
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
@@ -24,11 +26,7 @@ function LoginFormPage() {
       })
     );
 
-     if (serverResponse) {
-       setErrors(serverResponse);
-     } else {
-       navigate("/");
-     }
+    serverResponse ? setErrors(serverResponse) : navigate("/");
   };
 
   return (

@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
-import { useModal } from "../../../context/Modal";
+
 import { deleteComment } from "../../../redux/comment";
+import { useModal } from "../../../context/Modal";
+
 import "./DeleteCommentModal.css";
 
 function DeleteCommentModal({ comment }) {
@@ -12,13 +14,14 @@ function DeleteCommentModal({ comment }) {
         closeModal();
     }
 
-
-
     return (
         <>
             <div className="Delete-Post-Container">
-                <button onClick={handleDelete}>Delete</button>
-                <button onClick={closeModal}>Cancel</button>
+                <h3>Are you sure you want to delete this post?</h3>
+                <div>
+                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={closeModal}>Cancel</button>
+                </div>
             </div>
         </>
     );

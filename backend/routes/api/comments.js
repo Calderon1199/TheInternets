@@ -51,7 +51,7 @@ router.get('/:post_id', async (req, res, next) => {
             include: [
                 {
                     model: User,
-                    attributes: ['id', 'username'], // Specify the attributes you want to include from the User model
+                    attributes: ['id', 'username'],
                 }
             ]
         });
@@ -72,7 +72,17 @@ router.post('/:post_id', requireAuth, validateComment, async (req, res, next) =>
 
         const newComment = await Comment.create({ userId, postId, comment })
 
-        return res.status(200).json(newComment)
+        const userComment = await Comment.findByPk(newComment.id, {
+            where: { postId: postId },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username'],
+                }
+            ]
+        })
+
+        return res.status(200).json(userComment)
     } catch (error) {
         next(error);
     }

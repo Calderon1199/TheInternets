@@ -81,6 +81,7 @@ export const getSinglePost = (postId) => async (dispatch) => {
 }
 
 export const editPost = (postId, newPostData) => async (dispatch) => {
+    console.log(newPostData, 'bbbbbbbbb')
     try {
         const response = await csrfFetch(`/api/posts/${postId}`, {
             method: "PUT",

@@ -1,21 +1,21 @@
-import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkLogout } from "../../redux/session";
-import OpenModalMenuItem from "./OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ProfileButton() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false);
-  const user = useSelector(state => state.session?.user);
-  const ulRef = useRef();
+import { thunkLogout } from "../../redux/session";
 
-  const visitProfile = () => {
-    navigate("/profile")
-  }
+import OpenModalMenuItem from "./OpenModalMenuItem";
+import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../LoginFormModal";
+
+function ProfileButton() {
+  const user = useSelector(state => state.session.user);
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const ulRef = useRef();
 
   const toggleMenu = (e) => {
     e.stopPropagation();
@@ -56,10 +56,10 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <div className="Dropdown-Info">
-              <li>{user?.username}</li>
-              <li>{user?.email}</li>
+              <li>{user.username}</li>
+              <li>{user.email}</li>
               <li>
-                <button className="dropdown-button" onClick={visitProfile}><i className="fa-regular fa-user"></i>Profile</button>
+                <button className="dropdown-button" onClick={() => navigate("/profile")}><i className="fa-regular fa-user"></i>Profile</button>
               </li>
               <li>
                 <button className="dropdown-button" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket"></i>Log Out</button>

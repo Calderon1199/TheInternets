@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { deletePost, editPost, getSinglePost } from '../../../redux/post';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
+import { deletePost, getSinglePost } from '../../../redux/post';
 import CommentInputForm from '../../Comments/CommentInputForm';
 import CommentTile from '../../Comments/CommentTile';
-import "./PostView.css";
+
 import { calculateTimeDifference } from '../PostComponent';
+import "./PostView.css";
 
 
 function PostView() {
-    const {postId} = useParams();
-    const navigate = useNavigate();
-    const user = useSelector(state => state.session?.user) || null;
-    const dispatch = useDispatch();
-    const [editing, setEditing] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [postText, setPostText] = useState("");
     const post = useSelector(state => state.posts?.singlePost);
+    const user = useSelector(state => state.session.user);
+
+    const [loading, setLoading] = useState(true);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {postId} = useParams();
 
     useEffect(() => {
         dispatch(getSinglePost(+postId));
@@ -45,15 +47,15 @@ function PostView() {
                             <p>{calculateTimeDifference(post.createdAt)}</p>
                         </div>
                         <div className='Post-Text-Tile-Container'>
-                            <h3 onClick={() => visitPost(post.id)}>{post.title}</h3>
+                            <h3 onClick={() => navigate(`/posts/${post.id}`)}>{post.title}</h3>
                             {post.PostImages?.length > 0 && (
                                 <img src={post.PostImages?.find((img) => img.preview === true)?.url} alt='Post Image'></img>
                             )}
-                            <p className='Post-Text' onClick={() => visitPost(post.id)}>{post.postText}</p>
+                            <p className='Post-Text' onClick={() => navigate(`/posts/${post.id}`)}>{post.postText}</p>
                         </div>
                         <div className='Single-Post-Buttons'>
                             <div className='Option-Button-Container'>
-                                <button onClick={() => visitPost(post.id)}><i className="fa-regular fa-message"></i>{post?.Comments?.length}{post?.Comments?.length === 1 ? " Comment" : " Comments"}</button>
+                                <button onClick={() => navigate(`/posts/${post.id}`)}><i className="fa-regular fa-message"></i>{post?.Comments?.length}{post?.Comments?.length === 1 ? " Comment" : " Comments"}</button>
                             </div>
                             {post.userId === user?.id && (
                                 <div className='Option-Button-Container'>

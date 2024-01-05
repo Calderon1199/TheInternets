@@ -1,22 +1,18 @@
-import React from 'react';
 import { useNavigate } from "react-router-dom";
+
 import './CreatePostInput.css';
 
-function CreatePostInput({ user }) {
+function CreatePostInput() {
     const navigate = useNavigate();
-
-    const redirectToCreate = () => {
-        navigate('/posts/new');
-    };
 
     return (
         <div className='Create-Post-Bar'>
             <div className='Post-Bar-Avatar'>
-                <img src={user.profileImg} alt="User Profile"></img>
+                <i className="fa-solid fa-user" onClick={() => navigate('profile/')}></i>
             </div>
             <div className='Create-Post-Input'>
             <label>
-                <input type="text" onClick={redirectToCreate} placeholder='Create Post'/>
+                <input type="text" onClick={() => navigate('posts/new')} placeholder='Create Post'/>
             </label>
             </div>
         </div>

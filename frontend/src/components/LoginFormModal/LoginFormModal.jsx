@@ -5,11 +5,12 @@ import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
-  const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [email, setEmail] = useState("");
+
   const { closeModal } = useModal();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,28 +22,18 @@ function LoginFormModal() {
       })
     );
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      closeModal();
-    }
+    serverResponse ? setErrors(serverResponse) : closeModal();
+
   };
 
-  const handleDemoUserSubmit = async (e) => {
-    e.preventDefault();
-
-    const serverResponse = await dispatch(
-      thunkLogin({
+  const handleDemoUserSubmit = async () => {
+    await dispatch(thunkLogin({
         email: 'demo@user.io',
         password: "password",
       })
     );
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      closeModal();
-    }
+    closeModal();
   };
 
   return (
@@ -71,7 +62,7 @@ function LoginFormModal() {
         {errors.password && <p>{errors.password}</p>}
         <button type="submit" onClick={(e) => handleSubmit(e)}>Log In</button>
       </form>
-      <button onClick={(e) => handleDemoUserSubmit(e)}>Demo User</button>
+      <button onClick={handleDemoUserSubmit}>Demo User</button>
     </div>
   );
 }

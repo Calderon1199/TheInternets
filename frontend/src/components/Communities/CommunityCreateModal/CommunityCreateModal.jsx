@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import "./CommunityCreateModal.css";
-import { useModal } from '../../../context/Modal';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+
 import { createCommunity } from '../../../redux/community';
+import { useModal } from '../../../context/Modal';
+
+import "./CommunityCreateModal.css";
+
 function CommunityCreateModal() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [name, setName] = useState("");
     const [description, setDescription] = useState("");
+    const [name, setName] = useState("");
+
     const { closeModal } = useModal();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleCreateCommunity = async () => {
-        const newCommunityData = {
-            name,
-            description
-        }
+        const newCommunityData = { name, description };
         const newCommunity = await dispatch(createCommunity(newCommunityData));
+
         closeModal();
         navigate(`/communities/${newCommunity.id}`)
     }
