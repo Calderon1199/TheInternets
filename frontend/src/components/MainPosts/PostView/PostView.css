@@ -44,7 +44,7 @@
     cursor: pointer;
     display: flex;
     margin: 15px 0 0 0;
-    width: fit-content;
+    width: calc(30% + 30px);
     min-width: 30%;
     font-size: 12px;
     height: 20px;
@@ -54,6 +54,19 @@
     font-family: IBMPlexSans,Arial,sans-serif;
     color: #818384;
 }
+
+#post-view-cursor {
+    cursor:default;
+}
+
+#post-info-cursor {
+    cursor: text;
+}
+
+#post-text-cursor {
+    cursor: text;
+}
+
 
 .Single-Post-Buttons {
     display: flex;

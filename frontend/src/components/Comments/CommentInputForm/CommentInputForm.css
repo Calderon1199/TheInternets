@@ -35,6 +35,12 @@
     text-decoration: underline;
 }
 
+.Comment-As-User {
+    display: flex;
+    width: calc(17% + 20px);
+    justify-content: space-between;
+}
+
 .Comment-Input-True {
     width: 100%;
 }
