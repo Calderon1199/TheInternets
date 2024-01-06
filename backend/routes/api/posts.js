@@ -15,8 +15,8 @@ const validatePost = [
         .exists({ checkFalsy: true })
         .withMessage('Please provide a title.')
         .custom((value) => {
-            if (!/^[a-zA-Z0-9\s]+$/.test(value)) {
-                throw new Error('Title can only contain numbers, letters, and spaces.');
+            if (!/^[a-zA-Z0-9\s.,;:'"!?-]+$/.test(value)) {
+                throw new Error('Title can only contain letters, numbers, spaces, and common punctuation marks.');
             }
             if (value && (value.startsWith(' ') || value.endsWith(' '))) {
                 throw new Error('Title cannot start or end with a space.');
