@@ -12,6 +12,7 @@
     justify-content: center;
 }
 
+
 .Post-Text-Tile-Container h3 {
     font-family: IBMPlexSans, Arial, sans-serif;
     font-size: 20px;
@@ -88,11 +89,16 @@
     font-weight: 400;
     color: #d7dadc;
     word-break: keep-all;
+    height: fit-content;
+    padding-bottom: 10px
 }
 
-.Post-Text-Tile-Container {
-    word-break: break-all;
-    height: fit-content;
+.Post-Info-Outer-Container {
+    display: flex;
+    width: 90%;
+    word-wrap: break-word;
+    word-break: keep-all;
+    flex-direction: column;
 }
 
 .Option-Button-Container {

@@ -48,22 +48,19 @@
 .Comment-Input textarea{
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    min-width: 70%;
-    max-width: 70%;
+    padding: 10px 10px;
+    min-width: 90%;
+    max-width: 90%;
     height: 150px;
     background: none;
     color: white;
     border: 1px solid #4a4949;
 }
 
-.Comment-Input input::placeholder {
-    position: absolute;
-    top: 6%;
-    padding-left: 1%;
-}
+
 
 .Comment-Submit-Button {
-    width: 70.65%;
+    width: 93%;
     background-color: #272729;
     height: 40px;
     border-left: 1px solid #4a4949;
@@ -76,14 +73,31 @@
     justify-content: flex-end;
 }
 
-.Comment-Submit-Button button {
+
+.Comment-Submit-Button .disabled {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #e1e1e1;
+    border: 2px solid #303030;
+    color: gray;
+    font-weight: bold;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.Comment-Submit-Button .enabled {
+    background-color: #8ff0a4;
+    border: 2px solid #303030;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: gray;
-    font-weight: 500;
+    color: black;
+    font-weight: bold;
     border: none;
     width: 100px;
     height: 30px;
@@ -119,4 +133,11 @@
 
 #sort-label {
     color: #4bb0ee;
+}
+
+#comment-error {
+    position: absolute;
+    left: 8%;
+    color: #ff7b63;
+    font-size: 13px;
 }

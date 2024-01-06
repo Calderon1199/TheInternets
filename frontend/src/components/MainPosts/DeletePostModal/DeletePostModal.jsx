@@ -19,9 +19,13 @@ function DeletePostModal({post}) {
     return (
         <div className='Delete-Post-Modal'>
             <div className="Delete-Post-Container">
-                <p>Are you sure you want to delete this post?</p>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div className='Warning-Text'>
+                    <h3>Are you sure?</h3>
+                    <p id="warning-text">This action cannot be undone. All values associated with this post will be lost.</p>
+                </div>
                 <div className='Delete-Modal-Buttons'>
-                    <button id='delete-button' onClick={handleDelete}>Delete</button>
+                    <button id='delete-button' onClick={handleDelete}>Delete Post</button>
                     <button id='cancel-button' onClick={closeModal}>Cancel</button>
                 </div>
             </div>

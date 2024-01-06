@@ -56,7 +56,7 @@ function CreatePostForm() {
       newErrors.title = '';
     }
   setErrors(newErrors);
-    title.length > 5 && selectedCommunity ? setButtonDisabled(false) : setButtonDisabled(true);
+    title.length > 5 && selectedCommunity && !e.target.value.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleImageInputChange = (index, imageUrl) => {

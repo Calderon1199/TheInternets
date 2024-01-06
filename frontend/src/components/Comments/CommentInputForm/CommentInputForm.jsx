@@ -10,10 +10,32 @@ function CommentInputForm({postId}) {
     const user = useSelector(state => state.session?.user);
     const [comment, setComment] = useState("");
     const { setModalContent } = useModal();
+    const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+
+    const handleCommentChange = (comment) => {
+        setComment(comment);
+        const newErrors = { ...errors };
+
+        if (comment.length === 0 ){
+            newErrors.comment = '';
+        }
+        else if (comment.startsWith(' ')) {
+            newErrors.comment = 'Comment cannot start with spaces';
+        } else if (comment.length < 3) {
+            newErrors.comment = 'Comment must be longer';
+        } else {
+            newErrors.comment = '';
+        }
+        setErrors(newErrors);
+
+        comment.length >= 3  && !comment.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
+    }
 
     const handleCommentSubmit = () => {
-        const newCommentData = { comment };
+        const newCommentData = { comment: comment.trim() };
+        setComment('');
         dispatch(createComment(postId, newCommentData));
     }
 
@@ -28,10 +50,11 @@ function CommentInputForm({postId}) {
                         </div>
                         <div className='Comment-Input'>
                             <label>
-                                <textarea type="text" onChange={(e) => setComment(e.target.value)} placeholder='What are your thoughts?'></textarea>
+                                <textarea type="text" onChange={(e) => handleCommentChange(e.target.value)} value={comment} placeholder='What are your thoughts?'></textarea>
                             </label>
                             <div className='Comment-Submit-Button'>
-                                <button type='submit' onClick={handleCommentSubmit}>Comment</button>
+                                {errors.comment && <p className="errorDiv" id="comment-error">{errors.comment}</p>}
+                                <button type='submit' className={buttonDisabled ? 'disabled': 'enabled'} disabled={buttonDisabled} onClick={handleCommentSubmit}>Comment</button>
                             </div>
                         </div>
                     </div>
