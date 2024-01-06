@@ -44,7 +44,7 @@ function CreatePostForm() {
   const handleCommunityClick = (community) => {
     setSelectedCommunity(community);
     setShowDropdown(false);
-    title.length > 5 && selectedCommunity ? setButtonDisabled(false) : setButtonDisabled(true);
+    title.length > 5 ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleChangeTitle = (e) => {
@@ -52,11 +52,13 @@ function CreatePostForm() {
     const newErrors = { ...errors };
     if (e.target.value.startsWith(' ')) {
       newErrors.title = 'Title cannot start with spaces.';
+    } else if (e.target.value.length <= 5) {
+      newErrors.title = 'Title must be longer than five characters.';
     } else {
       newErrors.title = '';
     }
   setErrors(newErrors);
-    title.length > 5 && selectedCommunity && !e.target.value.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
+    e.target.value.length > 5 && selectedCommunity && !e.target.value.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleImageInputChange = (index, imageUrl) => {
@@ -67,29 +69,30 @@ function CreatePostForm() {
     });
 
     const newErrors = { ...errors };
-    console.log(imageUrl, 'imageurl')
 
     if (imageUrl.length === 0) {
       newErrors.images = '';
-      setButtonDisabled(false);
     } else if (!imageUrl.endsWith('.jpg') && !imageUrl.endsWith('.jpeg') && !imageUrl.endsWith('.png')){
       newErrors.images = 'Images must end in .jpg, .jpeg, or .png';
-      setButtonDisabled(true);
     } else {
       newErrors.images = '';
-      setButtonDisabled(false)
     }
 
     setErrors(newErrors);
+    title.length > 5 && selectedCommunity && !e.target.value.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleChangePostText = (e) => {
     setPostText(e.target.value);
     const newErrors = { ...errors };
-    if (e.target.value.startsWith(' ')) {
-      newErrors.title = 'Description cannot start with spaces.';
+    if (e.target.value.length === 0) {
+      newErrors.postText = "";
+    } else if (e.target.value.startsWith(' ')) {
+      newErrors.postText = 'Description cannot start with spaces.';
+    } else if (e.target.value.length <= 5) {
+      newErrors.postText = 'Title must be longer than five characters.';
     } else {
-      newErrors.title = '';
+      newErrors.postText = '';
     }
     setErrors(newErrors);
   };
@@ -100,6 +103,15 @@ function CreatePostForm() {
       if (selectedCommunity === null) {
         newErrors.community = 'Please choose a community.';
       }
+      if (title.startsWith(' ')) {
+        newErrors.title = 'Title cannot start with spaces.';
+      } else if (title.length <= 5) {
+        newErrors.title = 'Title must be longer than five characters.';
+      } else {
+        newErrors.title = '';
+      }
+
+    title.length > 5 && selectedCommunity && !title.startsWith(' ') && !postText.startsWith(' ')? setButtonDisabled(false) : setButtonDisabled(true);
 
       setErrors(newErrors);
 
@@ -127,7 +139,7 @@ function CreatePostForm() {
           </div>
           <div className="Community-Dropdown" ref={dropdownRef}>
             <button onClick={() => setShowDropdown(!showDropdown)}>
-              {selectedCommunity ? selectedCommunity.name : 'Select Community'}
+              {selectedCommunity ? selectedCommunity.name : 'Select Community (required)'}
             </button>
             {showDropdown && (
               <div className="Community-Dropdown-Options">
@@ -135,10 +147,10 @@ function CreatePostForm() {
                     <div className='Community-Name-Container' key={community.id}>
                         <div className='Community-Name' onClick={() => handleCommunityClick(community)}>
                             {community.name}
-                        {errors && errors.community && <p className="errorDiv">{errors.community}</p>}
                         </div>
                     </div>
                 ))}
+                {errors && errors.community && <p className="errorDiv">{errors.community}</p>}
               </div>
             )}
           </div>
@@ -155,7 +167,7 @@ function CreatePostForm() {
                         className="Title-Input"
                         onChange={handleChangeTitle}
                         value={title}
-                        placeholder="Title"
+                        placeholder="Title (required)"
                         />
                     </label>
                     {errors.title && <p className="errorDiv">{errors.title}</p>}
@@ -163,11 +175,12 @@ function CreatePostForm() {
                     <textarea
                         type="text"
                         className="Text-Input"
-                        onChange={handleChangePostText}
+                        onChange={(e) => handleChangePostText(e)}
                         value={postText}
                         placeholder="Text (optional)"
                     />
                     </label>
+                    {errors.postText && <p className="errorDiv">{errors.postText}</p>}
                 </>
             ): (
                 <>

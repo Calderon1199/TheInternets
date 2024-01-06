@@ -1,16 +1,21 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { deleteComment } from "../../../redux/comment";
 import { useModal } from "../../../context/Modal";
 
 import "./DeleteCommentModal.css";
+import { getSinglePost } from "../../../redux/post";
 
 function DeleteCommentModal({ comment }) {
     const dispatch = useDispatch();
+    const post = useSelector(state => state.posts?.singlePost);
     const { closeModal } = useModal();
 
     const handleDelete = () => {
-        dispatch(deleteComment(comment.id));
+        dispatch(deleteComment(comment.id))
+        .then(() => {
+            dispatch(getSinglePost(post.id))
+        })
         closeModal();
     }
 

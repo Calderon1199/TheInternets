@@ -9,7 +9,7 @@ import "./HomePageWidget.css";
 
 function HomePageWidget() {
     const user = useSelector(state => state.session.user);
-    
+
     const { setModalContent } = useModal();
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function HomePageWidget() {
             </div>
             <div className='Home-Widget-Buttons'>
                 <button onClick={() => visitCreate()} id='Post-Widget-Button'>Create Post</button>
-                <button onClick={() => visitCreate("community")} id='Community-Widget-Button'>Create Community</button>
+                <button onClick={() => alert("feature coming soon...")} id='Community-Widget-Button'>Create Community</button>
             </div>
         </div>
     );
