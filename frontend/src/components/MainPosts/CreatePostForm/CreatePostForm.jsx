@@ -54,11 +54,13 @@ function CreatePostForm() {
       newErrors.title = 'Title cannot start with spaces.';
     } else if (e.target.value.length <= 5) {
       newErrors.title = 'Title must be longer than five characters.';
+    }  else if (e.target.value.length > 255) {
+      newErrors.title = 'Title is too long.';
     } else {
       newErrors.title = '';
     }
   setErrors(newErrors);
-    e.target.value.length > 5 && selectedCommunity && !e.target.value.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
+    !newErrors.title && selectedCommunity ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleImageInputChange = (index, imageUrl) => {
