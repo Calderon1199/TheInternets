@@ -5,6 +5,7 @@ import { createComment } from '../../../redux/comment';
 import { useModal } from '../../../context/Modal';
 import LoginFormModal from '../../LoginFormModal';
 import './CommentInputForm.css';
+import { getSinglePost } from '../../../redux/post';
 
 function CommentInputForm({postId}) {
     const user = useSelector(state => state.session?.user);
@@ -23,20 +24,24 @@ function CommentInputForm({postId}) {
         }
         else if (comment.startsWith(' ')) {
             newErrors.comment = 'Comment cannot start with spaces';
-        } else if (comment.length < 3) {
+        } else if (comment.length < 2) {
             newErrors.comment = 'Comment must be longer';
         } else {
             newErrors.comment = '';
         }
         setErrors(newErrors);
 
-        comment.length >= 3  && !comment.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
+        comment.length > 2  && !comment.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
     }
 
     const handleCommentSubmit = () => {
         const newCommentData = { comment: comment.trim() };
         setComment('');
-        dispatch(createComment(postId, newCommentData));
+        setButtonDisabled(true);
+        dispatch(createComment(postId, newCommentData))
+        .then(() => {
+            dispatch(getSinglePost(postId));
+        })
     }
 
     return (
@@ -63,7 +68,7 @@ function CommentInputForm({postId}) {
                 )}
             </div>
             <div className='Search-Sort-Container'>
-                <div className='Search-Sort-Inner-Container'>
+                <div className='Search-Sort-Inner-Container' onClick={() => alert("feature coming soon...")}>
                     <label id ="sort-label" htmlFor="sort">Sort By:</label>
                     <select name="sort" id="sort-comments">
                         <option value="Best">Best</option>

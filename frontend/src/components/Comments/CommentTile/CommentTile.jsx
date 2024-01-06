@@ -12,9 +12,11 @@ import "./CommentTile.css";
 function CommentTile({comments}) {
   const user = useSelector((state) => state.session.user);
 
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [commentText, setCommentText] = useState("");
   const [isEditing, setIsEditing] = useState({});
   const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState({});
 
   const { setModalContent } = useModal();
   const dispatch = useDispatch();
@@ -25,6 +27,25 @@ function CommentTile({comments}) {
     return setModalContent(<DeleteCommentModal comment={comment} />);
   };
 
+  const handleCommentChange = (comment) => {
+        setCommentText(comment);
+        const newErrors = { ...errors };
+
+        if (comment.length === 0 ){
+            newErrors.comment = '';
+        }
+        else if (comment.startsWith(' ')) {
+            newErrors.comment = 'Comment cannot start with spaces';
+        } else if (comment.length < 3) {
+            newErrors.comment = 'Comment must be longer';
+        } else {
+            newErrors.comment = '';
+        }
+        setErrors(newErrors);
+
+        comment.length >= 3  && !comment.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
+    }
+
 
   const handleEditComment = (commentId) => {
     const updatedCommentData = {
@@ -33,6 +54,7 @@ function CommentTile({comments}) {
     dispatch(editComment(+commentId, updatedCommentData));
     setIsEditing((prevValue) => ({ ...prevValue, [commentId]: false}));
     setCommentText("");
+    setButtonDisabled(true);
   };
 
   useEffect(() => {
@@ -62,20 +84,20 @@ function CommentTile({comments}) {
                         <textarea
                             type="text"
                             value={commentText}
-                            onChange={(e) => setCommentText(e.target.value)}
-                            placeholder={comment.comment}
+                            onChange={(e) => handleCommentChange(e.target.value)}
                         ></textarea>
                         </label>
-                        <div>
-                            <button onClick={() => handleEditComment(comment.id)}>
+                        <div className='Comment-Buttons-Container'>
+                            <button id={buttonDisabled ? 'submit-edit-post-disabled' : 'submit-edit-post-enabled' }disabled={buttonDisabled} onClick={() => handleEditComment(comment.id)}>
                             Save Comment
                             </button>
-                            <button onClick={() => setIsEditing((prevIsEditing) => ({
+                            <button id='cancel-button2' onClick={() => setIsEditing((prevIsEditing) => ({
                                 ...prevIsEditing,
                                 [comment.id]: false,
                             }))}>
                             Cancel
                             </button>
+                            {errors.comment && <p className="errorDiv" id="comment-error3">{errors.comment}</p>}
                         </div>
                     </div>
                     ) : (
@@ -83,11 +105,15 @@ function CommentTile({comments}) {
                             <p id='comment-text'>{comment.comment}</p>
                         {user?.id === comment.userId && (
                         <div className='Option-Button-Container'>
-                            <button onClick={() => setIsEditing((prevIsEditing) => ({
-                                ...prevIsEditing,
-                                [comment.id]: true,
-                            }))}>
-                            Edit Comment
+                            <button onClick={() => {
+                                setIsEditing((prevIsEditing) => ({
+                                    ...prevIsEditing,
+                                    [comment.id]: true,
+                                }));
+                                setCommentText(comment.comment);
+                                setButtonDisabled(false);
+                            }}>
+                                Edit Comment
                             </button>
                             <button onClick={() => setModal(comment)}>
                             Delete Comment
