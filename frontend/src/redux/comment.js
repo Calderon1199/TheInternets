@@ -188,7 +188,7 @@ function commentReducer(state = initialState, action) {
                     ...state.byId,
                     [action.payload.id]: action.payload
                 },
-                postComments: [...state.postComments, action.payload]
+                postComments: [action.payload, ...state.postComments]
             };
             return newState;
         case DELETE_COMMENT_BY_ID:

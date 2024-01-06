@@ -9,8 +9,7 @@ import DeleteCommentModal from '../DeleteCommentModal';
 import { useModal } from '../../../context/Modal';
 import "./CommentTile.css";
 
-function CommentTile() {
-    const comments = useSelector((state) => state.comments.postComments);
+function CommentTile({comments}) {
   const user = useSelector((state) => state.session.user);
 
   const [commentText, setCommentText] = useState("");
@@ -20,7 +19,6 @@ function CommentTile() {
   const { setModalContent } = useModal();
   const dispatch = useDispatch();
   const { postId } = useParams();
-
 
 
   const setModal = (comment) => {
@@ -34,22 +32,27 @@ function CommentTile() {
     };
     dispatch(editComment(+commentId, updatedCommentData));
     setIsEditing((prevValue) => ({ ...prevValue, [commentId]: false}));
+    setCommentText("");
   };
 
   useEffect(() => {
-    dispatch(getCommentsForPost(+postId));
-    setLoading(false);
+    dispatch(getCommentsForPost(+postId))
+    .then(() => setLoading(false))
+    .catch((error) => {
+        console.error("Error fetching comments:", error);
+        setLoading(false);
+    });
   }, [dispatch, postId, user]);
 
   if (loading) return <h1>...loading comments</h1>;
 
     return (
-        <div>
+        <div >
             {!loading &&
             comments?.map((comment) => (
-                <div key={comment.id}>
+                <div key={comment.id} className='Comment-Outer-Container'>
                 <div className='User-Comment-Header'>
-                    <h5>{comment.User?.username}</h5>
+                    <h4>{comment.User?.username}</h4>
                     <span>&#8226;</span>
                     <p>{calculateTimeDifference(comment.createdAt)}</p>
                 </div>
@@ -76,10 +79,10 @@ function CommentTile() {
                         </div>
                     </div>
                     ) : (
-                    <div>
-                        <p>{comment.comment}</p>
+                    <div className='Comment-Container-2'>
+                            <p id='comment-text'>{comment.comment}</p>
                         {user?.id === comment.userId && (
-                        <div>
+                        <div className='Option-Button-Container'>
                             <button onClick={() => setIsEditing((prevIsEditing) => ({
                                 ...prevIsEditing,
                                 [comment.id]: true,
