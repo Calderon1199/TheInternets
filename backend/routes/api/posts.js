@@ -149,7 +149,20 @@ router.put('/:post_id', requireAuth, async (req, res, next) => {
             ...newData,
         });
 
-        const updatedPost = await Post.findByPk(+postId);
+        const updatedPost = await Post.findByPk(postId, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username', 'profileImg'],
+                },
+                {
+                    model: Group,
+                    attributes: ['name'],
+                },
+                Comment,
+                PostImage,
+            ],
+        });
 
         res.status(201).json(updatedPost);
     } catch(error) {

@@ -83,10 +83,10 @@
     cursor: pointer;
     color: white;
     background: none;
-    width: 100px;
+    width: 130px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     border: none;
     height: 30px;
     border-radius: 2px;
