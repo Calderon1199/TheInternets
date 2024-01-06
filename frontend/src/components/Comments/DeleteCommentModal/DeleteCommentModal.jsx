@@ -17,7 +17,7 @@ function DeleteCommentModal({ comment }) {
     return (
         <>
             <div className="Delete-Post-Container">
-                <h3>Are you sure you want to delete this post?</h3>
+                <h3>Are you sure you want to delete this comment?</h3>
                 <div>
                     <button onClick={handleDelete}>Delete</button>
                     <button onClick={closeModal}>Cancel</button>

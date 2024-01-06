@@ -34,7 +34,7 @@
 .Post-Info-Container {
     display: flex;
     margin: 15px 0 0 0;
-    width: calc(50% + 20px);
+    width: calc(55% + 20px);
     height: 20px;
     flex-direction: row;
     align-items: center;

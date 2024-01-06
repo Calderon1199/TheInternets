@@ -6,6 +6,7 @@ body {
 }
 
 .errorDiv {
-    color: orangered;
+    color: #ff7b63;
     margin: 0px;
+    padding: 0px;
 }

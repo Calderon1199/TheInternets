@@ -8,6 +8,8 @@ import CommentTile from '../../Comments/CommentTile';
 
 import { calculateTimeDifference } from '../PostComponent';
 import "./PostView.css";
+import DeletePostModal from '../DeletePostModal';
+import { useModal } from '../../../context/Modal';
 
 
 function PostView() {
@@ -16,6 +18,7 @@ function PostView() {
 
     const [loading, setLoading] = useState(true);
 
+    const { setModalContent } = useModal();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {postId} = useParams();
@@ -25,10 +28,10 @@ function PostView() {
         setLoading(false)
     }, [dispatch, user])
 
-    const deleteUserPost = (postId) => {
-        dispatch(deletePost(+postId));
-        navigate("/profile");
-    }
+    // const deleteUserPost = (postId) => {
+    //     dispatch(deletePost(+postId));
+    //     navigate("/profile");
+    // }
 
     if (loading) {
         return (
@@ -41,12 +44,13 @@ function PostView() {
         <div className='Post-Back-Drop'>
             <div className='Single-Post-Container'>
                 <div className='Single-Post-Inner-Container'>
-                    <div className='Post-Info-Outer-Container'>
-                        <div className='Single-Post-Info-Container'>
+                        <div className='Single-Post-Info-Container' id='post-info-cursor'>
                             <p>Posted by {post.User?.username}</p>
+                            <span>&#8226;</span>
                             <p>{calculateTimeDifference(post.createdAt)}</p>
                         </div>
-                        <div className='Post-Text-Tile-Container'>
+                    <div className='Post-Info-Outer-Container'>
+                        <div className='Post-Text-Tile-Container' id='post-text-cursor'>
                             <h3 onClick={() => navigate(`/posts/${post.id}`)}>{post.title}</h3>
                             {post.PostImages?.length > 0 && (
                                 <img src={post.PostImages?.find((img) => img.preview === true)?.url} alt='Post Image'></img>
@@ -55,11 +59,11 @@ function PostView() {
                         </div>
                         <div className='Single-Post-Buttons'>
                             <div className='Option-Button-Container'>
-                                <button onClick={() => navigate(`/posts/${post.id}`)}><i className="fa-regular fa-message"></i>{post?.Comments?.length}{post?.Comments?.length === 1 ? " Comment" : " Comments"}</button>
+                                <button className="post-comment-cursor" onClick={() => navigate(`/posts/${post.id}`)}><i className="fa-regular fa-message"></i>{post?.Comments?.length}{post?.Comments?.length === 1 ? " Comment" : " Comments"}</button>
                             </div>
                             {post.userId === user?.id && (
                                 <div className='Option-Button-Container'>
-                                    <button onClick={() => deleteUserPost(post.id)}>Remove Post</button>
+                                    <button onClick={() => setModalContent(<DeletePostModal post={post}/>)}>Remove Post</button>
                                     <button onClick={() => navigate(`/posts/${post.id}`)}>Edit Post</button>
                                 </div>
                             )}

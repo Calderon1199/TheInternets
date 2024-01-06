@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path')
 require('express-async-errors');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -14,6 +13,7 @@ const routes = require('./routes');
 const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
@@ -41,22 +41,7 @@ app.use(
     })
 );
 
-//apply middleware to allow for usage of static react app from build
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-app.use(express.static(path.join(__dirname, '../frontend/dist/favicon.ico')));
-
-
-app.use(routes); // Connect all the routes
-
-//send the react build as a static file
-app.get('/', (_req, res, _next) => {
-    res.sendFile(path.join(__dirname, "index.html"));
-});
-
-//send the react build as a static file
-app.get('/favicon.ico', (_req, res, _next) => {
-    res.sendFile(path.join(__dirname, '/favicon.ico'));
-});
+app.use(routes);
 
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {

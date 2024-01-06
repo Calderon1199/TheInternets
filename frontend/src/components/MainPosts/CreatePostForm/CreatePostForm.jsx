@@ -16,7 +16,7 @@ function CreatePostForm() {
     const [images, setImages] = useState(['', '', '']);
     const [infoType, setInfoType] = useState(true);
     const [postText, setPostText] = useState('');
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState({postText: "", title: "", images: "", community: ""});
     const [title, setTitle] = useState('');
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
@@ -49,7 +49,13 @@ function CreatePostForm() {
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
-    setErrors((prevErrors) => ({ ...prevErrors, title: '' }));
+    const newErrors = { ...errors };
+    if (e.target.value.startsWith(' ')) {
+      newErrors.title = 'Title cannot start with spaces.';
+    } else {
+      newErrors.title = '';
+    }
+  setErrors(newErrors);
     title.length > 5 && selectedCommunity ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
@@ -59,34 +65,47 @@ function CreatePostForm() {
       updatedImages[index] = imageUrl;
       return updatedImages;
     });
+
+    const newErrors = { ...errors };
+    console.log(imageUrl, 'imageurl')
+
+    if (imageUrl.length === 0) {
+      newErrors.images = '';
+      setButtonDisabled(false);
+    } else if (!imageUrl.endsWith('.jpg') && !imageUrl.endsWith('.jpeg') && !imageUrl.endsWith('.png')){
+      newErrors.images = 'Images must end in .jpg, .jpeg, or .png';
+      setButtonDisabled(true);
+    } else {
+      newErrors.images = '';
+      setButtonDisabled(false)
+    }
+
+    setErrors(newErrors);
   };
 
   const handleChangePostText = (e) => {
     setPostText(e.target.value);
-    setErrors((prevErrors) => ({ ...prevErrors, postText: '' }));
+    const newErrors = { ...errors };
+    if (e.target.value.startsWith(' ')) {
+      newErrors.title = 'Description cannot start with spaces.';
+    } else {
+      newErrors.title = '';
+    }
+    setErrors(newErrors);
   };
 
   const handleSubmitPost = async () => {
-      const errorCollector = {};
+      const newErrors = { ...errors };
 
-      if (!title) {
-        errorCollector.title = 'Please provide a title.';
-      }
-      if (title.startsWith(' ') || title.endsWith(' ')) {
-        errorCollector.title = 'Title cannot start or end with spaces.';
-      }
       if (selectedCommunity === null) {
-        errorCollector.community = 'Please choose a community.';
-      }
-      if (postText.startsWith(' ') || postText.endsWith(' ')) {
-        errorCollector.postText = 'Story cannot start or end with spaces.';
+        newErrors.community = 'Please choose a community.';
       }
 
-      setErrors(errorCollector);
+      setErrors(newErrors);
 
     const postData = {
-      title,
-      postText,
+      title: title.trim(),
+      postText: postText.trim(),
       categoryId: selectedCommunity?.id,
       images: images.filter(Boolean),
     };
@@ -116,6 +135,7 @@ function CreatePostForm() {
                     <div className='Community-Name-Container' key={community.id}>
                         <div className='Community-Name' onClick={() => handleCommunityClick(community)}>
                             {community.name}
+                        {errors && errors.community && <p className="errorDiv">{errors.community}</p>}
                         </div>
                     </div>
                 ))}
@@ -138,7 +158,6 @@ function CreatePostForm() {
                         placeholder="Title"
                         />
                     </label>
-                    {errors && errors.community && <p className="errorDiv">{errors.community}</p>}
                     {errors.title && <p className="errorDiv">{errors.title}</p>}
                     <label>
                     <textarea
@@ -149,20 +168,23 @@ function CreatePostForm() {
                         placeholder="Text (optional)"
                     />
                     </label>
-                    {errors.postText && <p className="errorDiv">{errors.postText}</p>}
                 </>
             ): (
                 <>
+                    <h3 id='image-rules'>Choose up to three images</h3>
+                    {errors.images && <p className="errorDiv">{errors.images}</p>}
                 {images.map((imageUrl, index) => (
-                  <label key={index}>
-                    <input
-                      type="text"
-                      className="Title-Input"
-                      onChange={(e) => handleImageInputChange(index, e.target.value)}
-                      value={imageUrl}
-                      placeholder={`Image url ${index + 1}`}
-                    />
-                  </label>
+                  <div>
+                    <label key={index}>
+                      <input
+                        type="text"
+                        className="Title-Input"
+                        onChange={(e) => handleImageInputChange(index, e.target.value)}
+                        value={imageUrl}
+                        placeholder={`Image url ${index + 1}`}
+                        />
+                    </label>
+                  </div>
                 ))}
               </>
             )}

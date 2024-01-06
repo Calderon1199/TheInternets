@@ -1,0 +1,37 @@
+.Delete-Post-Modal {
+    height: 250px;
+    width: 450px;
+    background-color: #303030;
+    border-radius: 15px;
+}
+
+.Delete-Post-Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px 50px 0px;
+    color: white;
+    font-size: 20px;
+}
+
+.Delete-Modal-Buttons {
+    width: 70%;
+    height: 40px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Delete-Modal-Buttons button{
+    background: none;
+    width: 120px;
+    height: 100%;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#delete-button {
+    background-color: #ff7b63;
+}

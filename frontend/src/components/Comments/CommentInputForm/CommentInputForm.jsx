@@ -22,8 +22,10 @@ function CommentInputForm({postId}) {
             <div className='Comment-User-Name'>
                 {user ? (
                     <div className='Comment-Input-True'>
-                        <p>Comment as </p>
-                        <p id='userName'>{user?.username}</p>
+                        <div className='Comment-As-User'>
+                            <p>Comment as </p>
+                            <p id='userName'>{user?.username}</p>
+                        </div>
                         <div className='Comment-Input'>
                             <label>
                                 <textarea type="text" onChange={(e) => setComment(e.target.value)} placeholder='What are your thoughts?'></textarea>
