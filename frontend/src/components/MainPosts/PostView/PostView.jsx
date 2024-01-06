@@ -21,6 +21,8 @@ function PostView() {
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(true);
     const [postText, setPostText] = useState("");
+    const [errors, setErrors] = useState({});
+    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const { setModalContent } = useModal();
     const dispatch = useDispatch();
@@ -30,15 +32,33 @@ function PostView() {
         dispatch(getSinglePost(+postId));
         dispatch(getCommentsForPost(postId));
         setLoading(false)
-    }, [dispatch, user])
+    }, [dispatch, user]);
+
+    const handleTextChange = (e) => {
+        setPostText(e.target.value);
+        console.log(postText,' posttext');
+        const newErrors = { ...errors };
+
+        if (e.target.value.length === 0) {
+            newErrors.postText = "";
+        } else if (e.target.value.startsWith(' ')) {
+            newErrors.postText = 'Description cannot start with spaces.';
+        } else if (e.target.value.length <= 5) {
+            newErrors.postText = 'Title must be longer than five characters.';
+        } else {
+            newErrors.postText = '';
+        }
+        setErrors(newErrors);
+
+        !newErrors.postText ? setButtonDisabled(false) : setButtonDisabled(true);
+    }
 
     const handleEditPost = async (postId, title, catId) => {
         const data = {
-            postText,
-            title: title,
+            postText: postText.trim(),
+            title: title.trim(),
             categoryId: catId
         }
-
         await dispatch(editPost(postId, data))
         .then(() => {
             dispatch(getSinglePost(+postId));
@@ -72,12 +92,16 @@ function PostView() {
                                 <img src={post.PostImages?.find((img) => img.preview === true)?.url} alt='Post Image'></img>
                             )}
                             {isEditing ? (
-                                <div>
+                                <div className='Post-Edit-Container'>
+                                    <h3>Edit your post</h3>
                                     <label>
-                                        <textarea type="text" onChange={(e) => setPostText(e.target.value)} placeholder={post.postText}></textarea>
+                                        <textarea type="text" value={postText} onChange={(e) => handleTextChange(e)}></textarea>
                                     </label>
-                                    <button onClick={() => handleEditPost(post.id, post.title, post.categoryId)}>Edit</button>
-                                    <button onClick={() => setIsEditing(false)}>Cancel</button>
+                                    <div className='Post-Edit-Buttons'>
+                                        <button id={buttonDisabled ? 'submit-edit-post-disabled': 'submit-edit-post-enabled'} disabled={buttonDisabled} onClick={() => handleEditPost(post.id, post.title, post.categoryId)}>Edit</button>
+                                        <button id='cancel-button2' onClick={() => setIsEditing(false)}>Cancel</button>
+                                        {errors && errors.postText && <p id='edit-error' className="errorDiv">{errors.postText}</p>}
+                                    </div>
                                 </div>
                             ): (
                                 <p className='Post-Text'>{post.postText}</p>
@@ -90,8 +114,7 @@ function PostView() {
                             {post.userId === user?.id && (
                                 <div className='Option-Button-Container'>
                                     <button onClick={() => setModalContent(<DeletePostModal post={post}/>)}>Remove Post</button>
-                                    <button onClick={() => setIsEditing(true)}>Edit Post</button>
-                                </div>
+                                    <button onClick={() => { setIsEditing(true); setPostText(post.postText); }}>Edit Post</button>                                </div>
                             )}
                         </div>
                     </div>

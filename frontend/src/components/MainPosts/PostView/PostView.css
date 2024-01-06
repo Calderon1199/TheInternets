@@ -105,3 +105,52 @@
     display: flex;
     flex-direction: row;
 }
+
+.Post-Edit-Buttons {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+#edit-error {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.Post-Edit-Container textarea{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    height: 200px;
+    min-width: 100%;
+    max-width: 100%;
+    background: none;
+    color: white;
+}
+
+.Post-Edit-Container button {
+    cursor: pointer;
+    margin: 0px 10px 15px 10px;
+    width: 105px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+}
+
+#submit-edit-post-enabled{
+    background-color: #8ff0a4;
+    color: black;
+    font-weight: bold;
+}
+
+/* #submit-edit-post .disabled {
+    color: black;
+    font-weight: bold;
+} */
+
+#cancel-button2 {
+    background-color: #ff7b63;
+    color: black;
+    font-weight: bold;
+}

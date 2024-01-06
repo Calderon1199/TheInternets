@@ -33,8 +33,8 @@
 }
 
 .Edit-Comment-Textarea textarea {
-    min-width: 92%;
-    max-width: 92%;
+    min-width: 100%;
+    max-width: 100%;
     line-height: 17px;
     color: white;
     padding: 10px 10px;
@@ -45,4 +45,23 @@
 #comment-text {
     margin-top: 0px;
     margin-bottom: 30px;
+}
+
+.Comment-Buttons-Container {
+    display: flex;
+    align-items: center;
+}
+
+.Comment-Buttons-Container button{
+    cursor: pointer;
+    margin: 10px 10px 15px 10px;
+    width: 105px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}
+
+#comment-error3 {
+    margin-left: 100px;
 }
