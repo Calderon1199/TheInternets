@@ -100,9 +100,16 @@ router.put('/:comment_id', requireAuth, validateComment, async (req, res, next) 
 
         if (commentToEdit.userId !== +userId) res.status(403).json({ message: "Forbidden" })
 
-        await commentToEdit.update({ ...newData })
+        const newComment = await commentToEdit.update({ ...newData })
 
-        const updatedComment = await Comment.findByPk(commentId);
+        const updatedComment = await Comment.findByPk(newComment.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username'],
+                }
+            ]
+        })
 
         return res.status(200).json(updatedComment)
     } catch (error) {
