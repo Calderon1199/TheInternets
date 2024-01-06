@@ -44,7 +44,7 @@ function CreatePostForm() {
   const handleCommunityClick = (community) => {
     setSelectedCommunity(community);
     setShowDropdown(false);
-    title.length > 5 ? setButtonDisabled(false) : setButtonDisabled(true);
+    title.length > 5 && title.length < 255 ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleChangeTitle = (e) => {
