@@ -114,7 +114,7 @@ function PostView() {
                             {post.userId === user?.id && (
                                 <div className='Option-Button-Container'>
                                     <button onClick={() => setModalContent(<DeletePostModal post={post}/>)}>Remove Post</button>
-                                    <button onClick={() => { setIsEditing(true); setPostText(post.postText); }}>Edit Post</button>                                </div>
+                                    <button onClick={() => { setIsEditing(true); setPostText(post.postText); if (post.postText.length) setButtonDisabled(false)}}>Edit Post</button>                                </div>
                             )}
                         </div>
                     </div>
