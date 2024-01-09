@@ -46,7 +46,6 @@ router.get('/', async (req, res, next) => {
 router.get('/user', async (req, res, next) => {
     try {
         const userId = req.user.id;
-        console.log(userId, '-------------------------------')
         const userCommunities = await Group.findAll({ where: { userId: +userId}});
 
         if (userCommunities.length <= 0) res.status(200).json({ message: "User has no posts" })
