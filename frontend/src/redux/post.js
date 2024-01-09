@@ -81,7 +81,6 @@ export const getSinglePost = (postId) => async (dispatch) => {
 }
 
 export const editPost = (postId, newPostData) => async (dispatch) => {
-    console.log(newPostData, 'bbbbbbbbb')
     try {
         const response = await csrfFetch(`/api/posts/${postId}`, {
             method: "PUT",
@@ -147,12 +146,9 @@ export const createPost = (postData) => async (dispatch) => {
         }
 
         const newPost = await response.json();
-        console.log(newPost, 'newpost');
-        console.log(images, 'images');
 
         if (images && images.length > 0) {
             for (let i = 0; i < images.length; i++) {
-                console.log(images[i], 'this is redux images')
                 await dispatch(createPostImage(newPost.id, { url: images[i], preview: i === 0 }));
             }
         }

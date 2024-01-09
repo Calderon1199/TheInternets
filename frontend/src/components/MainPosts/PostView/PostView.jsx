@@ -36,7 +36,6 @@ function PostView() {
 
     const handleTextChange = (e) => {
         setPostText(e.target.value);
-        console.log(postText,' posttext');
         const newErrors = { ...errors };
 
         if (e.target.value.length === 0) {
