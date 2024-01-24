@@ -80,7 +80,20 @@ router.get('/', async (req, res, next) => {
 router.get('/user', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const userPosts = await Post.findAll({ where: {userId: userId}, include: [Comment, PostImage]});
+        const userPosts = await Post.findAll({
+            where: { userId: userId }, include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Group,
+                    attributes: ['name'],
+                },
+                Comment,
+                PostImage,
+            ],
+        });
 
         if (userPosts.length <= 0) res.status(200).json({message: "User has no posts"})
 

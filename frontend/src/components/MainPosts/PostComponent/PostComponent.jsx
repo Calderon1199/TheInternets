@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { deletePost, editPost } from '../../../redux/post';
+import { useModal } from '../../../context/Modal';
 import CreatePostInput from '../CreatPost';
 
 import { calculateTimeDifference } from '.';
 import './PostComponent.css';
+import DeletePostModal from '../DeletePostModal';
 
 function PostTile({ posts, isProfile }) {
     const user = useSelector((state) => state.session?.user);
@@ -17,6 +19,7 @@ function PostTile({ posts, isProfile }) {
     const [newPosts, setPosts] = useState();
 
     const navigate = useNavigate();
+    const { setModalContent } = useModal();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -66,6 +69,7 @@ function PostTile({ posts, isProfile }) {
             </div>
             {!loading &&
             newPosts?.map((post) => (
+
                 <div className='Post-Tile-Inner-Container' key={post.id}>
                 <div className='Post-Info-Container'>
                     <h5 onClick={() => alert("feature coming soon...")} id='group-name'>{post.Group?.name}</h5>
@@ -74,21 +78,20 @@ function PostTile({ posts, isProfile }) {
                     <p>{calculateTimeDifference(post.createdAt)}</p>
                 </div>
                 <div className='Post-Text-Tile-Container'>
-                    {post.PostImages?.length > 0 ? (
-                    <div>
-                        <h3 onClick={() => navigate(`/posts/${post.id}`)}>{post.title}</h3>
-                        <img
-                        className='Post-Img'
-                        onClick={() => navigate(`/posts/${post.id}`)}
-                        src={post.PostImages.find((img) => img.preview === true).url}
-                        alt='Post Image'
-                        ></img>
-                    </div>
-                    ) : (
                     <>
                         <h3 onClick={() => navigate(`/posts/${post.id}`)}>{post.title}</h3>
-                        {editing[post.id] ? (
+                        {post.PostImages?.length > 0 && (
                         <div>
+                            <img
+                            className='Post-Img'
+                            onClick={() => navigate(`/posts/${post.id}`)}
+                            src={post.PostImages.find((img) => img.preview === true).url}
+                            alt='Post Image'
+                            ></img>
+                        </div>
+                        )}
+                        {editing[post.id] ? (
+                        <div className='Edit-Card-Container'>
                             <label>
                             <textarea
                                 className='Edit-Input'
@@ -102,25 +105,28 @@ function PostTile({ posts, isProfile }) {
                                 defaultValue={post.postText}
                             ></textarea>
                             </label>
-                            <button onClick={() => editUserPost(post.id, post.categoryId, post.title)}>
-                            Post
-                            </button>
-                            <button onClick={() => setEditing((prevEditing) => ({ ...prevEditing, [post.id]: false }))}>
-                            Cancel
-                            </button>
+                            <div className='Edit-Card-Buttons'>
+                                <div className='Edit-Buttons'>
+                                    <button className='cancel-button' onClick={() => setEditing((prevEditing) => ({ ...prevEditing, [post.id]: false }))}>
+                                    Cancel
+                                    </button>
+                                    <button className={!editing ? 'disabled': 'enabled'} onClick={() => editUserPost(post.id, post.categoryId, post.title)}>
+                                    Post
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         ) : (
-                        <p
+                            <p
                             className='Post-Text'
                             onClick={() => navigate(`/posts/${post.id}`)}
-                        >
+                            >
                             {post.postText}
                         </p>
                         )}
                     </>
-                    )}
                 </div>
-                <div className='Post-Buttons'>
+                <div className={editing[post.id] ? 'Post-Buttons-Editing' : 'Post-Buttons'}>
                     <div className='Option-Button-Container'>
                     <button onClick={() => navigate(`/posts/${post.id}`)}>
                         <i className='fa-regular fa-message'></i>
@@ -130,11 +136,12 @@ function PostTile({ posts, isProfile }) {
                     </div>
                     {post.userId === user?.id && (
                     <div className='Option-Button-Container'>
-                        <button onClick={() => deleteUserPost(post.id)}>
+                        <button onClick={() => setModalContent(<DeletePostModal post={post}/>)}>
                         Remove Post
                         </button>
                         {isProfile && (
-                        <button onClick={() => setEditing((prevEditing) => ({ ...prevEditing, [post.id]: true }))}>
+                            <button onClick={() => setEditing((prevEditing) => ({ ...prevEditing, [post.id]: true }))}>
+                            {console.log(editing, 'post')}
                         Edit Post
                         </button>
                         )}

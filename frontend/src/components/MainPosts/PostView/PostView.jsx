@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { deletePost, editPost, getSinglePost } from '../../../redux/post';
+import { editPost, getSinglePost } from '../../../redux/post';
 import CommentInputForm from '../../Comments/CommentInputForm';
 import CommentTile from '../../Comments/CommentTile';
 
