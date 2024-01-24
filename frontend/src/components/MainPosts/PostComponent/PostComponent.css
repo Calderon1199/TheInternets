@@ -79,6 +79,17 @@
     box-shadow: 0px -10px 60px 40px #1a1a1b;
 }
 
+.Post-Buttons-Editing {
+    display: flex;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    background-color: #1a1a1b;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: none;
+}
+
 .Option-Button-Container button{
     cursor: pointer;
     color: white;
@@ -136,4 +147,41 @@
 
 .Sort-Button-Container button:hover {
    background-color: #555657;
+}
+
+.Edit-Card-Container textarea {
+    padding: 10px 10px;
+}
+
+.Edit-Card-Buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+}
+
+.Edit-Buttons {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#Submit-Edit-Button {
+    background-color: #8ff0a4;
+    color: black;
+    font-weight: bold;
+}
+
+.Edit-Buttons .enabled {
+    cursor: pointer;
+    background-color: #8ff0a4;
+    border: 2px solid #303030;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: bold;
+    border: none;
+    width: 80px;
+    height: 30px;
 }

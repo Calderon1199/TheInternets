@@ -26,7 +26,7 @@ function ProfilePage() {
     )
 
     return (
-        <div>
+        <div className='Main-Page'>
             {userPosts.length > 0 ? (
                 <PostTile posts={userPosts} isProfile={true}/>
             ): (
