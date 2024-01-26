@@ -1,28 +1,29 @@
 import PostTile from './PostComponent';
 
-export function calculateTimeDifference(createdAt) {
+export function calculateTimeDifference(createdAt, updatedAt) {
     const createdAtDate = new Date(createdAt);
+    const updatedAtDate = new Date(updatedAt);
     const currentDate = new Date();
 
-    const timeDifference = currentDate - createdAtDate;
+    const timeDifference = currentDate - (updatedAtDate > createdAtDate ? updatedAtDate : createdAtDate);
     const seconds = Math.floor(timeDifference / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24)
+    const days = Math.floor(hours / 24);
+
+    const timeAgo = (value, unit) => `${value} ${unit}${value !== 1 ? 's' : ''} ago`;
 
     if (days > 0) {
-        return `${days} day${days !== 1 ? 's' : ''} ago`;
+        return `${timeAgo(days, 'day')} ${updatedAtDate > createdAtDate ? '(edited)' : ''}`;
     } else if (hours > 0) {
-        return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
+        return `${timeAgo(hours, 'hour')} ${updatedAtDate > createdAtDate ? '(edited)' : ''}`;
     } else if (minutes > 0) {
-        return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+        return `${timeAgo(minutes, 'minute')} ${updatedAtDate > createdAtDate ? '(edited)' : ''}`;
     } else if (seconds > 0) {
-        return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
+        return `${timeAgo(seconds, 'second')} ${updatedAtDate > createdAtDate ? '(edited)' : ''}`;
     } else {
         return `Just now`;
     }
 }
-
-
 
 export default PostTile;
