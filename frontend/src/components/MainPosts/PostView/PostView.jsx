@@ -82,7 +82,7 @@ function PostView() {
                         <div className='Single-Post-Info-Container' id='post-info-cursor'>
                             <p>Posted by {post.User?.username}</p>
                             <span>&#8226;</span>
-                            <p>{calculateTimeDifference(post.updatedAt)}</p>
+                            <p>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
                         </div>
                     <div className='Post-Info-Outer-Container'>
                         <div className='Post-Text-Tile-Container' id='post-text-cursor'>
