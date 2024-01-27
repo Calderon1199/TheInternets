@@ -187,7 +187,8 @@ function postReducer(state = initialState, action) {
                 return state;
             }
         case GET_POST_BY_ID:
-            return { ...state, singlePost: action.payload };
+            newState =  { ...state, singlePost: action.payload };
+            return newState;
         case EDIT_POST_BY_ID:
             newState = {
                 ...state,

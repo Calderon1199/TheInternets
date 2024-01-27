@@ -31,7 +31,7 @@
     justify-content: flex-start;
 }
 
-.Dropdown-Info li:hover {
+.dropdown-li:hover {
     border-radius: 0px;
     border: 1px solid #4a4949;
 }
@@ -40,6 +40,10 @@
 .NavLink {
     text-decoration: none;
     color: white;
+}
+
+.NavLink:hover {
+    text-decoration: underline;
 }
 
 .Nav-Container {

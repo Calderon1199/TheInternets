@@ -58,10 +58,10 @@ function ProfileButton() {
             <div className="Dropdown-Info">
               <li>{user.username}</li>
               <li>{user.email}</li>
-              <li>
+              <li className="dropdown-li">
                 <button className="dropdown-button" onClick={() => navigate("/profile")}><i className="fa-regular fa-user"></i>Profile</button>
               </li>
-              <li>
+              <li className="dropdown-li">
                 <button className="dropdown-button" onClick={logout}><i className="fa-solid fa-arrow-right-from-bracket"></i>Log Out</button>
               </li>
             </div>

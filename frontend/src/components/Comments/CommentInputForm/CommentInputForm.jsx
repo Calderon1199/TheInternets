@@ -6,9 +6,11 @@ import { useModal } from '../../../context/Modal';
 import LoginFormModal from '../../LoginFormModal';
 import './CommentInputForm.css';
 import { getSinglePost } from '../../../redux/post';
+import { useNavigate } from 'react-router-dom';
 
 function CommentInputForm({postId}) {
     const user = useSelector(state => state.session?.user);
+    const navigate = useNavigate();
     const [comment, setComment] = useState("");
     const { setModalContent } = useModal();
     const [errors, setErrors] = useState({});
@@ -51,7 +53,7 @@ function CommentInputForm({postId}) {
                     <div className='Comment-Input-True'>
                         <div className='Comment-As-User'>
                             <p>Comment as </p>
-                            <p id='userName'>{user?.username}</p>
+                            <p id='userName' onClick={() => navigate('/profile')}>{user?.username}</p>
                         </div>
                         <div className='Comment-Input'>
                             <label>
