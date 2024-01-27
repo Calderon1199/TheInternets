@@ -62,7 +62,7 @@ router.get('/', async (req, res, next) => {
                 },
                 {
                     model: Group,
-                    attributes: ['name'],
+                    attributes: ['name', 'id'],
                 },
                 Comment,
                 PostImage,
