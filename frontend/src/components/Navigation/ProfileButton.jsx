@@ -41,6 +41,7 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
+    navigate('/');
     closeMenu();
   };
 
@@ -66,7 +67,7 @@ function ProfileButton() {
               </li>
             </div>
           ) : (
-            <>
+            <div className="Modal-Options">
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
@@ -77,7 +78,7 @@ function ProfileButton() {
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
-            </>
+            </div>
           )}
         </ul>
       )}

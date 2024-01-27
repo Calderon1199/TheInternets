@@ -32,10 +32,10 @@ function ProfilePage() {
     )
 
     return (
-        <div >
+        <div>
             {isDeleted && (
                 <div className='Deleted-Header'>
-                    <h2>Successfully deleted your post!</h2>
+                    <h2>Successfully deleted!</h2>
                 </div>
             )}
             <div className='Main-Page'>

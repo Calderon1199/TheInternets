@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             Group.belongsTo(models.User, { foreignKey: 'userId' });
-            Group.hasMany(models.Post, { foreignKey: 'categoryId' });
+            Group.hasMany(models.Post, { foreignKey: 'categoryId', sourceKey: 'id', onDelete: 'CASCADE' });
         }
     }
     Group.init({

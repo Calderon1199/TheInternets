@@ -25,11 +25,15 @@
     display: flex;
     flex-direction: column;
     margin: 0px 20px;
-    height: 80px;
+    height: 70px;
 }
 
 .Community-Name-Container h3{
     margin: 0px;
+}
+
+.Community-Name-Container p {
+    margin-bottom: 0px;
 }
 
 .Community-Data-Input {
@@ -50,10 +54,53 @@
 .Community-Data-Input textarea {
     min-width: 100%;
     max-width: 100%;
+    padding: 5px;
     height: 200px;
     background: none;
     border: 1px solid #484949;
     color: #d7dadc;
+}
+
+.Post-Submit-Button2 {
+    padding-top: 10px;
+    cursor: pointer;
+    margin: 15px 0px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    border-top: 2px solid #484949;
+}
+
+.Post-Submit-Button2 .enabled2 {
+    cursor: pointer;
+    background-color: #8ff0a4;
+    border: 2px solid #303030;
+    border-radius: 15px;
+    display: flex;
+    margin: 0px 20px;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-weight: bold;
+    border: none;
+    width: fit-content;
+    height: 30px;
+}
+
+.Post-Submit-Button2 .disabled2 {
+    background-color: #e1e1e1;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 20px;
+    color: gray;
+    font-weight: bold;
+    border: none;
+    width: fit-content;
+    height: 30px;
 }
 
 .Community-Modal-Buttons {
@@ -79,4 +126,8 @@
 
 #Create-Com-Button {
     margin: 0px 20px;
+}
+
+#edit-error2 {
+    margin-bottom: 10px;
 }

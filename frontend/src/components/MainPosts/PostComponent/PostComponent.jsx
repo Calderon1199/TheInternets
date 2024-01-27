@@ -68,7 +68,7 @@ function PostTile({ posts, isProfile }) {
 
                 <div className='Post-Tile-Inner-Container' key={post.id}>
                 <div className='Post-Info-Container'>
-                    <h5 onClick={() => alert("feature coming soon...")} id='group-name'>{post.Group?.name}</h5>
+                    <h5 onClick={() => navigate(`/communities/${post?.Group?.id}`)} id='group-name'>{post.Group?.name}</h5>
                     <span>&#x2022;</span>
                     <p onClick={() => alert("feature coming soon...")} id='post-owner-name'><span>Posted by </span>{post.User?.username}</p>
                     <p>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
@@ -137,7 +137,6 @@ function PostTile({ posts, isProfile }) {
                         </button>
                         {isProfile && (
                             <button onClick={() => setEditing((prevEditing) => ({ ...prevEditing, [post.id]: true }))}>
-                            {console.log(editing, 'post')}
                         Edit Post
                         </button>
                         )}

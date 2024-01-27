@@ -10,10 +10,36 @@ import "./CommunityCreateModal.css";
 function CommunityCreateModal() {
     const [description, setDescription] = useState("");
     const [name, setName] = useState("");
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [errors, setErrors] = useState({});
 
     const { closeModal } = useModal();
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const handleNameChange = (newName) => {
+        setName(newName);
+        const newErrors = {...errors};
+        if (newName.startsWith(' ')) newErrors.name = 'Name cannot start with spaces.';
+        else if (newName.length === 0) newErrors.name = ''
+        else if (newName.length <= 5) newErrors.name = 'Name must be longer than five characters.';
+        else if (newName.length > 20) newErrors.name = 'Name is too long.';
+        else newErrors.name = '';
+        setErrors(newErrors);
+        newName.length > 0 && !newErrors.name && description && !errors.description ? setButtonDisabled(false) : setButtonDisabled(true);
+    }
+
+    const handleDescriptionChange = (newDescription) => {
+        setDescription(newDescription);
+        const newErrors = {...errors};
+        if (newDescription.startsWith(' ')) newErrors.description = 'Description cannot start with spaces.';
+        else if (newDescription.length === 0) newErrors.description = ''
+        else if (newDescription.length <= 5) newErrors.description = 'Description must be longer than five characters.';
+        else if (newDescription.length > 255) newErrors.description = 'Description is too long.';
+        else newErrors.description = '';
+        setErrors(newErrors);
+        newDescription.length > 0 && !newErrors.description && name && !errors.name ? setButtonDisabled(false) : setButtonDisabled(true);
+    }
 
     const handleCreateCommunity = async () => {
         const newCommunityData = { name, description };
@@ -33,16 +59,18 @@ function CommunityCreateModal() {
                 <p>Community names can be changed</p>
             </div>
             <div className='Community-Data-Input'>
+                {errors && errors.name && <p id='edit-error2' className="errorDiv">{errors.name}</p>}
                 <label>
-                    <input onChange={(e) => setName(e.target.value)} placeholder='Community Name'/>
+                    <input onChange={(e) => handleNameChange(e.target.value)} placeholder='Community Name (Required)'/>
                 </label>
+                {errors && errors.description && <p id='edit-error2' className="errorDiv">{errors.description}</p>}
                 <label>
-                    <textarea onChange={(e) => setDescription(e.target.value)} placeholder='Community Description'/>
+                    <textarea onChange={(e) => handleDescriptionChange(e.target.value)} placeholder='Community Description (Required)'/>
                 </label>
             </div>
-            <div className='Community-Modal-Buttons'>
-                <button onClick={() => closeModal()}>Cancel</button>
-                <button id='Create-Com-Button' onClick={() => handleCreateCommunity()}>Create Community</button>
+            <div className="Post-Submit-Button2">
+                <button className='cancel-button' onClick={() => closeModal()}>Cancel</button>
+                <button className={buttonDisabled ? 'disabled2': 'enabled2'} onClick={() => handleCreateCommunity()} disabled={buttonDisabled}>Create Community</button>
             </div>
         </div>
     );
