@@ -1,8 +1,9 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Group } = require('../../db/models');
+const { Group, Comment, PostImage } = require('../../db/models');
 const { User } = require('../../db/models');
+const { Post } = require('../../db/models');
 
 
 const router = express.Router();
@@ -60,7 +61,21 @@ router.get('/:communityId', async (req, res, next) => {
     try {
         const communityId = req.params.communityId
         const singleCommunity = await Group.findByPk(+communityId);
-
+        const posts = await Post.findAll({
+            where: { categoryId: communityId }, include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Group,
+                    attributes: ['name'],
+                },
+                Comment,
+                PostImage,
+            ],
+});
+        singleCommunity.dataValues.posts = posts || [];
         res.status(200).json(singleCommunity);
     } catch (error) {
         next(error);
@@ -87,6 +102,7 @@ router.put('/:communityId', validateCommunity, async (req, res, next) => {
 
         const community = await Group.findByPk(+communityId);
 
+
         if (!community) res.status(404).json({ message: "Community not found."});
         if (community.userId !== userId) return res.status(403).json({ message: "Forbidden"});
 
@@ -95,19 +111,23 @@ router.put('/:communityId', validateCommunity, async (req, res, next) => {
         })
 
         const updatedCommunity = await Group.findByPk(communityId);
+        const posts = await Post.findAll({
+            where: { categoryId: communityId }, include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Group,
+                    attributes: ['name'],
+                },
+                Comment,
+                PostImage,
+            ],
+        });
+        updatedCommunity.dataValues.posts = posts || [];
 
         res.status(200).json(updatedCommunity);
-    } catch (error) {
-        next(error);
-    }
-});
-
-router.get('/:communityId', async (req, res, next) => {
-    try {
-        const communityId = req.params.communityId
-        const singleCommunity = await Group.findByPk(+communityId);
-
-        res.status(200).json(singleCommunity);
     } catch (error) {
         next(error);
     }

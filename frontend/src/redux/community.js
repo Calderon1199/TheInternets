@@ -160,9 +160,7 @@ function communityReducer(state = initialState, action) {
             if (action.payload) {
                 newState = {
                     ...state,
-                    singleCommunity: {
-                        [action.payload.id] : action.payload
-                    }
+                    singleCommunity: action.payload
                 }
                 return newState;
             } else {
@@ -212,7 +210,7 @@ function communityReducer(state = initialState, action) {
                         (community) => community.id !== action.payload
                     ),
                     byId: { ...state.byId },
-                    singleCommunity: { ...state.singleCommunity },
+                    singleCommunity: {},
                     userCommunities: state.userCommunities.filter((community =>
                         community.id !== action.payload
                     ))

@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { deletePost, editPost, getSinglePost } from '../../../redux/post';
+import { editPost, getSinglePost } from '../../../redux/post';
 import CommentInputForm from '../../Comments/CommentInputForm';
 import CommentTile from '../../Comments/CommentTile';
 
@@ -82,7 +82,7 @@ function PostView() {
                         <div className='Single-Post-Info-Container' id='post-info-cursor'>
                             <p>Posted by {post.User?.username}</p>
                             <span>&#8226;</span>
-                            <p>{calculateTimeDifference(post.updatedAt)}</p>
+                            <p>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
                         </div>
                     <div className='Post-Info-Outer-Container'>
                         <div className='Post-Text-Tile-Container' id='post-text-cursor'>
@@ -122,8 +122,10 @@ function PostView() {
                         {comments.length > 0 ? (
                             <CommentTile comments={comments}/>
                         ): (
-                            <div>
-                                <h3>Be The first to post</h3>
+                            <div className='Empty-Comments'>
+                                <i class="fa-solid fa-comments"></i>
+                                <h3>No comments yet</h3>
+                                <p>Be the first to share what you think!</p>
                             </div>
                         )}
                     </div>

@@ -1,6 +1,11 @@
 'use strict';
 const { Model } = require('sequelize');
 
+let options = {};
+options.tableName = 'Posts';
+if (process.env.NODE_ENV === 'production') {
+    options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 
 module.exports = (sequelize, DataTypes) => {
     class Post extends Model {
@@ -22,17 +27,24 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Users',
+                model: {
+                    tableName: 'Users',
+                    schema: options.schema
+                },
                 key: 'id'
-            }
+            },
         },
         categoryId: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Groups',
+                model: {
+                    tableName: 'Groups',
+                    schema: options.schema
+                },
                 key: 'id'
-            }
+            },
+            onDelete: 'CASCADE'
         },
         title: {
             type: DataTypes.STRING,

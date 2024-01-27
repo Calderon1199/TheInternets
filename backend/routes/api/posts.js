@@ -62,7 +62,7 @@ router.get('/', async (req, res, next) => {
                 },
                 {
                     model: Group,
-                    attributes: ['name'],
+                    attributes: ['name', 'id'],
                 },
                 Comment,
                 PostImage,
@@ -80,7 +80,20 @@ router.get('/', async (req, res, next) => {
 router.get('/user', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const userPosts = await Post.findAll({ where: {userId: userId}, include: [Comment, PostImage]});
+        const userPosts = await Post.findAll({
+            where: { userId: userId }, include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Group,
+                    attributes: ['name'],
+                },
+                Comment,
+                PostImage,
+            ],
+        });
 
         if (userPosts.length <= 0) res.status(200).json({message: "User has no posts"})
 
@@ -235,4 +248,24 @@ router.delete('/:post_id/images/:image_id', requireAuth, async (req, res, next) 
 })
 
 
+router.put('/:post_id/images/:image_id', requireAuth, async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const postId = req.params.post_id;
+        const imageId = req.params.image_id;
+        const imageToEdit = await PostImage.findByPk(+imageId);
+        const post = await Post.findByPk(+postId, { include: [Comment, PostImage] });
+
+
+
+        if (!post) res.status(404).json({ message: "Post not found." });
+        if (post.userId !== +userId) res.status(403).json({ message: "Forbidden" });
+
+        await imageToDelete.destroy();
+
+        res.status(200).json({ message: "Successfully Deleted" });
+    } catch (error) {
+        next(error)
+    }
+})
 module.exports = router;

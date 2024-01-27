@@ -90,6 +90,7 @@ module.exports = {
                 name: 'DIY',
                 description: "Unleash your creativity at DIYCrafts. Share your craft projects, home improvement ideas, and DIY hacks with a community of fellow creators. Whether you're into woodworking, crafting, or upcycling, this subreddit is your workshop for inspiration and collaboration."
             }
+            
 
         ], {})
     },

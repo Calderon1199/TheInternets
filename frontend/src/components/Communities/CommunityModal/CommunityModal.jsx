@@ -1,24 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
+import './CommunityModal.css';
+import { useModal } from '../../../context/Modal';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { deleteCommunity } from '../../../redux/community';
 
-import { deleteComment } from "../../../redux/comment";
-import { useModal } from "../../../context/Modal";
 
-import "./DeleteCommentModal.css";
-import { getSinglePost } from "../../../redux/post";
-
-function DeleteCommentModal({ comment }) {
-    const dispatch = useDispatch();
-    const post = useSelector(state => state.posts?.singlePost);
+function DeleteCommunityModal({community}) {
     const { closeModal } = useModal();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
 
     const handleDelete = () => {
-        dispatch(deleteComment(comment.id))
-        .then(() => {
-            dispatch(getSinglePost(post.id))
-        })
+        dispatch(deleteCommunity(community.id));
+        navigate("/profile?deleted=true");
         closeModal();
     }
-
     return (
         <div className='Delete-Post-Modal'>
             <div className="Delete-Post-Container">
@@ -28,13 +25,12 @@ function DeleteCommentModal({ comment }) {
                     <p id="warning-text">This action cannot be undone. All values associated with this post will be lost.</p>
                 </div>
                 <div className='Delete-Modal-Buttons'>
-                    <button id='delete-button' onClick={handleDelete}>Delete Comment</button>
+                    <button id='delete-button' onClick={handleDelete}>Delete Community</button>
                     <button id='cancel-button' onClick={closeModal}>Cancel</button>
                 </div>
             </div>
         </div>
-
     );
 }
 
-export default DeleteCommentModal;
+export default DeleteCommunityModal;
