@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { deletePost, editPost } from '../../../redux/post';
+import { editPost } from '../../../redux/post';
 import { useModal } from '../../../context/Modal';
 import CreatePostInput from '../CreatPost';
 
@@ -41,10 +41,6 @@ function PostTile({ posts, isProfile }) {
         navigate(`/posts/${postId}`);
     };
 
-    const deleteUserPost = (postId) => {
-        dispatch(deletePost(+postId));
-    }
-
     const sortNew = (type) => {
         if (type === 'new') {
             setPosts(posts.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
@@ -80,7 +76,7 @@ function PostTile({ posts, isProfile }) {
                 <div className='Post-Text-Tile-Container'>
                     <>
                         <h3 onClick={() => navigate(`/posts/${post.id}`)}>{post.title}</h3>
-                        {post.PostImages?.length > 0 && (
+                        {post.PostImages?.length > 0 && !editing[post.id] &&(
                         <div>
                             <img
                             className='Post-Img'
@@ -118,7 +114,7 @@ function PostTile({ posts, isProfile }) {
                         </div>
                         ) : (
                             <p
-                            className='Post-Text'
+                            className='Post-Text2'
                             onClick={() => navigate(`/posts/${post.id}`)}
                             >
                             {post.postText}

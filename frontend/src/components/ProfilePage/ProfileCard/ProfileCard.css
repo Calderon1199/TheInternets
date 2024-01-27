@@ -1,0 +1,49 @@
+.User-Card {
+    margin: 10px 5%;
+    height: 150px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Handle p{
+    color: white
+}
+
+.User-Card-Button button {
+    border: 2px solid #4a4949;
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    border-radius: 15px;
+    background: none;
+    border: 1px solid #4a4949;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.User-Card-Button {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 10px;
+}
+
+#Post-Widget-Button3 {
+    background-color: #ff4500;
+    color: white;
+
+}
+
+#Post-Widget-Button3:hover {
+    background-color: #c23400;
+    color: white;
+
+}

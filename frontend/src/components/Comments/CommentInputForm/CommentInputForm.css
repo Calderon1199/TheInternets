@@ -19,9 +19,14 @@
 }
 
 #userName {
+    cursor: pointer;
     font-family: "Noto Sans", Arial, sans-serif;
     font-size: 12px;
     color: #4fbcff;
+}
+
+#userName:hover {
+    text-decoration: underline;
 }
 
 #userName2 {

@@ -13,7 +13,7 @@ function DeletePostModal({post}) {
 
     const handleDelete = () => {
         dispatch(deletePost(post.id));
-        navigate("/profile");
+        navigate("/profile?deleted=true");
         closeModal();
     }
     return (

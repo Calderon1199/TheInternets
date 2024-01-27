@@ -34,7 +34,7 @@
 .Post-Info-Container {
     display: flex;
     margin: 15px 0 0 0;
-    width: calc(55% + 20px);
+    width: calc(55% + 100px);
     height: 20px;
     flex-direction: row;
     align-items: center;
@@ -42,6 +42,13 @@
 }
 
 .Post-Text {
+    word-break: keep-all;
+    line-height: 25px;
+    overflow: hidden;
+    max-height: 265px;
+}
+
+.Post-Text2{
     word-break: keep-all;
     line-height: 25px;
     overflow: hidden;
