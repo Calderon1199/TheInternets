@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             Post.belongsTo(models.Group, { foreignKey: "categoryId" })
             Post.belongsTo(models.User, { foreignKey: "userId" })
             Post.hasMany(models.PostImage, { foreignKey: "postId", sourceKey: 'id', onDelete: 'CASCADE' })
+            Post.hasMany(models.Like, { foreignKey: "postId", sourceKey: 'id', onDelete: 'CASCADE' })
             Post.hasMany(models.Comment, { foreignKey: "postId", sourceKey: 'id', onDelete: 'CASCADE' })
         }
     }
