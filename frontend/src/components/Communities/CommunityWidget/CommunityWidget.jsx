@@ -58,9 +58,9 @@ function CommunityWidget() {
         <div className='Comm-Widget'>
             <div className='Comm-Widget2'>
                 <p>About the Community</p>
-                {/* {community.userId === user?.id && (
-                    <button onClick={() => handleDelete()}>Delete</button>
-                )} */}
+                {community.userId === user?.id && (
+                    <button onClick={() => handleDelete()}>Delete Community</button>
+                )}
             </div>
             <div className='Comm-Description'>
                 {!editing ? (

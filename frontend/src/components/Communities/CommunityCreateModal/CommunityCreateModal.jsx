@@ -21,6 +21,7 @@ function CommunityCreateModal() {
         setName(newName);
         const newErrors = {...errors};
         if (newName.startsWith(' ')) newErrors.name = 'Name cannot start with spaces.';
+        else if (newName.includes(' ')) newErrors.name = 'Name cannot contain spaces.';
         else if (newName.length === 0) newErrors.name = ''
         else if (newName.length <= 5) newErrors.name = 'Name must be longer than five characters.';
         else if (newName.length > 20) newErrors.name = 'Name is too long.';
@@ -56,7 +57,7 @@ function CommunityCreateModal() {
             </div>
             <div className='Community-Name-Container'>
                 <h3>Name</h3>
-                <p>Community names can be changed</p>
+                <p>Community names cannot be changed</p>
             </div>
             <div className='Community-Data-Input'>
                 {errors && errors.name && <p id='edit-error2' className="errorDiv">{errors.name}</p>}

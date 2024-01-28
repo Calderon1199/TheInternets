@@ -22,7 +22,7 @@ function DeleteCommunityModal({community}) {
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <div className='Warning-Text'>
                     <h3>Are you sure?</h3>
-                    <p id="warning-text">This action cannot be undone. All values associated with this post will be lost.</p>
+                    <p id="warning-text">This action cannot be undone. All values associated with this Community, including posts will be lost.</p>
                 </div>
                 <div className='Delete-Modal-Buttons'>
                     <button id='delete-button' onClick={handleDelete}>Delete Community</button>
