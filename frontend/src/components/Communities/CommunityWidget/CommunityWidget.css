@@ -13,6 +13,22 @@
     align-items: center;
 }
 
+.Comm-Widget2 button{
+    width:50%;
+    height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+    color: rgb(28, 28, 28);
+    border: 1px solid #303030;
+    font-weight: bold;
+    background-color: #f66151;
+}
+
+.Comm-Widget button:hover {
+    background-color: #ed333b;
+}
+
 .Comm-Description {
     border-bottom: 1px solid gray;
     overflow: hidden;
