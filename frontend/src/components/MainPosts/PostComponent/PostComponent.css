@@ -222,36 +222,38 @@
     display: flex;
 }
 
-.fa-regular.fa-circle-up.enabled {
+.fa-solid.fa-chevron-up.enabled {
     color: #8ff0a4;
     cursor: pointer;
     font-size: 20px;
     margin: 5px 5px;
 }
 
-.fa-regular.fa-circle-up.disabled {
+.fa-solid.fa-chevron-up.disabled {
     margin: 5px 5px;
     cursor: pointer;
     font-size: 20px;
 }
 
-.fa-regular.fa-circle-up.disabled:hover {
+.fa-solid.fa-chevron-up.disabled:hover {
     color: #8ff0a4;
 }
 
-.fa-regular.fa-circle-down.enabled {
+.fa-solid.fa-chevron-down.enabled {
     color: #f66151;
     cursor: pointer;
     font-size: 20px;
     margin: 5px 5px;
 }
 
-.fa-regular.fa-circle-down.disabled {
+.fa-solid.fa-chevron-down.disabled {
     margin: 5px 5px;
+    cursor: pointer;
+    font-size: 20px;
     cursor: pointer;
     font-size: 20px;
 }
 
-.fa-regular.fa-circle-down.disabled:hover {
+.fa-solid.fa-chevron-down.disabled:hover {
     color:#f66151
 }
