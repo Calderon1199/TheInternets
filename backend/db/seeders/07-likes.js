@@ -43,7 +43,6 @@ module.exports = {
             { userId: 1, postId: 30, isLiked: false },
             { userId: 1, postId: 31, isLiked: false },
             { userId: 3, postId: 32, isLiked: false },
-            { userId: 1, postId: 33, isLiked: true },
             { userId: 1, postId: 34, isLiked: false },
             { userId: 1, postId: 35, isLiked: false },
             { userId: 2, postId: 36, isLiked: false },
