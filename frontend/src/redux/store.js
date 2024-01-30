@@ -9,11 +9,13 @@ import sessionReducer from "./session";
 import postReducer from "./post";
 import commentReducer from "./comment";
 import communityReducer from "./community";
+import likeReducer from './like';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     posts: postReducer,
     comments: commentReducer,
+    likes: likeReducer,
     communities: communityReducer
 });
 

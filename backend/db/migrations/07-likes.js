@@ -1,7 +1,7 @@
 'use strict';
 
 let options = {};
-options.tableName = 'Posts';
+options.tableName = 'Likes';
 if (process.env.NODE_ENV === 'production') {
     options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -26,25 +26,20 @@ module.exports = {
                     key: 'id'
                 },
             },
-            categoryId: {
+            postId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
                 references: {
                     model: {
-                        tableName: 'Groups',
+                        tableName: 'Posts',
                         schema: options.schema
                     },
                     key: 'id'
                 },
-                onDelete: 'CASCADE'
             },
-            title: {
-                type: Sequelize.STRING,
-                allowNull: false
-            },
-            postText: {
-                type: Sequelize.TEXT,
-                allowNull: true
+            isLiked: {
+                allowNull: false,
+                type: Sequelize.BOOLEAN,
             },
             createdAt: {
                 allowNull: false,

@@ -38,7 +38,7 @@ const DeletePostById = (deletedPostId) => ({
     payload: deletedPostId
 });
 
-const initialState = { allPosts: [], byId: {}, singlePost: {}, userPosts: [] };
+const initialState = { allPosts: [], byId: {}, singlePost: {}, userPosts: [], userPostsObj: {}};
 
 
 export const getPosts = () => async (dispatch) => {
@@ -182,6 +182,10 @@ function postReducer(state = initialState, action) {
                 return {
                     ...state,
                     userPosts: action.payload,
+                    userPostsObj: action.payload.reduce((acc, post) => {
+                        acc[post.id] = post;
+                        return acc;
+                    }, {})
                 };
             } else {
                 return state;
@@ -218,6 +222,7 @@ function postReducer(state = initialState, action) {
                 singlePost: state.singlePost.id === action.payload ? {} : state.singlePost,
                 userPosts: state.userPosts.filter((post) => post.id !== action.payload)
             };
+            delete state.userPostsObj[action.payload];
             return newState;
         default:
             return state;

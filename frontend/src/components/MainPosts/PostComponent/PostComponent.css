@@ -48,6 +48,8 @@
     max-height: 265px;
 }
 
+
+
 .Post-Text2{
     word-break: keep-all;
     line-height: 25px;
@@ -191,4 +193,67 @@
     border: none;
     width: 80px;
     height: 30px;
+}
+
+.Post-Tile-Container2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.Like {
+    display: flex;
+    align-items: center;
+}
+
+.Like p {
+    margin: 0px;
+    margin-left:20px;
+    margin-right: 10px;
+}
+
+.Like-Container {
+    display: flex;
+    align-items: center;
+}
+
+.Like-Options {
+    display: flex;
+}
+
+.fa-solid.fa-chevron-up.enabled {
+    color: #8ff0a4;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 5px 5px;
+}
+
+.fa-solid.fa-chevron-up.disabled {
+    margin: 5px 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.fa-solid.fa-chevron-up.disabled:hover {
+    color: #8ff0a4;
+}
+
+.fa-solid.fa-chevron-down.enabled {
+    color: #f66151;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 5px 5px;
+}
+
+.fa-solid.fa-chevron-down.disabled {
+    margin: 5px 5px;
+    cursor: pointer;
+    font-size: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.fa-solid.fa-chevron-down.disabled:hover {
+    color:#f66151
 }

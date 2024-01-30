@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Group, Comment, PostImage } = require('../../db/models');
 const { User } = require('../../db/models');
-const { Post } = require('../../db/models');
+const { Post, Like } = require('../../db/models');
 
 
 const router = express.Router();
@@ -71,6 +71,7 @@ router.get('/:communityId', async (req, res, next) => {
                     model: Group,
                     attributes: ['name'],
                 },
+                Like,
                 Comment,
                 PostImage,
             ],

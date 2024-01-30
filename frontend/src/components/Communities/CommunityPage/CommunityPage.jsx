@@ -21,7 +21,6 @@ function CommunityPage() {
     return (
         <div className='Community-Container'>
             <div className='Community-Banner'>
-
             </div>
             <div className='Community-Header'>
                 <h1>{community?.name}</h1>
