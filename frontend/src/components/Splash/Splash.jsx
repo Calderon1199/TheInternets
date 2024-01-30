@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import {getCommunities, getSingleCommunity, getUserCommunities } from '../../redux/community';
 import { getPosts } from '../../redux/post';
 
-import ProductTile from "../MainPosts/PostComponent/";
+import PostTile from "../MainPosts/PostComponent/";
 import HomePageWidget from './HomePageWidget';
 import "./Splash.css";
+import { getAllUserLikes } from '../../redux/like';
 
 const Splash = () => {
   const allPosts = useSelector(state => state.posts?.allPosts);
@@ -16,6 +17,7 @@ const Splash = () => {
     dispatch(getCommunities())
     dispatch(getUserCommunities())
     dispatch(getPosts());
+    dispatch(getAllUserLikes());
     dispatch(getSingleCommunity(1));
   }, [dispatch])
 
@@ -24,7 +26,7 @@ const Splash = () => {
 
   return (
     <div className='Main-Page'>
-        <ProductTile posts={allPosts} isProfile={false}/>
+        <PostTile posts={allPosts} isProfile={false}/>
         <HomePageWidget />
     </div>
   );

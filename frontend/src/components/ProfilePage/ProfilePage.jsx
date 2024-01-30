@@ -7,6 +7,7 @@ import { getUserPosts } from '../../redux/post';
 import ProfileCard from './ProfileCard';
 import './ProfilePage.css';
 import { useLocation } from 'react-router-dom';
+import { getAllUserLikes } from '../../redux/like';
 
 function ProfilePage() {
     const user = useSelector(state => state.session.user);
@@ -21,6 +22,7 @@ function ProfilePage() {
 
     useEffect(() => {
         dispatch(getUserPosts());
+        dispatch(getAllUserLikes());
         if (userPosts.length) {
             setHasPost(true)
         }
