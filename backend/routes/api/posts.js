@@ -1,12 +1,8 @@
 const express = require('express');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Post } = require('../../db/models');
-const { Comment } = require('../../db/models');
-const { User } = require('../../db/models');
-const { PostImage } = require('../../db/models');
+const { Post, Comment, User, PostImage, Group, Like } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
-const { Group } = require('../../db/models');
 
 const router = express.Router();
 
@@ -64,6 +60,7 @@ router.get('/', async (req, res, next) => {
                     model: Group,
                     attributes: ['name', 'id'],
                 },
+                Like,
                 Comment,
                 PostImage,
             ],
@@ -90,6 +87,7 @@ router.get('/user', requireAuth, async (req, res, next) => {
                     model: Group,
                     attributes: ['name'],
                 },
+                Like,
                 Comment,
                 PostImage,
             ],
