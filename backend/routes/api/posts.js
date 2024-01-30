@@ -187,12 +187,16 @@ router.delete('/:post_id', requireAuth, async (req, res, next) => {
         const postId = req.params.post_id;
 
         const post  = await Post.findByPk(+postId);
+        const likes = await Like.findAll({ where: { postId: postId}})
 
         if (!post) {
             res.status(404).json({message: "Post not found"})
         } else if (post.userId !== +userId) {
             res.status(403).json({message: "Forbidden"})
         } else {
+            for (const like of likes) {
+                await like.destroy();
+            }
             await post.destroy();
         }
 

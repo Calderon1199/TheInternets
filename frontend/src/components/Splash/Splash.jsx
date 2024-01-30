@@ -11,15 +11,18 @@ import { getAllUserLikes } from '../../redux/like';
 
 const Splash = () => {
   const allPosts = useSelector(state => state.posts?.allPosts);
+  const user = useSelector(state => state.session?.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCommunities())
-    dispatch(getUserCommunities())
     dispatch(getPosts());
-    dispatch(getAllUserLikes());
     dispatch(getSingleCommunity(1));
-  }, [dispatch])
+    if (user) {
+      dispatch(getUserCommunities())
+      dispatch(getAllUserLikes());
+    }
+  }, [dispatch, user])
 
 
 

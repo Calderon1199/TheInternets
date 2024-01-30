@@ -11,6 +11,8 @@ import "./PostView.css";
 import DeletePostModal from '../DeletePostModal';
 import { useModal } from '../../../context/Modal';
 import { getCommentsForPost } from '../../../redux/comment';
+import CommunityWidget from '../../Communities/CommunityWidget';
+import { getSingleCommunity } from '../../../redux/community';
 
 
 function PostView() {
@@ -30,6 +32,7 @@ function PostView() {
 
     useEffect(() => {
         dispatch(getSinglePost(+postId));
+        dispatch(getSingleCommunity(post.categoryId));
         dispatch(getCommentsForPost(postId));
         setLoading(false)
     }, [dispatch, user]);
@@ -131,6 +134,7 @@ function PostView() {
                     </div>
                 </div>
             </div>
+            <CommunityWidget />
         </div>
     );
 }
