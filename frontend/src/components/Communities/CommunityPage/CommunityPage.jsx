@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleCommunity } from '../../../redux/community';
+import { getCommunities, getSingleCommunity } from '../../../redux/community';
 import { useParams } from 'react-router-dom';
 import './CommunityPage.css';
 import CreatePostInput from '../../MainPosts/CreatPost';
@@ -15,6 +15,7 @@ function CommunityPage() {
 
     useEffect(() => {
         dispatch(getSingleCommunity(+communityId))
+        dispatch(getCommunities());
     }, [communityId])
 
 
