@@ -6,6 +6,7 @@ import LoginFormModal from "../LoginFormModal";
 import ProfileButton from "./ProfileButton";
 
 import "./Navigation.css";
+import SearchInput from "../Search/SearchInput";
 
 function Navigation() {
   const user = useSelector(state => state.session.user);
@@ -31,6 +32,7 @@ function Navigation() {
             Home
           </NavLink>
         </li>
+        <SearchInput />
         <div className="Right-Side-Navigation">
           <li>
             <NavLink className="NavLink" to={urlPath} onClick={handleNavLinkClick}>
