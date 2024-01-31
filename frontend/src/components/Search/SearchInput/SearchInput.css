@@ -1,0 +1,55 @@
+.Site-Search {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Site-Search label {
+    width: 61%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Site-Search input {
+    background: none;
+    border: 2px solid grey;
+    font-size: 14px;
+    height: 30px;
+    width: 100%;
+    color: white;
+    border-radius: 20px;
+    padding: 0px 5%;
+}
+
+.Search-Dropdown {
+    position: absolute;
+    color: white;
+    border: 1px solid grey;
+    border-radius: 10px;
+    top: 4.6%;
+    width: 31%;
+    height: fit-content;
+    background-color: #1A1A1B;
+}
+
+.Search-Dropdown h3 {
+    padding: 0px 10px;
+    margin: 10px 0px;
+}
+
+.Search-Dropdown-Row {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.Search-Dropdown-Row:hover {
+    font-size: 15px;
+    
+}
