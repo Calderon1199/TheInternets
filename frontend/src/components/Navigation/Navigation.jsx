@@ -29,7 +29,7 @@ function Navigation() {
       <ul className="Nav-Options">
         <li>
           <NavLink className="NavLink" to="/">
-            Home
+            <img src="../../public/the-internets-high-resolution-logo-transparent.png" width="150" height="35"/>
           </NavLink>
         </li>
         <SearchInput />
