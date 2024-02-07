@@ -1,30 +1,29 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import CommentTile from '../Comments/CommentTile/CommentTile';
 import PostTile from '../MainPosts/PostComponent';
-
-import { getUserPosts } from '../../redux/post';
 import ProfileCard from './ProfileCard';
-import './ProfilePage.css';
-import { useLocation } from 'react-router-dom';
+
 import { getAllUserLikes, getUserDislikes, getUserLikes } from '../../redux/like';
 import { getUserComments } from '../../redux/comment';
-import CommentTile from '../Comments/CommentTile/CommentTile';
+import { getUserPosts } from '../../redux/post';
+import './ProfilePage.css';
 
 function ProfilePage() {
-    const user = useSelector(state => state.session.user);
-    const userPosts = useSelector(state => state.posts?.userPosts);
-    const userLikes = useSelector(state => state.likes?.userLikes);
-    const userDislikes = useSelector(state => state.likes?.userDislikes);
     const userComments = useSelector(state => state.comments?.allUserComments);
-
-    const location = useLocation();
-    const isDeleted = new URLSearchParams(location.search).get('deleted');
+    const userDislikes = useSelector(state => state.likes?.userDislikes);
+    const userLikes = useSelector(state => state.likes?.userLikes);
+    const userPosts = useSelector(state => state.posts?.userPosts);
+    const user = useSelector(state => state.session.user);
 
     const [loading, setLoading] = useState(true);
     const [hasPost, setHasPost] = useState(false);
     const [type, setType] = useState("post");
 
+    const isDeleted = new URLSearchParams(location.search).get('deleted');
+    const location = useLocation();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,9 +32,6 @@ function ProfilePage() {
         dispatch(getUserDislikes());
         dispatch(getUserComments());
         dispatch(getAllUserLikes());
-        if (userPosts.length) {
-            setHasPost(true)
-        }
         setLoading(false)
     }, [dispatch])
 

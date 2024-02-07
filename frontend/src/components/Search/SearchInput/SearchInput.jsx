@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import "./SearchInput.css";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import "./SearchInput.css";
 
 function SearchInput() {
-    const [showMenu, setShowMenu] = useState(false);
-    const navigate = useNavigate();
-    const [searchInput, setSearchInput] = useState("");
-    const allCommunities = useSelector(state => state.communities?.allCommunities);
-    const ulRef = useRef();
+  const allCommunities = useSelector(state => state.communities?.allCommunities);
+
+  const [searchInput, setSearchInput] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+  
+  const navigate = useNavigate();
+  const ulRef = useRef();
 
   const toggleMenu = (e) => {
     e.stopPropagation();

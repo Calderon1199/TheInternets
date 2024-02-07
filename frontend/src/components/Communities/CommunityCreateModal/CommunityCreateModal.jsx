@@ -4,14 +4,13 @@ import { useState } from 'react';
 
 import { createCommunity } from '../../../redux/community';
 import { useModal } from '../../../context/Modal';
-
 import "./CommunityCreateModal.css";
 
 function CommunityCreateModal() {
-    const [description, setDescription] = useState("");
-    const [name, setName] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [description, setDescription] = useState("");
     const [errors, setErrors] = useState({});
+    const [name, setName] = useState("");
 
     const { closeModal } = useModal();
     const navigate = useNavigate();

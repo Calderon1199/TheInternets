@@ -1,10 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { createLike, deleteUserLike, editUserLike, getAllUserLikes, getUserLikes } from "../../../redux/like";
 import { useEffect, useState } from "react";
+
+import { createLike, deleteUserLike, editUserLike, getAllUserLikes, getUserDislikes, getUserLikes } from "../../../redux/like";
+import { getSingleCommunity } from "../../../redux/community";
 import { getPosts, getUserPosts } from "../../../redux/post";
+import { useDispatch, useSelector } from "react-redux";
+
 import LoginFormModal from "../../LoginFormModal";
 import { useModal } from "../../../context/Modal";
-import { getSingleCommunity } from "../../../redux/community";
 
 function LikeComponent({ postId, catId, isProfile }) {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const handleCreateLike = async (boolean) => {
         await dispatch(createLike({ isLiked: boolean, postId }));
         if (isProfile) {
             dispatch(getUserLikes());
+            dispatch(getUserDislikes());
         }
         await dispatch(getAllUserLikes());
         await dispatch(getPosts())
@@ -48,6 +51,10 @@ const handleCreateLike = async (boolean) => {
         else if (type === 'like' && like.isLiked) await dispatch(deleteUserLike(like.id)), setLike(null);
         await dispatch(getAllUserLikes());
         await dispatch(getPosts());
+        if (isProfile) {
+            dispatch(getUserLikes());
+            dispatch(getUserDislikes());
+        }
         if (catId) {
             await dispatch(getSingleCommunity(catId))
         }

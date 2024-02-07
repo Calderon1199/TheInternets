@@ -1,15 +1,16 @@
-import './DeletePostModal.css';
-import { useModal } from '../../../context/Modal';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../redux/post';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+;
+import { useModal } from '../../../context/Modal';
+import { deletePost } from '../../../redux/post';
+
+import './DeletePostModal.css';
 
 
 function DeletePostModal({post}) {
     const { closeModal } = useModal();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
 
     const handleDelete = () => {
         dispatch(deletePost(post.id));
