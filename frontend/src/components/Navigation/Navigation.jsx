@@ -6,9 +6,9 @@ import LoginFormModal from "../LoginFormModal";
 import ProfileButton from "./ProfileButton";
 
 import "./Navigation.css";
+import { getCommunities } from "../../redux/community";
 import SearchInput from "../Search/SearchInput";
 import { useEffect } from "react";
-import { getCommunities } from "../../redux/community";
 
 function Navigation() {
   const user = useSelector(state => state.session.user);
@@ -16,7 +16,6 @@ function Navigation() {
 
   const { setModalContent } = useModal();
   const navigate = useNavigate();
-
   const urlPath = "/posts/new";
 
   useEffect(() => {

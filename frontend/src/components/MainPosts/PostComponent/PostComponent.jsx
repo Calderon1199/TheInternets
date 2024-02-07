@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { editPost } from '../../../redux/post';
 import { useModal } from '../../../context/Modal';
-import CreatePostInput from '../CreatPost';
-
-import { calculateTimeDifference } from '.';
-import './PostComponent.css';
 import DeletePostModal from '../DeletePostModal';
+import { editPost } from '../../../redux/post';
+
 import LikeComponent from '../../Likes/LikeComponent/LikeComponent';
+import { calculateTimeDifference } from '.';
+import CreatePostInput from '../CreatPost';
+import './PostComponent.css';
 
 function PostTile({ posts, isProfile }) {
     const user = useSelector((state) => state.session?.user);

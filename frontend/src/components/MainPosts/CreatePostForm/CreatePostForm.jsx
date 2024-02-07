@@ -11,14 +11,14 @@ import './CreatePostForm.css';
 function CreatePostForm() {
     const communities = useSelector(state => state.communities?.allCommunities);
 
+    const [errors, setErrors] = useState({postText: "", title: "", images: "", community: ""});
     const [selectedCommunity, setSelectedCommunity] = useState(null);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const [showDropdown, setShowDropdown] = useState(false);
     const [images, setImages] = useState(['', '', '']);
     const [infoType, setInfoType] = useState(true);
     const [postText, setPostText] = useState('');
-    const [errors, setErrors] = useState({postText: "", title: "", images: "", community: ""});
     const [title, setTitle] = useState('');
-    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const dropdownRef = useRef(null);
     const navigate = useNavigate();

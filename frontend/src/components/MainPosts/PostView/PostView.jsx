@@ -2,29 +2,30 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { editPost, getSinglePost } from '../../../redux/post';
 import CommentInputForm from '../../Comments/CommentInputForm';
+import { editPost, getSinglePost } from '../../../redux/post';
+import { calculateTimeDifference } from '../PostComponent';
 import CommentTile from '../../Comments/CommentTile';
 
-import { calculateTimeDifference } from '../PostComponent';
-import "./PostView.css";
-import DeletePostModal from '../DeletePostModal';
-import { useModal } from '../../../context/Modal';
-import { getCommentsForPost } from '../../../redux/comment';
 import CommunityWidget from '../../Communities/CommunityWidget';
 import { getSingleCommunity } from '../../../redux/community';
+import DeletePostModal from '../DeletePostModal';
+
+import { getCommentsForPost } from '../../../redux/comment';
+import { useModal } from '../../../context/Modal';
+import "./PostView.css";
 
 
 function PostView() {
-    const post = useSelector(state => state.posts?.singlePost);
     const comments = useSelector(state => state.comments?.postComments);
+    const post = useSelector(state => state.posts?.singlePost);
     const user = useSelector(state => state.session.user);
 
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(true);
     const [postText, setPostText] = useState("");
     const [errors, setErrors] = useState({});
-    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const { setModalContent } = useModal();
     const dispatch = useDispatch();

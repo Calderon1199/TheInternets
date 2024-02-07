@@ -1,8 +1,10 @@
-import './CommunityModal.css';
-import { useModal } from '../../../context/Modal';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { deleteCommunity } from '../../../redux/community';
+
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { useModal } from '../../../context/Modal';
+import './CommunityModal.css';
 
 
 function DeleteCommunityModal({community}) {
