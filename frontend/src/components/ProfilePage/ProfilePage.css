@@ -4,3 +4,30 @@
     justify-content: center;
     background-color: #94E044;
 }
+
+.Profile-Type-Buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 0 0 6.5%;
+    background-color: #1D1D1D;
+    width: 93.5%;
+    height: 35px
+}
+
+.Profile-Type-Buttons button{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-size: 20px;
+    color: #A8AAAC;
+    background: none;
+    height: 100%;
+    width: fit-content;
+}
+
+.Profile-Type-Buttons .enabled {
+    border-bottom: 2px solid whitesmoke;
+}

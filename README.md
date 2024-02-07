@@ -27,7 +27,7 @@
 <br />
 <div align="center">
   <a href="https://theinternets.onrender.com/">
-    <img src="frontend/public/the-internets-high-resolution-logo-transparent.png" alt="Logo" width="250" height="60">
+    <img src="frontend/public/the-internets-high-resolution-logo-transparent.png" alt="Logo" height="200">
   </a>
 
   <h3 align="center">Welcome to The Internets</h3>

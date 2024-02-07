@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createLike, deleteUserLike, editUserLike, getAllUserLikes } from "../../../redux/like";
+import { createLike, deleteUserLike, editUserLike, getAllUserLikes, getUserLikes } from "../../../redux/like";
 import { useEffect, useState } from "react";
 import { getPosts, getUserPosts } from "../../../redux/post";
 import LoginFormModal from "../../LoginFormModal";
 import { useModal } from "../../../context/Modal";
+import { getSingleCommunity } from "../../../redux/community";
 
-function LikeComponent({ postId }) {
+function LikeComponent({ postId, catId, isProfile }) {
   const dispatch = useDispatch();
   const { setModalContent } = useModal();
   const currentPath = window.location.pathname;
@@ -16,15 +17,20 @@ function LikeComponent({ postId }) {
 
   useEffect(() => {
     if (currentLikeStatus) setLike(currentLikeStatus);
-
     }, [dispatch, userLikes])
 
 
 const handleCreateLike = async (boolean) => {
     if (user) {
         await dispatch(createLike({ isLiked: boolean, postId }));
+        if (isProfile) {
+            dispatch(getUserLikes());
+        }
         await dispatch(getAllUserLikes());
         await dispatch(getPosts())
+        if (catId) {
+            await dispatch(getSingleCommunity(catId))
+        }
         if (currentPath === '/profile') {
             await dispatch(getUserPosts());
         }
@@ -42,6 +48,9 @@ const handleCreateLike = async (boolean) => {
         else if (type === 'like' && like.isLiked) await dispatch(deleteUserLike(like.id)), setLike(null);
         await dispatch(getAllUserLikes());
         await dispatch(getPosts());
+        if (catId) {
+            await dispatch(getSingleCommunity(catId))
+        }
         if (currentPath === '/profile') {
           await dispatch(getUserPosts());
         }
