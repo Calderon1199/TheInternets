@@ -5,14 +5,17 @@ import { useDispatch } from "react-redux";
 
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import SignupFormModal from "../SignupFormModal";
 
 function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState("");
 
+  const { setModalContent } = useModal();
   const { closeModal } = useModal();
   const dispatch = useDispatch();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +26,8 @@ function LoginFormModal() {
         password,
       })
     );
+
+    console.log(serverResponse)
 
     serverResponse ? setErrors(serverResponse) : closeModal();
 
@@ -40,31 +45,48 @@ function LoginFormModal() {
 
   return (
     <div className="Login-Modal-Container">
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-        </label>
-        {errors.credential && <p>{errors.credential}</p>}
-        <label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit" onClick={(e) => handleSubmit(e)}>Log In</button>
-      </form>
-      <button onClick={handleDemoUserSubmit}>Demo User</button>
+      <div className="Welcome-Header">
+        <h3>Welcome back</h3>
+        <p>Log in to contribute to The Internets</p>
+      </div>
+      <div className="Login-Form">
+        <form onSubmit={handleSubmit}>
+          <div className="Email-Input">
+            <p>Email Address</p>
+            <label>
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                required
+              />
+            </label>
+            {errors.credential && <p>{errors.credential}</p>}
+          </div>
+          <div className="Email-Input">
+            <p>Password</p>
+            <label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+              />
+            </label>
+            {errors.password && <p>{errors.password}</p>}
+          </div>
+        </form>
+      </div>
+      <div className="Login-Buttons">
+        <button id="Login-Submit" type="submit" onClick={(e) => handleSubmit(e)}>Log In</button>
+        <button id="Demo-Submit" onClick={handleDemoUserSubmit}>Demo User</button>
+      </div>
+      <div className="Sign-Up-Footer">
+        <p>Dont have an account?</p>
+        <h4 onClick={() => setModalContent(<SignupFormModal />)}>Sign up</h4>
+      </div>
     </div>
   );
 }

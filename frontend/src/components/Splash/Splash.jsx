@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import {getCommunities, getSingleCommunity, getUserCommunities } from '../../redux/community';
+import {getCommunities, getUserCommunities } from '../../redux/community';
 import { getAllUserLikes } from '../../redux/like';
 import { getPosts } from '../../redux/post';
 
@@ -18,14 +18,11 @@ const Splash = () => {
   useEffect(() => {
     dispatch(getCommunities())
     dispatch(getPosts());
-    dispatch(getSingleCommunity(1));
     if (user) {
       dispatch(getUserCommunities())
       dispatch(getAllUserLikes());
     }
   }, [dispatch, user])
-
-
 
 
   return (

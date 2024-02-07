@@ -46,7 +46,11 @@ function Navigation() {
             </NavLink>
           </li>
           <li className="Profile-Button-Container">
-            <ProfileButton />
+            {user ? (
+              <ProfileButton />
+            ) : (
+              <button className="Login-Button" onClick={() => setModalContent(<LoginFormModal />)}>Log in</button>
+            )}
           </li>
         </div>
       </ul>
