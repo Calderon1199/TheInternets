@@ -132,7 +132,7 @@ function PostTile({ posts, isProfile }) {
                         <div className='Like-Container'>
                             <div className='Like'>
                                 <p>{post.Likes?.filter(like => like.isLiked).length - post.Likes?.filter(like => !like.isLiked).length}</p>
-                                <LikeComponent postId={post.id}/>
+                                <LikeComponent postId={post.id} catId={post.categoryId} isProfile={isProfile}/>
                             </div>
                         </div>
                         </div>

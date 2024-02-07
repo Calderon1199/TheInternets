@@ -38,6 +38,8 @@ router.get('/', async (req, res, next) => {
     try {
         const allCommunities = await Group.findAll({ include: User });
 
+        if (!allCommunities) res.status(200).send({message: "There are currently no communities."})
+
         res.status(200).json({ Communities: allCommunities });
     } catch (error) {
         next(error);
@@ -49,7 +51,7 @@ router.get('/user', async (req, res, next) => {
         const userId = req.user.id;
         const userCommunities = await Group.findAll({ where: { userId: +userId}});
 
-        if (userCommunities.length <= 0) res.status(200).json({ message: "User has no posts" })
+        if (userCommunities.length <= 0) res.status(200).json({ message: "User has no communities." })
 
         res.status(200).json({ Communities: userCommunities });
     } catch (error) {
@@ -61,6 +63,10 @@ router.get('/:communityId', async (req, res, next) => {
     try {
         const communityId = req.params.communityId
         const singleCommunity = await Group.findByPk(+communityId);
+
+        if (!singleCommunity) {
+            res.status(404).send({message: "Community not found."})
+        }
         const posts = await Post.findAll({
             where: { categoryId: communityId }, include: [
                 {
@@ -69,7 +75,7 @@ router.get('/:communityId', async (req, res, next) => {
                 },
                 {
                     model: Group,
-                    attributes: ['name'],
+                    attributes: ['id', 'name'],
                 },
                 Like,
                 Comment,
@@ -77,6 +83,7 @@ router.get('/:communityId', async (req, res, next) => {
             ],
 });
         singleCommunity.dataValues.posts = posts || [];
+
         res.status(200).json(singleCommunity);
     } catch (error) {
         next(error);
@@ -89,7 +96,7 @@ router.post('/new', async (req, res, next) => {
         const userId = req.user.id;
         const newCommunity = await Group.create({ userId, name, description });
 
-        res.status(200).json(newCommunity);
+        res.status(201).json(newCommunity);
     } catch (error) {
         next(error);
     }
@@ -144,7 +151,7 @@ router.delete('/:communityId', async (req, res, next) => {
         const communityToDelete = await Group.findByPk(+communityId);
 
         if (!communityToDelete) {
-            res.status(404).json({ message: "Community not found" })
+            res.status(404).json({ message: "Community not found." })
         } else if (communityToDelete.userId !== +userId) {
             res.status(403).json({ message: "Forbidden" })
         } else {

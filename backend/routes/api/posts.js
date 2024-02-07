@@ -85,7 +85,7 @@ router.get('/user', requireAuth, async (req, res, next) => {
                 },
                 {
                     model: Group,
-                    attributes: ['name'],
+                    attributes: ['id', 'name'],
                 },
                 Like,
                 Comment,
@@ -93,7 +93,7 @@ router.get('/user', requireAuth, async (req, res, next) => {
             ],
         });
 
-        if (userPosts.length <= 0) res.status(200).json({message: "User has no posts"})
+        if (userPosts.length <= 0) res.status(200).json({message: "User has no posts."})
 
         res.status(200).json({ posts: userPosts })
     } catch (error) {
@@ -146,11 +146,8 @@ router.put('/:post_id', requireAuth, async (req, res, next) => {
         const newData = req.body;
 
         const post = await Post.findByPk(+postId);
-        const categoryCheck = await Group.findByPk(+newData.categoryId);
 
-
-        if (!post) res.status(404).json({ message: "Post not found" })
-        if (!categoryCheck) res.status(404).json({ message: "Category not found"})
+        if (!post) res.status(404).json({ message: "Post not found." })
 
         if (post.userId !== userId) {
             return res.status(403).json({ message: "Forbidden" });
@@ -200,7 +197,7 @@ router.delete('/:post_id', requireAuth, async (req, res, next) => {
             await post.destroy();
         }
 
-        res.status(200).json({ message: "Successfully deleted" });
+        res.status(200).json({ message: "Successfully deleted." });
     } catch (error) {
         next(error);
     }

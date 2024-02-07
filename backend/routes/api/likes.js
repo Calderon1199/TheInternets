@@ -1,5 +1,6 @@
 const express = require('express');
-const { Like, Post } = require('../../db/models');
+const { Op } = require('sequelize');
+const { Like, Post, Comment, PostImage, Group, User } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
 const router = express.Router();
@@ -26,12 +27,44 @@ router.get('/user/all-likes', requireAuth, async (req, res, next) => {
 router.get('/user/likes', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const userLikes = await Like.findAll({
-            where: { isLiked: true, userId: +userId },
-            include: {
-                model: Post
+        const likes = await Like.findAll({
+            where: {
+                isLiked: true,
+                userId: +userId
             }
         });
+
+        // Extract post IDs from liked posts
+        const postIds = likes.map(like => like.postId);
+
+        // Fetch all likes associated with the liked posts
+        const userLikes = await Post.findAll({
+            where: {
+                id: {
+                    [Op.in]: postIds
+                }
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Group,
+                    attributes: ['id', 'name'],
+                },
+                {
+                    model: Like,
+                },
+                {
+                    model: Comment,
+                },
+                {
+                    model: PostImage,
+                },
+            ]
+        });
+
 
         res.status(200).json({ Likes: userLikes });
     } catch (error) {
@@ -56,11 +89,42 @@ router.get('/user/posts/:postId', requireAuth, async (req, res, next) => {
 router.get('/user/dislikes', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const userDislikes = await Like.findAll({
-            where: { isLiked: false, userId: +userId },
-            include: {
-                model: Post
+        const dislike = await Like.findAll({
+            where: {
+                isLiked: false,
+                userId: +userId
             }
+        });
+
+        // Extract post IDs from liked posts
+        const postIds = dislike.map(dislike => dislike.postId);
+
+        // Fetch all likes associated with the liked posts
+        const userDislikes = await Post.findAll({
+            where: {
+                id: {
+                    [Op.in]: postIds
+                }
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Group,
+                    attributes: ['id', 'name'],
+                },
+                {
+                    model: Like,
+                },
+                {
+                    model: Comment,
+                },
+                {
+                    model: PostImage,
+                },
+            ]
         });
 
         if (userDislikes.length <= 0) res.status(200).json({ message: "User has no dislikes" })

@@ -31,7 +31,14 @@ router.get('/', async (req, res, next) => {
 router.get('/user', requireAuth, async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const userComments = await Comment.findAll({ where: { userId: userId }});
+        const userComments = await Comment.findAll({ where: { userId: userId },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'username'],
+                }
+            ]
+        });
 
         if (userComments.length === 0) {
             res.status(404).json({ message: "User has no comments" });

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useModal } from "../../context/Modal";
 import LoginFormModal from "../LoginFormModal";
@@ -7,14 +7,21 @@ import ProfileButton from "./ProfileButton";
 
 import "./Navigation.css";
 import SearchInput from "../Search/SearchInput";
+import { useEffect } from "react";
+import { getCommunities } from "../../redux/community";
 
 function Navigation() {
   const user = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
 
   const { setModalContent } = useModal();
   const navigate = useNavigate();
 
   const urlPath = "/posts/new";
+
+  useEffect(() => {
+    dispatch(getCommunities())
+  })
 
   const handleNavLinkClick = () => {
     if (!user) {
@@ -29,7 +36,7 @@ function Navigation() {
       <ul className="Nav-Options">
         <li>
           <NavLink className="NavLink" to="/">
-            <img src="../../public/the-internets-high-resolution-logo-transparent.png" width="150" height="35"/>
+            <img src="../../public/the-internets-high-resolution-logo-transparent.png" />
           </NavLink>
         </li>
         <SearchInput />
