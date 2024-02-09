@@ -46,6 +46,13 @@
     margin: 0px 4%;
 }
 
+.Post-Info-Left p {
+    cursor: pointer;
+}
+
+.Post-Info-Left p:hover {
+    text-decoration: underline;
+}
 
 .Post-Info-Container {
     display: flex;

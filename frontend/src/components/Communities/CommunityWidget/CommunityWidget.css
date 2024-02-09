@@ -1,16 +1,23 @@
 .Comm-Widget {
     width: 25%;
     border-radius: 5px;
+    color: #d7dadc;
     padding: 15px;
-    margin-left: 5%;
-    border: 1px solid grey;
-    background-color: #272729;
+    margin-left: 2%;
+    border: .5px solid grey;
+    background-color: #1A1A1B;
+    height: fit-content;
 }
 
 .Comm-Widget2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+}
+
+.Comm-Widget2 h3:hover {
+    text-decoration: underline;
 }
 
 .Comm-Widget2 button{
@@ -31,6 +38,7 @@
 
 .Comm-Description {
     border-bottom: 1px solid gray;
+    cursor: pointer;
     overflow: hidden;
     word-wrap: break-word;
     word-break: keep-all;
