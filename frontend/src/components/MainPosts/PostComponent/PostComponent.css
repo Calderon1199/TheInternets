@@ -1,6 +1,5 @@
 .Post-Tile-Inner-Container {
     height:fit-content;
-    width: 600px;
     padding-left: 20px;
     padding-right: 20px;
     background-color: #1a1a1b;
@@ -12,8 +11,15 @@
 
 .Post-Tile-Container {
     display: flex;
+    width: 45%;
     justify-content: center;
     flex-direction: column;
+}
+
+@media screen and (max-width: 999px) {
+    .Post-Tile-Container {
+        width: 70%;
+    }
 }
 
 .Post-Tile-Inner-Container:hover {
@@ -30,15 +36,31 @@
     max-width: 95%;
 }
 
+.Post-Info-Left {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+
+.Post-Info-Left span{
+    margin: 0px 4%;
+}
+
 
 .Post-Info-Container {
     display: flex;
     margin: 15px 0 0 0;
-    width: calc(55% + 100px);
+    width: 70%;
     height: 20px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 1148px) {
+    .Post-Info-Container p {
+        font-size: 14px;
+    }
 }
 
 .Post-Text {
@@ -71,6 +93,9 @@
 
 #post-owner-name {
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
 }
 
 .Post-Text-Tile-Container {
