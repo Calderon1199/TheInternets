@@ -19,7 +19,7 @@ function LikeComponent({ postId, catId, isProfile }) {
 
   useEffect(() => {
     if (currentLikeStatus) setLike(currentLikeStatus);
-    }, [dispatch, userLikes])
+    }, [dispatch, userLikes, currentLikeStatus])
 
 
 const handleCreateLike = async (boolean) => {

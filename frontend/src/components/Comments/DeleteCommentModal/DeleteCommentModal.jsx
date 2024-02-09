@@ -24,7 +24,7 @@ function DeleteCommentModal({ comment }) {
     return (
         <div className='Delete-Post-Modal'>
             <div className="Delete-Post-Container">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+                <i className="fa-solid fa-triangle-exclamation"></i>
                 <div className='Warning-Text'>
                     <h3>Are you sure?</h3>
                     <p id="warning-text">This action cannot be undone. All values associated with this comment will be lost.</p>

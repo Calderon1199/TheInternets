@@ -27,7 +27,7 @@ function CommunityPage() {
       dispatch(getUserCommunities())
       dispatch(getAllUserLikes());
     }
-    }, [communityId, user])
+    }, [dispatch, communityId, user])
 
 
     return (

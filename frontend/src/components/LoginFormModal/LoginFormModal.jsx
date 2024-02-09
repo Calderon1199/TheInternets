@@ -58,7 +58,6 @@ function LoginFormModal() {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
                 required
               />
             </label>
@@ -71,7 +70,6 @@ function LoginFormModal() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
                 required
               />
             </label>
@@ -80,7 +78,7 @@ function LoginFormModal() {
         </form>
       </div>
       <div className="Login-Buttons">
-        <button id="Login-Submit" type="submit" onClick={(e) => handleSubmit(e)}>Log In</button>
+        <button className="Login-Submit" type="submit" onClick={(e) => handleSubmit(e)}>Log In</button>
         <button id="Demo-Submit" onClick={handleDemoUserSubmit}>Demo User</button>
       </div>
       <div className="Sign-Up-Footer">

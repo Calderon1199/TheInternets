@@ -21,7 +21,7 @@ function PostRules() {
                         4. Search for duplicates before posting.
                     </li>
                     <li id='rule-5'>
-                        5. Read the community's rules.
+                        5. Read the community rules.
                     </li>
                 </ol>
             </ul>
