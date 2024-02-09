@@ -1,16 +1,25 @@
 .Single-Post-Container {
     color: white;
-    width: 700px;
+    width: 59%;
     padding-left: 40px;
     display: flex;
     position: relative;
     border-radius: 5px;
-    margin: 0px auto;
+    margin: 0px 0px 0px 5%;
     height: fit-content;
     background-color: #1a1a1b;
     align-items: center;
     justify-content: center;
 }
+
+@media screen and (max-width: 1000px) {
+    .Single-Post-Container {
+        margin-right: 5%;
+        width: 100%;
+    }
+}
+
+
 
 .Post-Text-Tile-Container {
     word-wrap: break-word;
@@ -31,11 +40,30 @@
 
 .Post-Back-Drop {
     background-color: black;
-    width: 1300px;
+    display: flex;
+    width: 90%;
     height: 100%;
     margin: 0 auto;
     padding-top: 80px;
     padding-bottom: 30px;
+}
+
+.Post-View-Banner {
+    display: flex;
+    align-items: center;
+    color: #d7dadc;
+    justify-content: space-around;
+    margin: 0 auto;
+    height: 50px;
+    width: 90%;
+    position: sticky;
+    top: 50px;
+    z-index: 999;
+    background-color: black;
+}
+
+.Post-View-Banner p {
+    margin: 0px;
 }
 
 .Single-Post-Inner-Container {
@@ -55,7 +83,7 @@
     cursor: pointer;
     display: flex;
     margin: 15px 0 0 0;
-    width: calc(30% + 90px);
+    width: 90%;
     min-width: 30%;
     font-size: 12px;
     height: 20px;
@@ -178,4 +206,10 @@
 
 .fa-solid.fa-comments {
     font-size: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+    .Comm-Widget {
+        display: none;
+    }
 }

@@ -114,6 +114,7 @@ router.get('/:post_id', async (req, res, next) => {
                     model: Group,
                     attributes: ['name'],
                 },
+                Like,
                 Comment,
                 PostImage,
             ],

@@ -8,7 +8,7 @@ import DeleteCommunityModal from '../CommunityModal';
 import { useModal } from '../../../context/Modal';
 import './CommunityWidget.css';
 
-function CommunityWidget() {
+function CommunityWidget(isPostView) {
     const community = useSelector(state => state.communities?.singleCommunity);
     const user = useSelector(state => state.session?.user);
 
@@ -60,9 +60,13 @@ function CommunityWidget() {
 
     return (
         <div className='Comm-Widget'>
-            <div className='Comm-Widget2'>
-                <p>About the Community</p>
-                {community.userId === user?.id && (
+            <div className='Comm-Widget2' onClick={() => navigate(`/communities/${community.id}`)}>
+                {!isPostView ? (
+                    <h3>About the Community</h3>
+                ): (
+                    <h3>{community.name}</h3>
+                )}
+                {community.userId === user?.id && !isPostView && (
                     <button onClick={() => handleDelete()}>Delete Community</button>
                 )}
             </div>
@@ -89,7 +93,10 @@ function CommunityWidget() {
             </div>
             <div className='Comm-Options'>
                 <button onClick={() => navigate('/posts/new')} id='Post-Widget-Button'>Create Post</button>
-                {community.userId === user?.id && (
+                {isPostView && (
+                    <button onClick={() => navigate(`/communities/${community.id}`)} id='Community-Widget-Button'>Visit Community</button>
+                )}
+                {community.userId === user?.id && !isPostView && (
                     <button onClick={() => !editing ? setEditing(true) : setEditing(false)} id='Community-Widget-Button'>Edit Description</button>
                 )}
             </div>
