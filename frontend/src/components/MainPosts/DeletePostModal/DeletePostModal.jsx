@@ -1,15 +1,16 @@
-import './DeletePostModal.css';
-import { useModal } from '../../../context/Modal';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../redux/post';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+;
+import { useModal } from '../../../context/Modal';
+import { deletePost } from '../../../redux/post';
+
+import './DeletePostModal.css';
 
 
 function DeletePostModal({post}) {
     const { closeModal } = useModal();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
 
     const handleDelete = () => {
         dispatch(deletePost(post.id));
@@ -19,7 +20,7 @@ function DeletePostModal({post}) {
     return (
         <div className='Delete-Post-Modal'>
             <div className="Delete-Post-Container">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+                <i className="fa-solid fa-triangle-exclamation"></i>
                 <div className='Warning-Text'>
                     <h3>Are you sure?</h3>
                     <p id="warning-text">This action cannot be undone. All values associated with this post will be lost.</p>

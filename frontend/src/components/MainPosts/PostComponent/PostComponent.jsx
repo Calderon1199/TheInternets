@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { editPost } from '../../../redux/post';
 import { useModal } from '../../../context/Modal';
-import CreatePostInput from '../CreatPost';
-
-import { calculateTimeDifference } from '.';
-import './PostComponent.css';
 import DeletePostModal from '../DeletePostModal';
+import { editPost } from '../../../redux/post';
+
 import LikeComponent from '../../Likes/LikeComponent/LikeComponent';
+import { calculateTimeDifference } from '.';
+import CreatePostInput from '../CreatPost';
+import './PostComponent.css';
 
 function PostTile({ posts, isProfile }) {
     const user = useSelector((state) => state.session?.user);
@@ -68,9 +68,11 @@ function PostTile({ posts, isProfile }) {
                 newPosts?.map((post) => (
                     <div className='Post-Tile-Inner-Container' key={post.id}>
                         <div className='Post-Info-Container'>
-                            <h5 onClick={() => navigate(`/communities/${post?.Group?.id}`)} id='group-name'>{post.Group?.name}</h5>
-                            <span>&#x2022;</span>
-                            <p onClick={() => alert("feature coming soon...")} id='post-owner-name'><span>Posted by </span>{post.User?.username}</p>
+                            <div className='Post-Info-Left'>
+                                <h5 onClick={() => navigate(`/communities/${post?.Group?.id}`)} id='group-name'>{post.Group?.name}</h5>
+                                <span>&#x2022;</span>
+                                <p onClick={() => alert("feature coming soon...")} id='post-owner-name'>Posted by {post.User?.username}</p>
+                            </div>
                             <p>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
                         </div>
                     <div className='Post-Text-Tile-Container'>

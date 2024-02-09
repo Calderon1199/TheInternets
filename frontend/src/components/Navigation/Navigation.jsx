@@ -6,9 +6,9 @@ import LoginFormModal from "../LoginFormModal";
 import ProfileButton from "./ProfileButton";
 
 import "./Navigation.css";
+import { getCommunities } from "../../redux/community";
 import SearchInput from "../Search/SearchInput";
 import { useEffect } from "react";
-import { getCommunities } from "../../redux/community";
 
 function Navigation() {
   const user = useSelector(state => state.session.user);
@@ -16,7 +16,6 @@ function Navigation() {
 
   const { setModalContent } = useModal();
   const navigate = useNavigate();
-
   const urlPath = "/posts/new";
 
   useEffect(() => {
@@ -36,7 +35,7 @@ function Navigation() {
       <ul className="Nav-Options">
         <li>
           <NavLink className="NavLink" to="/">
-            <img src="../../public/the-internets-high-resolution-logo-transparent.png" />
+            <img src="/the-internets-high-resolution-logo-transparent.png" />
           </NavLink>
         </li>
         <SearchInput />
@@ -47,7 +46,11 @@ function Navigation() {
             </NavLink>
           </li>
           <li className="Profile-Button-Container">
-            <ProfileButton />
+            {user ? (
+              <ProfileButton />
+            ) : (
+              <button className="Login-Button" onClick={() => setModalContent(<LoginFormModal />)}>Log in</button>
+            )}
           </li>
         </div>
       </ul>

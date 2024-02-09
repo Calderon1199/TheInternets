@@ -171,12 +171,12 @@ function likeReducer(state = initialState, action) {
             if (action.payload) {
                 newState = {
                     ...state,
-                    userLikes: state.userLikes.map((like) =>
-                    like.id === action.payload.id ? action.payload : like
-                    ),
-                    userDislikes: state.userDislikes.map((dislike) =>
-                       dislike.id === action.payload.id ? action.payload : dislike
-                    )
+                    // userLikes: state.userLikes.map((like) =>
+                    // like.id === action.payload.id ? action.payload : like
+                    // ),
+                    // userDislikes: state.userDislikes.map((dislike) =>
+                    //    dislike.id === action.payload.id ? action.payload : dislike
+                    // )
                 }
                 return newState;
             } else {

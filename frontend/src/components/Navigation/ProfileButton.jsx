@@ -9,7 +9,7 @@ import SignupFormModal from "../SignupFormModal";
 import LoginFormModal from "../LoginFormModal";
 
 function ProfileButton() {
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session?.user);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -57,8 +57,7 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <div className="Dropdown-Info">
-              <li>{user.username}</li>
-              <li>{user.email}</li>
+              <li className="Dropdown-li-Intro">Hello, {user?.username}!</li>
               <li className="dropdown-li">
                 <button className="dropdown-button" onClick={() => navigate("/profile")}><i className="fa-regular fa-user"></i>Profile</button>
               </li>

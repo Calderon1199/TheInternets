@@ -11,14 +11,14 @@ import './CreatePostForm.css';
 function CreatePostForm() {
     const communities = useSelector(state => state.communities?.allCommunities);
 
+    const [errors, setErrors] = useState({postText: "", title: "", images: "", community: ""});
     const [selectedCommunity, setSelectedCommunity] = useState(null);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const [showDropdown, setShowDropdown] = useState(false);
     const [images, setImages] = useState(['', '', '']);
     const [infoType, setInfoType] = useState(true);
     const [postText, setPostText] = useState('');
-    const [errors, setErrors] = useState({postText: "", title: "", images: "", community: ""});
     const [title, setTitle] = useState('');
-    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
@@ -81,7 +81,7 @@ function CreatePostForm() {
     }
 
     setErrors(newErrors);
-    title.length > 5 && selectedCommunity && !e.target.value.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
+    title.length > 5 && selectedCommunity && !imageUrl.startsWith(' ') ? setButtonDisabled(false) : setButtonDisabled(true);
   };
 
   const handleChangePostText = (e) => {
@@ -189,7 +189,7 @@ function CreatePostForm() {
                     <h3 id='image-rules'>Choose up to three images</h3>
                     {errors.images && <p className="errorDiv">{errors.images}</p>}
                 {images.map((imageUrl, index) => (
-                  <div>
+                  <div key={index}>
                     <label key={index}>
                       <input
                         type="text"

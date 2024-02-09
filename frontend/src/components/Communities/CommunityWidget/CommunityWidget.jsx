@@ -1,20 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
-import './CommunityWidget.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+
 import { editCommunity, getSingleCommunity } from '../../../redux/community';
+
 import DeleteCommunityModal from '../CommunityModal';
 import { useModal } from '../../../context/Modal';
+import './CommunityWidget.css';
 
 function CommunityWidget() {
     const community = useSelector(state => state.communities?.singleCommunity);
-    const [description, setDescription] = useState(community?.description);
-    const [errors, setErrors] = useState({});
-    const { setModalContent } = useModal();
-    const [buttonDisabled, setButtonDisabled] = useState(true);
-    const dispatch = useDispatch();
-    const [editing, setEditing] = useState(false);
     const user = useSelector(state => state.session?.user);
+
+    const [description, setDescription] = useState(community?.description);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [editing, setEditing] = useState(false);
+    const [errors, setErrors] = useState({});
+
+    const { setModalContent } = useModal();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleEditChange = (newDescription) => {
@@ -81,7 +85,7 @@ function CommunityWidget() {
                     </div>
 
                 )}
-                <p><i class="fa-solid fa-cake-candles"></i> Created {formattedDate}</p>
+                <p><i className="fa-solid fa-cake-candles"></i> Created {formattedDate}</p>
             </div>
             <div className='Comm-Options'>
                 <button onClick={() => navigate('/posts/new')} id='Post-Widget-Button'>Create Post</button>

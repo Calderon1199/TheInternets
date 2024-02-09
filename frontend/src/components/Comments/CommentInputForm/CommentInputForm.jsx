@@ -4,18 +4,21 @@ import { useState } from 'react';
 import { createComment } from '../../../redux/comment';
 import { useModal } from '../../../context/Modal';
 import LoginFormModal from '../../LoginFormModal';
-import './CommentInputForm.css';
+
 import { getSinglePost } from '../../../redux/post';
 import { useNavigate } from 'react-router-dom';
+import './CommentInputForm.css';
 
 function CommentInputForm({postId}) {
     const user = useSelector(state => state.session?.user);
-    const navigate = useNavigate();
-    const [comment, setComment] = useState("");
-    const { setModalContent } = useModal();
-    const [errors, setErrors] = useState({});
-    const dispatch = useDispatch();
+
     const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [comment, setComment] = useState("");
+    const [errors, setErrors] = useState({});
+
+    const { setModalContent } = useModal();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleCommentChange = (comment) => {
         setComment(comment);

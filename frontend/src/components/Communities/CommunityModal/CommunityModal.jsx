@@ -1,8 +1,10 @@
-import './CommunityModal.css';
-import { useModal } from '../../../context/Modal';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { deleteCommunity } from '../../../redux/community';
+
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { useModal } from '../../../context/Modal';
+import './CommunityModal.css';
 
 
 function DeleteCommunityModal({community}) {
@@ -19,7 +21,7 @@ function DeleteCommunityModal({community}) {
     return (
         <div className='Delete-Post-Modal'>
             <div className="Delete-Post-Container">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+                <i className="fa-solid fa-triangle-exclamation"></i>
                 <div className='Warning-Text'>
                     <h3>Are you sure?</h3>
                     <p id="warning-text">This action cannot be undone. All values associated with this Community, including posts will be lost.</p>

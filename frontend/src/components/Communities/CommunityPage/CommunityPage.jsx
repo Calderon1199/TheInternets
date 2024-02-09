@@ -1,19 +1,22 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCommunities, getSingleCommunity, getUserCommunities } from '../../../redux/community';
 import { useParams } from 'react-router-dom';
-import './CommunityPage.css';
+import { useEffect } from 'react';
+
 import CreatePostInput from '../../MainPosts/CreatPost';
 import PostTile from '../../MainPosts/PostComponent';
 import CommunityWidget from '../CommunityWidget';
-import { getPosts } from '../../../redux/post';
+
+import { getCommunities, getSingleCommunity, getUserCommunities } from '../../../redux/community';
 import { getAllUserLikes } from '../../../redux/like';
+import { getPosts } from '../../../redux/post';
+import './CommunityPage.css';
 
 function CommunityPage() {
-    const dispatch = useDispatch();
-    const {communityId} = useParams();
-    const user = useSelector(state => state.session?.user)
     const community = useSelector(state => state.communities?.singleCommunity);
+    const user = useSelector(state => state.session?.user);
+
+    const {communityId} = useParams();
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -24,7 +27,7 @@ function CommunityPage() {
       dispatch(getUserCommunities())
       dispatch(getAllUserLikes());
     }
-    }, [communityId, user])
+    }, [dispatch, communityId, user])
 
 
     return (

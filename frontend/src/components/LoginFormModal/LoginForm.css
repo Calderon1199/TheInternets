@@ -1,43 +1,98 @@
 .Login-Modal-Container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 350px;
+    /* align-items: center; */
+    height: 450px;
     padding: 10px 50px;
-    color: white;
-    background-color: #1a282d;
+    color: #F2F4F7;
+    background-color: #1D2939;
     width: 400px;
     border-radius: 30px;
 }
 
-.Login-Modal-Container form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: whitesmoke;
-    justify-content: space-evenly;
-    height: 200px;
-    border-top: 1px solid #38454C;
-    width: 100%;
+.Welcome-Header p{
+    margin-top: 0px;
 }
 
-.Login-Modal-Container form input{
-    width: 300px;
+.Welcome-Header h3 {
+    margin-bottom: 10px;
+}
+
+.Login-Form form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding-top: 25px;
+    height: 200px;
+    border-top: 1px solid #344054;
+    width: 100%;
+    height: 150px;
+}
+
+.Email-Input {
+    width: 100%;
+    height: 100%;
+}
+
+.Email-Input p{
+    margin-bottom: 5px;
+}
+
+.Login-Buttons {
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+    height: 150px;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.Login-Buttons button{
+    cursor: pointer;
+    width: 100%;
     height: 40px;
-    border-radius: 25px;
+    border-radius: 10px;
+    font-size: 15px;
+    border: none;
+    font-weight: 700;
+}
+
+.Login-Submit {
+    color: white;
+    background-color: #3584e4;
+}
+
+#Demo-Submit {
+    color: white;
+    background-color: #F06F77;
+}
+
+.Sign-Up-Footer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.Sign-Up-Footer h4 {
+    cursor: pointer;
+    margin: 0px 0px 0px 3%;
+}
+
+.Sign-Up-Footer h4:hover {
+    text-decoration: underline;
+}
+
+.Email-Input input{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
     background: none;
-    background-color: #38454C;
+    background-color: #344054;
+    box-sizing: border-box;
     color: white;
     border: none;
     padding: 0px 10px;
-}
-
-.Login-Modal-Container button {
-    cursor: pointer;
-    width: 200px;
-    height: 30px;
-    border-radius: 20px;
-    border: 1px solid #38454C;
-    font-size: 15px;
-    font-weight: 700;
+    margin-bottom: 15px;
 }
