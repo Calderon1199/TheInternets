@@ -11,7 +11,7 @@ import './CommunityWidget.css';
 function CommunityWidget() {
     const community = useSelector(state => state.communities?.singleCommunity);
     const user = useSelector(state => state.session?.user);
-    
+
     const [description, setDescription] = useState(community?.description);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [editing, setEditing] = useState(false);
@@ -85,7 +85,7 @@ function CommunityWidget() {
                     </div>
 
                 )}
-                <p><i class="fa-solid fa-cake-candles"></i> Created {formattedDate}</p>
+                <p><i className="fa-solid fa-cake-candles"></i> Created {formattedDate}</p>
             </div>
             <div className='Comm-Options'>
                 <button onClick={() => navigate('/posts/new')} id='Post-Widget-Button'>Create Post</button>

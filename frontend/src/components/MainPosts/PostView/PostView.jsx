@@ -127,7 +127,7 @@ function PostView() {
                             <CommentTile comments={comments}/>
                         ): (
                             <div className='Empty-Comments'>
-                                <i class="fa-solid fa-comments"></i>
+                                <i className="fa-solid fa-comments"></i>
                                 <h3>No comments yet</h3>
                                 <p>Be the first to share what you think!</p>
                             </div>

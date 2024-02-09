@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: [4, 30],
+        isAllowedCharacters(value) {
+          const regex = /^[a-zA-Z0-9_-]+$/;
+          if (!regex.test(value)) {
+            throw new Error('Username can only contain letters, numbers, dashes, and underscores.');
+          }
+        },
         isNotEmail(value) {
           if (Validator.isEmail(value)) {
             throw new Error('Cannot be an email.');

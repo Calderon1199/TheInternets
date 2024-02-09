@@ -19,11 +19,10 @@ function ProfilePage() {
     const user = useSelector(state => state.session.user);
 
     const [loading, setLoading] = useState(true);
-    const [hasPost, setHasPost] = useState(false);
     const [type, setType] = useState("post");
 
-    const isDeleted = new URLSearchParams(location.search).get('deleted');
     const location = useLocation();
+    const isDeleted = new URLSearchParams(location.search).get('deleted');
     const dispatch = useDispatch();
 
     useEffect(() => {
