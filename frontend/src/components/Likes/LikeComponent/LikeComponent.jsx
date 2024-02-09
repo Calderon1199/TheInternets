@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { createLike, deleteUserLike, editUserLike, getAllUserLikes, getUserDislikes, getUserLikes } from "../../../redux/like";
 import { getSingleCommunity } from "../../../redux/community";
-import { getPosts, getUserPosts } from "../../../redux/post";
+import { getPosts, getSinglePost, getUserPosts } from "../../../redux/post";
 import { useDispatch, useSelector } from "react-redux";
 
 import LoginFormModal from "../../LoginFormModal";
@@ -37,6 +37,9 @@ const handleCreateLike = async (boolean) => {
         if (currentPath === '/profile') {
             await dispatch(getUserPosts());
         }
+        if (currentPath === `/posts/${postId}`) {
+            await dispatch(getSinglePost(postId));
+        }
 
     } else {
         return setModalContent(<LoginFormModal/>)
@@ -60,6 +63,9 @@ const handleCreateLike = async (boolean) => {
         }
         if (currentPath === '/profile') {
           await dispatch(getUserPosts());
+        }
+        if (currentPath === `/posts/${postId}`) {
+            await dispatch(getSinglePost(postId));
         }
     } else {
         return setModalContent(<LoginFormModal/>)

@@ -55,6 +55,9 @@
     background-color: #1a1a1b;
     border-bottom: 1px solid #4a4949;
     height: 50px;
+    position: sticky;
+    top: 0px;
+    z-index: 999;
     align-items: center;
 }
 

@@ -20,7 +20,7 @@
 
 #userName {
     cursor: pointer;
-    font-family: "Noto Sans", Arial, sans-serif;
+    margin-left: 1%;
     font-size: 12px;
     color: #4fbcff;
 }
@@ -31,7 +31,6 @@
 
 #userName2 {
     cursor: pointer;
-    font-family: "Noto Sans", Arial, sans-serif;
     font-size: 12px;
     color: #4fbcff;
 }
@@ -42,8 +41,9 @@
 
 .Comment-As-User {
     display: flex;
-    width: calc(17% + 20px);
-    justify-content: space-between;
+    /* width: fit-content; */
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .Comment-Input-True {
