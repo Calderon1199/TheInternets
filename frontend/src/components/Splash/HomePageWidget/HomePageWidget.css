@@ -1,5 +1,5 @@
 .Home-Widget-Container {
-    margin-left: 2%;
+    margin-left: 3%;
     display: flex;
     background-color: #1a1a1b;
     flex-direction: column;
@@ -13,6 +13,18 @@
     font-family: IBMPlexSans,
         Arial,
         sans-serif;;
+}
+
+@media screen and (max-width: 1090px) {
+    .Home-Widget-Container {
+        width: 23%;
+    }
+}
+
+@media screen and (max-width: 999px) {
+    .Home-Widget-Container {
+        display: none;
+    }
 }
 
 .Home-Widget-Container h3{
