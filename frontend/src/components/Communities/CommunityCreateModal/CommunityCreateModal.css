@@ -7,9 +7,14 @@
     background-color: #1a1a1b;
     overflow: hidden;
     border: 1px solid #484949;
-    font-family: IBMPlexSans,
-        Arial,
-        sans-serif;
+}
+
+.Char-Count {
+    display: flex;
+    margin-bottom: 5px;
+    width: 100%;
+    justify-content: flex-end;
+    color: #818384;
 }
 
 .Community-Modal-Header {
@@ -21,6 +26,16 @@
     border-bottom: 1px solid #484949;
 }
 
+.Community-Name-Container h3 {
+    color: whitesmoke;
+}
+
+.Community-Name-Container p {
+    color: #818384;
+    font-size: 13px;
+
+}
+
 .Community-Name-Container {
     display: flex;
     flex-direction: column;
@@ -28,8 +43,9 @@
     height: 70px;
 }
 
-.Community-Name-Container h3{
+.Community-Name-Container h4{
     margin: 0px;
+    color:whitesmoke;
 }
 
 .Community-Name-Container p {
@@ -43,8 +59,11 @@
 }
 
 .Community-Data-Input input {
+    box-sizing: border-box;
     width: 100%;
     height: 40px;
+    padding: 0px 5px;
+    font-size: 14px;
     background: none;
     border: 1px solid #484949;
     color: #d7dadc;
@@ -52,6 +71,9 @@
 }
 
 .Community-Data-Input textarea {
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: sans-serif;
     min-width: 100%;
     max-width: 100%;
     padding: 5px;
@@ -64,13 +86,15 @@
 .Post-Submit-Button2 {
     padding-top: 10px;
     cursor: pointer;
-    margin: 15px 0px;
+    margin: 15px 0px 0px 0px;
+    padding-bottom: 15px;
     height: 45px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
     border-top: 2px solid #484949;
+    background-color: #303030
 }
 
 .Post-Submit-Button2 .enabled2 {

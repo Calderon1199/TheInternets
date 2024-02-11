@@ -18,14 +18,36 @@ function PostTile({ posts, isProfile }) {
     const [postText, setPostText] = useState({});
     const [editing, setEditing] = useState({});
     const [newPosts, setPosts] = useState();
+    const [type, setType] = useState();
 
     const navigate = useNavigate();
     const { setModalContent } = useModal();
     const dispatch = useDispatch();
 
+    const sortNew = (type) => {
+        setType(type);
+        if (type === 'new') {
+            setPosts(posts.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+        } else if (type === 'old') {
+            setPosts(posts.slice().sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)));
+        } else if (type === 'con'){
+            const sortedPosts = posts.slice().sort((a, b) => {
+          const commentsComparison = b.Comments?.length - a.Comments?.length;
+          return commentsComparison !== 0 ? commentsComparison : a.id % 2 === 0 ? 1 : -1;
+        })
+        setPosts(sortedPosts)
+    } else if (type === 'like'){
+        const sortedLikes = posts
+        .filter(post => post.Likes && post.Likes.length > 0 && post.Likes[0].isLiked === true)
+        .sort((a, b) => b.Likes.length - a.Likes.length);
+        setPosts(sortedLikes)
+    }
+}
+
     useEffect(() => {
         setPosts(posts);
         setLoading(false);
+        sortNew(type);
     }, [posts]);
 
 
@@ -42,27 +64,16 @@ function PostTile({ posts, isProfile }) {
         navigate(`/posts/${postId}`);
     };
 
-    const sortNew = (type) => {
-        if (type === 'new') {
-            setPosts(posts.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-        } else if (type === 'old') {
-            setPosts(posts.slice().sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)));
-        } else if (type === 'con'){
-            const sortedPosts = posts.slice().sort((a, b) => {
-          const commentsComparison = b.Comments?.length - a.Comments?.length;
-          return commentsComparison !== 0 ? commentsComparison : a.id % 2 === 0 ? 1 : -1;
-        })
-        setPosts(sortedPosts)
-        }
-    }
+
 
     return (
             <div className='Post-Tile-Container'>
                 {user && !isProfile && <CreatePostInput user={user} />}
                 <div className='Sort-Button-Container'>
-                <button onClick={() => sortNew('new')}>New</button>
-                <button onClick={() => sortNew('old')}>Old</button>
-                <button onClick={() => sortNew('con')}>Controversial</button>
+                <button onClick={() => sortNew('new')} className={type === 'new' ? "enabled" : "disabled"}>New</button>
+                <button onClick={() => sortNew('old')} className={type === 'old' ? "enabled" : "disabled"}>Old</button>
+                <button onClick={() => sortNew('like')} className={type === 'like' ? "enabled" : "disabled"}>Most Liked</button>
+                <button onClick={() => sortNew('con')} className={type === 'con' ? "enabled" : "disabled"}>Controversial</button>
                 </div>
                 {!loading &&
                 newPosts?.map((post) => (

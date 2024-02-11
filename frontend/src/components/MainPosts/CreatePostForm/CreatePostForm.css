@@ -18,6 +18,8 @@
 
 .Create-Post-Container {
     display: flex;
+    width: 85%;
+    justify-content: space-evenly;
     flex-direction: row;
     gap: 20px;
 }
@@ -48,7 +50,8 @@
 
 .Title-Input {
     background: none;
-    width: 98.1%;
+    box-sizing: border-box;
+    width: 100%;
     height: 40px;
     border: 1px solid #484949;
     border-radius: 2px;
@@ -64,9 +67,9 @@
 
 .Text-Input {
     background: none;
-    width: 100%;
-    max-width: 98.1%;
-    min-width: 98.1%;
+    max-width: 100%;
+    min-width: 100%;
+    box-sizing: border-box;
     padding-left: 10px;
     padding-top: 10px;
     height: 200px;
@@ -141,43 +144,68 @@
 
 .Community-Dropdown-Options {
     position: absolute;
-    background-color: #1a1a1b;
-    height: 400px;
+    background-color: #303030;
+    height: 320px;
     width: 250px;
-    border: 1px solid #484949;
+    border-left: 1px solid #484949;
+    border-bottom: 1px solid #484949;
+    border-right: 1px solid #484949;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-left: 10px;
+    padding-left: 5px;
     cursor: pointer;
     font-size: 16px;
     overflow-y: scroll;
-    color: #484949;
+    color: whitesmoke;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.Community-Dropdown-Options::-webkit-scrollbar {
+    background-color: darkgray;
     border-radius: 10px;
-    box-shadow: 0px 0px 2px 2px #d7dadc;
+
+}
+
+.Community-Dropdown-Options::-webkit-scrollbar-thumb {
+    background-color: #1a1a1b;
+    border-radius: 10px;
+    border-bottom-right-radius: 10px;
+
 }
 
 .Community-Name-Container{
-    height: 20px;
-    padding: 10px 0px;
+    height: 100%;
+    padding-top: 10px;
     overflow-wrap: break-word;
+}
+
+.Community-Name {
+    height: 45px;
+    display: flex;
+    align-items: center;
 }
 
 
 .Community-Name:hover {
-    color: whitesmoke;
+    color: white;
+    font-size: 17px;
 }
 
-.Community-Dropdown button{
-    cursor: pointer;
-   margin-bottom: 15px;
-   min-width: 200px;
-   height: 40px;
+.Dropdown-Input {
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.Community-Dropdown-Input input{
+   width: fit-content;
+   outline: none;
    background: none;
-   border: 1px solid #484949;
    color: #d7dadc;
+   border: none;
    font-weight: bold;
-   border-radius: 5px;
    background-color: #1a1a1b;
 }
 
@@ -215,4 +243,35 @@
 
 #image-rules {
     color: #ffa348
+}
+
+.Community-Dropdown-Input {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: fit-content;
+    border: 1px solid #484949;
+}
+
+.Community-Dropdown-Input span {
+    margin: 0px 5px;
+}
+
+.Community-Carrot {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 23px;
+    margin-right: 20px;
+}
+
+.fa-solid.fa-sort-down {
+    margin-bottom: 10px;
+    color: #d7dadc;
+    cursor: pointer;
+}
+
+.fa-solid.fa-user-group {
+    margin: 0px 2%;
+    color: whitesmoke;
 }

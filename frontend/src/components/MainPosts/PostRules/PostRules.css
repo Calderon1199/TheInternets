@@ -1,6 +1,6 @@
 .Post-Rules-Container {
     width: 300px;
-    height: 280px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -24,7 +24,7 @@
 
 .Rules-List {
     width: 100%;
-    height: 95%;
+    height: 100%;
     margin: 0px 0px;
     padding-left: 0;
     display: flex;
@@ -50,10 +50,14 @@
 
 .Rules-List-ol li {
     width: 100%;
-    height: 13%;
-    padding-top: 10px;
+    height: 70%;
+    padding: 15px 0px;
     border-bottom: 1px solid #484949;
     display: flex;
     align-self: flex-start;
     justify-content: flex-start;
+}
+
+#rule-5 {
+    border-bottom: none;
 }

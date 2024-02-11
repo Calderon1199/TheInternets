@@ -9,6 +9,8 @@ import "./CommunityCreateModal.css";
 function CommunityCreateModal() {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [description, setDescription] = useState("");
+    const [charCount, setCharCount] = useState(0);
+    const [charCount2, setCharCount2] = useState(0);
     const [errors, setErrors] = useState({});
     const [name, setName] = useState("");
 
@@ -18,9 +20,9 @@ function CommunityCreateModal() {
 
     const handleNameChange = (newName) => {
         setName(newName);
+        setCharCount(newName.length)
         const newErrors = {...errors};
-        if (newName.startsWith(' ')) newErrors.name = 'Name cannot start with spaces.';
-        else if (newName.includes(' ')) newErrors.name = 'Name cannot contain spaces.';
+        if (newName.includes(' ')) newErrors.name = 'Name cannot contain spaces.';
         else if (newName.length === 0) newErrors.name = ''
         else if (newName.length <= 5) newErrors.name = 'Name must be longer than five characters.';
         else if (newName.length > 20) newErrors.name = 'Name is too long.';
@@ -31,6 +33,7 @@ function CommunityCreateModal() {
 
     const handleDescriptionChange = (newDescription) => {
         setDescription(newDescription);
+        setCharCount2(newDescription.length)
         const newErrors = {...errors};
         if (newDescription.startsWith(' ')) newErrors.description = 'Description cannot start with spaces.';
         else if (newDescription.length === 0) newErrors.description = ''
@@ -55,15 +58,17 @@ function CommunityCreateModal() {
                 <h3>Create a community</h3>
             </div>
             <div className='Community-Name-Container'>
-                <h3>Name</h3>
-                <p>Community names cannot be changed</p>
+                <h4>Name</h4>
+                <p>Names cannot be changed</p>
             </div>
             <div className='Community-Data-Input'>
                 {errors && errors.name && <p id='edit-error2' className="errorDiv">{errors.name}</p>}
+                <span className='Char-Count'>{charCount} / 20</span>
                 <label>
                     <input onChange={(e) => handleNameChange(e.target.value)} placeholder='Community Name (Required)'/>
                 </label>
                 {errors && errors.description && <p id='edit-error2' className="errorDiv">{errors.description}</p>}
+                <span className='Char-Count'>{charCount2} / 255</span>
                 <label>
                     <textarea onChange={(e) => handleDescriptionChange(e.target.value)} placeholder='Community Description (Required)'/>
                 </label>
