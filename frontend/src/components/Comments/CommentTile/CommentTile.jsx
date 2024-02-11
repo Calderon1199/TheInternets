@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { editComment, getCommentsForPost } from '../../../redux/comment';
@@ -9,7 +9,7 @@ import DeleteCommentModal from '../DeleteCommentModal';
 import { useModal } from '../../../context/Modal';
 import "./CommentTile.css";
 
-function CommentTile({comments}) {
+function CommentTile({comments, isProfile}) {
   const user = useSelector((state) => state.session.user);
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -20,6 +20,7 @@ function CommentTile({comments}) {
 
   const { setModalContent } = useModal();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { postId } = useParams();
 
 
@@ -66,13 +67,18 @@ function CommentTile({comments}) {
     });
   }, [dispatch, postId, user]);
 
-  if (loading) return <h1>...loading comments</h1>;
+//   if (loading) return <img src='../Rolling-1s-200px.svg'></img>;
 
     return (
-        <div >
-            {!loading &&
+        <div className={!isProfile ? 'Comment-Container-Outside': 'Comment-Container-Outside-Profile'}>
+            {!loading ?
             comments?.map((comment) => (
                 <div key={comment.id} className='Comment-Outer-Container'>
+                    {isProfile && (
+                        <div className='Comment-Title' onClick={() => navigate(`/posts/${comment.postId}`)}>
+                            <p>{comment.User?.username} commented on {comment.Post?.title}</p>
+                        </div>
+                    )}
                 <div className='User-Comment-Header'>
                     <h4>{comment.User?.username}</h4>
                     <span>&#8226;</span>
@@ -123,7 +129,11 @@ function CommentTile({comments}) {
                     </div>
                     )}
                 </div>
-            ))}
+            )): (
+                <div className='Comment-Load'>
+                    <img src='../Rolling-1s-200px.svg'></img>
+                </div>
+            )}
         </div>
     );
 }

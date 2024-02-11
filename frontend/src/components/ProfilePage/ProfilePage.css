@@ -5,9 +5,39 @@
     background-color: #94E044;
 }
 
+.Profile-Page {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.Loading-Profile {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.Empty-User-Data {
+    background-color: #1D1D1D;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+    .Post-Tile-Container {
+        width: 75%
+    }
+}
+
 .Profile-Type-Buttons {
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 50px;
+    z-index: 99;
     justify-content: flex-start;
     padding: 0 0 0 6.5%;
     background-color: #1D1D1D;
@@ -26,6 +56,10 @@
     background: none;
     height: 100%;
     width: fit-content;
+}
+
+.Profile-Type-Buttons button:hover {
+    color: white;
 }
 
 .Profile-Type-Buttons .enabled {

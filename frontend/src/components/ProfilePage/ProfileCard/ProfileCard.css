@@ -1,5 +1,5 @@
 .User-Card {
-    margin: 10px 5%;
+    margin: 10px 2%;
     height: 150px;
     border: 1px solid grey;
     background-color: #1D1D1D;
@@ -9,6 +9,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+}
+
+@media screen and (max-width: 1200px) {
+    .User-Card {
+        display: none;
+    }
 }
 
 .Handle p{

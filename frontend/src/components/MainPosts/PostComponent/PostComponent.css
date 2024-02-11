@@ -186,6 +186,10 @@
     font-weight: 700;
 }
 
+.Sort-Button-Container button.enabled {
+    background-color: #555657;
+}
+
 .Sort-Button-Container button:hover {
    background-color: #555657;
 }

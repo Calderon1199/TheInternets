@@ -11,7 +11,7 @@ import SearchInput from "../Search/SearchInput";
 import { useEffect } from "react";
 
 function Navigation() {
-  const user = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session?.user);
   const dispatch = useDispatch();
 
   const { setModalContent } = useModal();
@@ -24,26 +24,26 @@ function Navigation() {
 
   const handleNavLinkClick = () => {
     if (!user) {
-      setModalContent(<LoginFormModal />);
+      return setModalContent(<LoginFormModal />);
     } else {
-      navigate(urlPath);
+      navigate('/posts/new')
     }
   };
 
   return (
     <div className="Nav-Container">
       <ul className="Nav-Options">
-        <li>
-          <NavLink className="NavLink" to="/">
-            <img src="/the-internets-high-resolution-logo-transparent.png" />
+        <li className="Logo-Li">
+          <NavLink className="NavLinkLogo" to="/">
+              <p id="right-logo">The Internets</p>
           </NavLink>
         </li>
         <SearchInput />
         <div className="Right-Side-Navigation">
           <li>
-            <NavLink className="NavLink" to={urlPath} onClick={handleNavLinkClick}>
+            <h4 className="NavLink" onClick={handleNavLinkClick}>
               Create a post
-            </NavLink>
+            </h4>
           </li>
           <li className="Profile-Button-Container">
             {user ? (

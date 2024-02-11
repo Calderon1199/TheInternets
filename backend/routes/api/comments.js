@@ -36,6 +36,10 @@ router.get('/user', requireAuth, async (req, res, next) => {
                 {
                     model: User,
                     attributes: ['id', 'username'],
+                },
+                {
+                    model: Post,
+                    attributes: ['id', 'title']
                 }
             ]
         });

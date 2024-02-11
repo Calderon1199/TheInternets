@@ -87,18 +87,20 @@ function PostView() {
         <div>
             <div className='Post-View-Banner'>
                 <div className='Like'>
-                    {!loading && (
+                    {!loading ? (
                         <p>{post.Likes.filter(like => like.isLiked).length - post.Likes.filter(like => !like.isLiked).length}</p>
+                    ): (
+                        <img src='../Rolling-1s-200px.svg' id='Like-Load'></img>
                     )}
                     <LikeComponent postId={post.id} catId={post.categoryId} isProfile={false}/>
                 </div>
                 <p>{post.title}</p>
-                <i className="fa-solid fa-xmark"></i>
+                <i className="fa-solid fa-xmark" onClick={() => navigate(-1)}></i>
             </div>
             <div className='Post-Back-Drop'>
                 <div className='Single-Post-Container'>
                     {loading ? (
-                        <h1>..loading</h1>
+                        <img src='../Rolling-1s-200px.svg'></img>
                     ) : (
                         <div className='Single-Post-Inner-Container'>
                             <div className='Single-Post-Info-Container' id='post-info-cursor'>

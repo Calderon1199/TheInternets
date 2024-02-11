@@ -13,10 +13,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
 }
 
 .Comm-Widget2 h3:hover {
+    cursor: pointer;
     text-decoration: underline;
 }
 
@@ -38,7 +38,6 @@
 
 .Comm-Description {
     border-bottom: 1px solid gray;
-    cursor: pointer;
     overflow: hidden;
     word-wrap: break-word;
     word-break: keep-all;
