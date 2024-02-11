@@ -35,8 +35,10 @@ function CommunityPage() {
             <div className='Community-Banner'>
             </div>
             <div className='Community-Header'>
-                <h1>{community?.name}</h1>
-                <p>{community?.name}</p>
+                <div className='Inner-Community-Header'>
+                    <h1>{community?.name}</h1>
+                    <p>{community?.name}</p>
+                </div>
             </div>
             <div className='Community-Page'>
                 {community?.posts?.length ? (

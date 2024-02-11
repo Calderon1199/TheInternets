@@ -165,14 +165,12 @@
 .Community-Dropdown-Options::-webkit-scrollbar {
     background-color: darkgray;
     border-radius: 10px;
-
 }
 
 .Community-Dropdown-Options::-webkit-scrollbar-thumb {
     background-color: #1a1a1b;
     border-radius: 10px;
     border-bottom-right-radius: 10px;
-
 }
 
 .Community-Name-Container{

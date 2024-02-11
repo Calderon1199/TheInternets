@@ -13,7 +13,7 @@
     justify-content: center;
 }
 
-.Site-Search input {
+.Site-Search-Input{
     background: none;
     border: 2px solid grey;
     font-size: 14px;
@@ -21,35 +21,86 @@
     width: 100%;
     color: white;
     border-radius: 20px;
+    outline-style: none;
     padding: 0px 5%;
 }
+
 
 .Search-Dropdown {
     position: absolute;
     color: white;
-    border: 1px solid grey;
-    border-radius: 10px;
-    top: 4.6%;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    border-bottom: 2px solid gray;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 0px 15px;
+    top: 50px;
     width: 31%;
-    height: fit-content;
+    height: 250px;
+    overflow-y: scroll;
     background-color: #1A1A1B;
 }
 
+
 .Search-Dropdown h3 {
-    padding: 0px 10px;
-    margin: 10px 0px;
+    padding: 10px 0px;
+    margin: 0px 0px;
+    height: 20px;
+    color:#99c1f1;
+    border-bottom: 1px solid white;
+    width: 100%;
+}
+
+.Search-Dropdown-Row h4 {
+    margin: 0px;
+}
+
+.Search-Dropdown-Row p {
+    margin: 0px;
+    font-size: 12px;
+    color: #5a5a5a;
 }
 
 .Search-Dropdown-Row {
-    height: 50px;
+    height: 40px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 0px 15px;
+    justify-content: space-around;
     font-size: 14px;
     cursor: pointer;
+    flex-direction: column;
+    margin: 15px 0px;
 }
 
 .Search-Dropdown-Row:hover {
     font-size: 15px;
-    
+}
+
+.Search-Dropdown-Row:hover p {
+    margin: 0;
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+.Search-Dropdown-Row:hover h4 {
+    color: white;
+}
+
+#No-Results-Note {
+    padding-left: 15px;
+    color: #ff7b63;
+}
+
+.Search-Dropdown::-webkit-scrollbar {
+    background-color: #313C42;
+    background: none;
+    border-radius: 10px;
+    width: 10px;
+}
+
+.Search-Dropdown::-webkit-scrollbar-thumb {
+    background-color: #FF4500;
+    border-radius: 10px;
 }
