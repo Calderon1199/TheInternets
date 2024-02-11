@@ -26,20 +26,28 @@ function ProfilePage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUserPosts());
-        dispatch(getUserLikes());
-        dispatch(getUserDislikes());
-        dispatch(getUserComments());
-        dispatch(getAllUserLikes());
-        setLoading(false)
+        const fetchData = async () => {
+            await dispatch(getUserPosts());
+            await dispatch(getUserLikes());
+            await dispatch(getUserDislikes());
+            setLoading(false)
+            await dispatch(getUserComments());
+            await dispatch(getAllUserLikes());
+        }
+        fetchData();
     }, [dispatch])
 
-    if(loading) (
-        <h3>..loading</h3>
-    )
+    if (loading) {
+        return (
+            <div className='Loading-Profile'>
+                <img src='./Rolling-1s-200px.svg'></img>
+            </div>
+        )
+    }
+
 
     return (
-        <div className='Profile-Pagr'>
+        <div className='Profile-Page'>
             {isDeleted && (
                 <div className='Deleted-Header'>
                     <h2>Successfully deleted!</h2>
@@ -52,33 +60,45 @@ function ProfilePage() {
                 <button onClick={() => setType("downvotes")} className={type === 'downvotes' ? 'enabled' : 'disabled'}>Downvotes</button>
             </div>
             <div className='Main-Page'>
-                {type === 'post' && (
-                    userPosts?.length > 0 ? (
-                        <PostTile posts={userPosts} isProfile={true} />
-                    ) : (
-                        <h2>No posts to display yet!</h2>
-                    )
-                )}
-                {type === 'comments' && (
-                    userComments?.length > 0 ? (
-                        <CommentTile comments={userComments} />
-                    ) : (
-                        <h2>No comments yet!</h2>
-                    )
-                )}
-                {type === 'upvotes' && (
-                    userLikes?.length > 0 ? (
-                        <PostTile posts={userLikes} isProfile={true} />
-                    ) : (
-                        <h2>No upvotes yet!</h2>
-                    )
-                )}
-                {type === 'downvotes' && (
-                    userDislikes?.length > 0 ? (
-                        <PostTile posts={userDislikes} isProfile={true} />
-                    ) : (
-                        <h2>No downvotes yet!</h2>
-                    )
+                {!loading && (
+                    <>
+                    {type === 'post' && (
+                        userPosts?.length > 0 ? (
+                            <PostTile posts={userPosts} isProfile={true} />
+                        ) : (
+                            <div className='Empty-User-Data'>
+                                <h2>No posts to display yet!</h2>
+                            </div>
+                        )
+                    )}
+                    {type === 'comments' && (
+                        userComments?.length > 0 ? (
+                            <CommentTile comments={userComments} isProfile={true}/>
+                        ) : (
+                            <div className='Empty-User-Data'>
+                                <h2>No comments yet!</h2>
+                            </div>
+                        )
+                    )}
+                    {type === 'upvotes' && (
+                        userLikes?.length > 0 ? (
+                            <PostTile posts={userLikes} isProfile={true} />
+                        ) : (
+                            <div className='Empty-User-Data'>
+                                <h2>No upvotes yet!</h2>
+                            </div>
+                        )
+                    )}
+                    {type === 'downvotes' && (
+                        userDislikes?.length > 0 ? (
+                            <PostTile posts={userDislikes} isProfile={true} />
+                        ) : (
+                            <div className='Empty-User-Data'>
+                                <h2>No downvotes yet!</h2>
+                            </div>
+                        )
+                    )}
+                    </>
                 )}
                 <ProfileCard user={user}/>
             </div>

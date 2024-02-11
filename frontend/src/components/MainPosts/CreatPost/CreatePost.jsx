@@ -8,7 +8,7 @@ function CreatePostInput() {
     return (
         <div className='Create-Post-Bar'>
             <div className='Post-Bar-Avatar'>
-                <i className="fa-solid fa-user" onClick={() => navigate('/profile')}></i>
+                <i className="fa-regular fa-user" id="user-icon" onClick={() => navigate('/profile')}></i>
             </div>
             <div className='Create-Post-Input'>
             <label>

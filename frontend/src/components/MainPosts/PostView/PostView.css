@@ -19,6 +19,10 @@
     }
 }
 
+#Like-Load {
+    width: 25px;
+    height: 25px;
+}
 
 
 .Post-Text-Tile-Container {
@@ -44,7 +48,7 @@
     width: 90%;
     height: 100%;
     margin: 0 auto;
-    padding-top: 80px;
+    padding-top: 60px;
     padding-bottom: 30px;
 }
 
@@ -58,8 +62,12 @@
     width: 90%;
     position: sticky;
     top: 50px;
-    z-index: 999;
+    z-index: 9;
     background-color: black;
+}
+
+.fa-solid.fa-xmark {
+    cursor: pointer;
 }
 
 .Post-View-Banner p {
@@ -141,6 +149,7 @@
 .Option-Button-Container {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .Post-Edit-Buttons {
@@ -156,6 +165,7 @@
 }
 
 .Post-Edit-Container textarea{
+    box-sizing: border-box;
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 10px;

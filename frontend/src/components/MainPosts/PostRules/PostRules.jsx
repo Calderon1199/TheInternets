@@ -4,7 +4,7 @@ function PostRules() {
     return (
         <div className='Post-Rules-Container'>
             <div className='Rules-Header'>
-                <h4>Posting to InstaChat</h4>
+                <h4>Posting to The Internets</h4>
             </div>
             <ul className='Rules-List'>
                 <ol className='Rules-List-ol'>

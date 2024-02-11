@@ -12,10 +12,12 @@ function CreatePostForm() {
     const communities = useSelector(state => state.communities?.allCommunities);
 
     const [errors, setErrors] = useState({postText: "", title: "", images: "", community: ""});
+
     const [selectedCommunity, setSelectedCommunity] = useState(null);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [showDropdown, setShowDropdown] = useState(false);
     const [images, setImages] = useState(['', '', '']);
+    const [titleCount, setTitleCount] = useState(0);
     const [infoType, setInfoType] = useState(true);
     const [postText, setPostText] = useState('');
     const [title, setTitle] = useState('');
@@ -27,6 +29,8 @@ function CreatePostForm() {
   useEffect(() => {
     dispatch(getCommunities());
   }, [dispatch]);
+
+
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -49,6 +53,7 @@ function CreatePostForm() {
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
+    setTitleCount(e.target.value.length)
     const newErrors = { ...errors };
     if (e.target.value.startsWith(' ')) {
       newErrors.title = 'Title cannot start with spaces.';
@@ -59,6 +64,7 @@ function CreatePostForm() {
     } else {
       newErrors.title = '';
     }
+    if (e.target.value.length === 0) newErrors.title = '';
   setErrors(newErrors);
     !newErrors.title && selectedCommunity ? setButtonDisabled(false) : setButtonDisabled(true);
   };
@@ -109,6 +115,8 @@ function CreatePostForm() {
         newErrors.title = 'Title cannot start with spaces.';
       } else if (title.length <= 5) {
         newErrors.title = 'Title must be longer than five characters.';
+      } else if (title.length <= 5) {
+        newErrors.title = 'Title must be longer than five characters.';
       } else {
         newErrors.title = '';
       }
@@ -139,10 +147,19 @@ function CreatePostForm() {
           <div className="Create-Post-Header">
             <h3>Create a post</h3>
           </div>
-          <div className="Community-Dropdown" ref={dropdownRef}>
-            <button onClick={() => setShowDropdown(!showDropdown)}>
-              {selectedCommunity ? selectedCommunity.name : 'Select Community (required)'}
-            </button>
+          <div className="Community-Dropdown">
+            <div className='Community-Dropdown-Input' ref={dropdownRef} onClick={() => setShowDropdown(!showDropdown)}>
+              <i class="fa-solid fa-user-group"></i>
+              <div className='Dropdown-Input'>
+                <input
+                    placeholder={!selectedCommunity ? 'Choose a community' : `${selectedCommunity.name}`}
+                    disabled
+                />
+              </div>
+              <div className='Community-Carrot'>
+                <i class="fa-solid fa-sort-down" onClick={() => setShowDropdown(!showDropdown)}></i>
+              </div>
+            </div>
             {showDropdown && (
               <div className="Community-Dropdown-Options">
                 {communities.map((community) => (
@@ -164,6 +181,7 @@ function CreatePostForm() {
             {infoType ? (
                 <>
                     <label>
+                      <span className='Char-Count'>{titleCount} / 255</span>
                     <input
                         type="text"
                         className="Title-Input"

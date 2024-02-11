@@ -10,7 +10,7 @@
     height: 60px;
 }
 
-.fa-solid.fa-user {
+#user-icon {
     cursor: pointer;
     font-size: 25px;
     margin: 0px;
@@ -18,7 +18,7 @@
     color: #c061cb;
 }
 
-.fa-solid.fa-user:hover {
+#user-icon:hover {
     transition-duration: 300ms;
     color: #f66151;
 }
@@ -27,7 +27,7 @@
 .Post-Bar-Avatar */
 
 .Create-Post-Input {
-    width: 70%;
+    width: 80%;
 }
 
 
