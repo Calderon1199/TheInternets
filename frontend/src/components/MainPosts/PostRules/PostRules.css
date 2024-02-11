@@ -10,6 +10,12 @@
     border-radius: 4px;
 }
 
+@media screen and (max-width: 950px) {
+    .Post-Rules-Container {
+        display: none;
+    }
+}
+
 .Rules-Header {
     border-bottom: 1px solid #484949;
     color: #d7dadc;
