@@ -88,7 +88,7 @@
 }
 
 .Profile-Button {
-    width: 175px;
+    width: 80%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -117,10 +117,36 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 65%;
+}
+
+.Profile-Img {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+}
+
+.Profile-Img img{
+    width: 50px;
+    height: 30px;
+    margin-right: 5%;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.Profile-Img p {
+    width: 100%;
+    font-size: 16px;
+}
+
+.Profile-Img i {
+    margin-right: 7%;
+    font-size: 14px;
 }
 
 .Profile-Button-Text {
-    width: 55%;
+    width: fit-content;
     display: flex;
     justify-content: space-between;
 }

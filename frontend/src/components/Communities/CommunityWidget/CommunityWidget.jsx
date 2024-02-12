@@ -8,7 +8,7 @@ import DeleteCommunityModal from '../CommunityModal';
 import { useModal } from '../../../context/Modal';
 import './CommunityWidget.css';
 
-function CommunityWidget(isPostView) {
+function CommunityWidget({isPostView}) {
     const community = useSelector(state => state.communities?.singleCommunity);
     const user = useSelector(state => state.session?.user);
 
@@ -62,9 +62,26 @@ function CommunityWidget(isPostView) {
         <div className='Comm-Widget'>
             <div className='Comm-Widget2' onClick={() => navigate(`/communities/${community.id}`)}>
                 {!isPostView ? (
-                    <h3>About the Community</h3>
+                    <h4>About the Community</h4>
                 ): (
-                    <h3>{community.name}</h3>
+                    <div className='Comm-Widget-Header'>
+                        {community.avatar ? (
+                            <div className='Comm-Widget-Banner'>
+                                {community.banner && (
+                                    <img src={community.banner}></img>
+                                )}
+                                <div className='Community-Widget-Title'>
+                                    <img id='avatar' src={community.avatar}></img>
+                                    <h3>{community.name}</h3>
+                                </div>
+                            </div>
+                        ): (
+                            <div className='Community-Widget-Title'>
+                                <i class="fa-solid fa-people-roof"></i>
+                                <h3>{community.name}</h3>
+                            </div>
+                        )}
+                    </div>
                 )}
                 {community.userId === user?.id && !isPostView && (
                     <button onClick={() => handleDelete()}>Delete Community</button>

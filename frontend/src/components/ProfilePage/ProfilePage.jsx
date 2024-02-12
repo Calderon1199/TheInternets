@@ -48,17 +48,21 @@ function ProfilePage() {
 
     return (
         <div className='Profile-Page'>
-            {isDeleted && (
-                <div className='Deleted-Header'>
-                    <h2>Successfully deleted!</h2>
-                </div>
-            )}
             <div className='Profile-Type-Buttons'>
                 <button onClick={() => setType("post")} className={type === 'post' ? 'enabled' : 'disabled'}>Posts</button>
                 <button onClick={() => setType("comments")} className={type === 'comments' ? 'enabled' : 'disabled'}>Comments</button>
                 <button onClick={() => setType("upvotes")} className={type === 'upvotes' ? 'enabled' : 'disabled'}>Upvotes</button>
                 <button onClick={() => setType("downvotes")} className={type === 'downvotes' ? 'enabled' : 'disabled'}>Downvotes</button>
             </div>
+            {isDeleted && (
+                <div className={isDeleted === 'true' ? "Deleted-Header" : 'Deleted-Header-Bad'}>
+                {isDeleted === 'true' ? (
+                    <h2>Successfully deleted!</h2>
+                ): (
+                    <h2>Uh oh... something went wrong</h2>
+                )}
+                </div>
+            )}
             <div className='Main-Page'>
                 {!loading && (
                     <>

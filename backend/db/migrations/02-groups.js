@@ -30,6 +30,16 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false
             },
+            avatar: {
+                type: Sequelize.STRING,
+                defaultValue: "",
+                allowNull: true
+            },
+            banner: {
+                type: Sequelize.STRING,
+                defaultValue: "",
+                allowNull: true
+            },
             description: {
                 type: Sequelize.TEXT,
                 allowNull: false

@@ -18,21 +18,29 @@ module.exports = {
             {
                 userId: 1,
                 name: 'Programming',
+                avatar: "https://img.freepik.com/free-vector/laptop-with-program-code-isometric-icon-software-development-programming-applications-dark-neon_39422-971.jpg",
+                banner: "https://www.hp.com/us-en/shop/app/assets/images/uploads/prod/10-Best-Free-Drawing-Software-Programs16746752375285.jpg",
                 description: "Explore the world of coding and programming at Programming. Share your projects, seek advice, and engage with a community of fellow developers. Whether you're a seasoned coder or just starting, this is the place to discuss languages, frameworks, and everything in between. Let's code together!"
             },
             {
                 userId: 1,
                 name: 'WorldNews',
+                avatar: "https://cdn3d.iconscout.com/3d/premium/thumb/live-news-10494126-8447434.png",
+                banner: "https://static.vecteezy.com/system/resources/previews/004/941/460/original/breaking-news-live-banner-on-world-map-background-illustration-vector.jpg",
                 description: "Stay informed and join the conversation on global events at WorldNews. Discuss breaking news, share perspectives, and engage with a diverse community. From politics to cultural events, this subreddit is your hub for staying connected to the world. Explore different viewpoints and contribute to the ongoing dialogue on the latest happenings worldwide."
             },
             {
                 userId: 1,
                 name: 'Film',
+                avatar: "https://i.pinimg.com/736x/6a/1d/7c/6a1d7c77fecd83549c46144c02f28a22.jpg",
+                banner: "https://static.vecteezy.com/system/resources/previews/015/416/101/original/movie-time-sign-banner-recording-projector-icons-old-picture-roll-frame-filmstrip-spotlight-festival-cinema-poster-or-flyer-template-for-your-design-illustration-free-vector.jpg",
                 description: "Welcome to FilmTalks, where movie enthusiasts gather to discuss the latest releases, timeless classics, and everything in between.Whether you're into heartwarming dramas, edge-of-your-seat thrillers, or laugh-out-loud comedies, this is the place to share your thoughts, recommendations, and dive into the world of cinema. Join us for insightful conversations, reviews, and a community passionate about the magic of storytelling through film. Lights, camera, discussion!"
             },
             {
                 userId: 1,
                 name: 'Gaming',
+                avatar: "https://img.freepik.com/premium-photo/neon-poster-playstation-controller-with-controller-middle_705708-21634.jpg",
+                banner: "https://wpimg.pixelied.com/blog/wp-content/uploads/2021/08/03132930/branded-banner-reddit-banner-size.jpg",
                 description: 'Welcome to Gaming, your hub for all things gaming! Join the discussion on the latest releases, share your favorite moments, and connect with gamers worldwide. Level up your gaming experience with a community that understands your passion.'
             },
             {
@@ -90,7 +98,7 @@ module.exports = {
                 name: 'DIY',
                 description: "Unleash your creativity at DIYCrafts. Share your craft projects, home improvement ideas, and DIY hacks with a community of fellow creators. Whether you're into woodworking, crafting, or upcycling, this subreddit is your workshop for inspiration and collaboration."
             }
-            
+
 
         ], {})
     },
