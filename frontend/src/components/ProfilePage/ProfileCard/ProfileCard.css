@@ -1,7 +1,8 @@
 .User-Card {
     margin: 10px 2%;
-    height: 150px;
+    height: fit-content;
     border: 1px solid grey;
+    padding: 10px 0px;
     background-color: #1D1D1D;
     border-radius: 5px;
     width: 20%;
@@ -53,4 +54,36 @@
     background-color: #c23400;
     color: white;
 
+}
+
+.User-Image {
+    width: 100%;
+    position: relative;
+}
+
+.User-Image img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    border: 2px solid grey;
+    object-fit: cover;
+
+}
+.fa-solid.fa-camera {
+    position: absolute;
+    top: 59%;
+    left: 20%;
+    font-size: 20px
+}
+
+#no-avatar {
+    color: #1D1D1D;
+    position: absolute;
+    top: 59%;
+    left: 20%;
+    font-size: 20px
+}
+
+.Handle {
+    width: 80%;
 }

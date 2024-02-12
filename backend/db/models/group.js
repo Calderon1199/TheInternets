@@ -48,6 +48,16 @@ module.exports = (sequelize, DataTypes) => {
                     }
                 },
             }
+        },
+        avatar: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+            allowNull: true
+        },
+        banner: {
+            type: DataTypes.STRING,
+            defaultValue: "",
+            allowNull: true
         }
     }, {
         sequelize,

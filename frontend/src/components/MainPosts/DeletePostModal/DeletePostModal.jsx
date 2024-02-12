@@ -12,9 +12,9 @@ function DeletePostModal({post}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleDelete = () => {
-        dispatch(deletePost(post.id));
-        navigate("/profile?deleted=true");
+    const handleDelete = async () => {
+        const res = await dispatch(deletePost(post.id));
+        res.message ? navigate("/profile?deleted=true") : navigate("/profile?deleted=false")
         closeModal();
     }
     return (

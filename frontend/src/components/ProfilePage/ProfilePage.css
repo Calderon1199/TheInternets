@@ -5,6 +5,14 @@
     background-color: #94E044;
 }
 
+.Deleted-Header-Bad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f66151;
+    color: white;
+}
+
 .Profile-Page {
     margin: 0 auto;
     width: 100%;
