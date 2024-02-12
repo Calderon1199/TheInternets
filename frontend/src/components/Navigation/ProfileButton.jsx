@@ -49,7 +49,18 @@ function ProfileButton() {
     <div className="Profile-Button">
       <button className="profile-button" onClick={toggleMenu}>
         <div className="Profile-Button-Text">
-          <i className="fa-solid fa-user-astronaut"></i>{user?.username}
+          {user ? (
+            <div className="Profile-Img">
+              {user.profileImg ? (
+                <img src={user.profileImg}></img>
+              ): (
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"></img>
+              )}
+              <p>{user.username}</p>
+            </div>
+          ): (
+            <h3>...loading</h3>
+          )}
         </div>
         <i className="fa-solid fa-chevron-down"></i>
       </button>

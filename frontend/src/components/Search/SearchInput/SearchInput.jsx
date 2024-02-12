@@ -32,6 +32,8 @@ function SearchInput() {
     communityList.push({
       id: allCommunities[community].id,
       name: allCommunities[community].name,
+      avatar: allCommunities[community].avatar,
+      banner: allCommunities[community].banner,
       createdAt: allCommunities[community].createdAt
     });
   }
@@ -86,7 +88,15 @@ function SearchInput() {
                             navigate(`/communities/${community.id}`)
                           }}
                           >
-                            <h4>{community.name}</h4>
+                            {console.log(community.avatar, '-----------')}
+                            <div className="Community-Avi-Container">
+                                {community.avatar ? (
+                                  <img src={community.avatar}></img>
+                                ): (
+                                  <i class="fa-solid fa-people-roof"></i>
+                                )}
+                                <h4>{community.name}</h4>
+                              </div>
                             <p>Created {calculateTimeDifference(community.createdAt)}</p>
                       </div>
                     ))}
@@ -102,7 +112,14 @@ function SearchInput() {
                             navigate(`/communities/${community.id}`)
                             }}
                             >
-                              <h4>{community.name}</h4>
+                              <div className="Community-Avi-Container">
+                                {community.avatar ? (
+                                  <img src={community.avatar}></img>
+                                ): (
+                                  <i class="fa-solid fa-people-roof"></i>
+                                )}
+                                <h4>{community.name}</h4>
+                              </div>
                               <p>Created {calculateTimeDifference(community.createdAt)}</p>
                           </div>
                         )): (

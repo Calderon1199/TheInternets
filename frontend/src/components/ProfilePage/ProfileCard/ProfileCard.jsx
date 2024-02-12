@@ -10,6 +10,17 @@ function ProfileCard({user}) {
     return (
         <div className='User-Card'>
             <div className='Handle'>
+                {user?.profileImg ? (
+                    <div className='User-Image'>
+                        <img src={user.profileImg}></img>
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                ) : (
+                    <div className='User-Image'>
+                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"></img>
+                        <i class="fa-solid fa-camera" id='no-avatar'></i>
+                    </div>
+                )}
                 <h3>Hello {user?.username}</h3>
             </div>
             <div className='User-Card-Button'>

@@ -21,7 +21,7 @@ module.exports = {
         email: 'demo@user.io',
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password'),
-        profileImg: ''
+        profileImg: 'https://i.pinimg.com/736x/8f/37/db/8f37dbcf131a9f00ebc68d622dc6f606.jpg'
       },
       {
         email: 'user1@user.io',

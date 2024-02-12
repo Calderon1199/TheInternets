@@ -27,7 +27,7 @@
 }
 
 .Comm-Widget2 button{
-    width:50%;
+    width: 40%;
     height: 30px;
     border-radius: 15px;
     cursor: pointer;
@@ -100,4 +100,44 @@
     border: 1px solid #4a4949;
     font-size: 14px;
     font-weight: 700;
+}
+
+#avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    margin-right: 5%;
+}
+
+.Community-Widget-Title i {
+    font-size: 30px;
+    border-radius: 30px;
+    display: flex;
+    margin-right: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.Community-Widget-Title {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.Comm-Widget-Banner {
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+
+}
+
+.Comm-Widget-Banner img{
+    width: 100%;
+    height: 70px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.Comm-Widget-Header {
+    width: 100%;
 }
