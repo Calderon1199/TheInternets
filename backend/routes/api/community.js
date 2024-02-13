@@ -129,6 +129,7 @@ router.put('/:communityId', validateCommunity, async (req, res, next) => {
                     model: Group,
                     attributes: ['name'],
                 },
+                Like,
                 Comment,
                 PostImage,
             ],

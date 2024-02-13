@@ -73,3 +73,11 @@
 .Profile-Type-Buttons .enabled {
     border-bottom: 2px solid whitesmoke;
 }
+
+.Right-Profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: 2%;
+}

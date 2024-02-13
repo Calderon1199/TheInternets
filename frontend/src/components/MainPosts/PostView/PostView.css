@@ -223,3 +223,12 @@
         display: none;
     }
 }
+
+#post-view-exit {
+    color: #ff7b63;
+    font-size: 25px;
+}
+
+#header-title {
+    color: #8ff0a4;
+}

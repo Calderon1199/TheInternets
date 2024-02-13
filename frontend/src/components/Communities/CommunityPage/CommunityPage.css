@@ -32,6 +32,7 @@
 .Comm-Image-Container {
     margin-right: 4%;
     height: 100%;
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -67,3 +68,9 @@
     justify-content: center;
 }
 
+#comm-camera {
+    position: absolute;
+    font-size: 25px;
+    left: 75%;
+    top: 70%;
+}
