@@ -88,16 +88,11 @@ function SearchInput() {
                             navigate(`/communities/${community.id}`)
                           }}
                           >
-                            {console.log(community.avatar, '-----------')}
                             <div className="Community-Avi-Container">
-                                {community.avatar ? (
-                                  <img src={community.avatar}></img>
-                                ): (
-                                  <i class="fa-solid fa-people-roof"></i>
-                                )}
-                                <h4>{community.name}</h4>
-                              </div>
-                            <p>Created {calculateTimeDifference(community.createdAt)}</p>
+                              <img src={community.avatar ? community.avatar : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}></img>
+                              <h4>{community.name}</h4>
+                            </div>
+                          <p>Created {calculateTimeDifference(community.createdAt)}</p>
                       </div>
                     ))}
                       <div className="Other-Communities">
@@ -113,11 +108,7 @@ function SearchInput() {
                             }}
                             >
                               <div className="Community-Avi-Container">
-                                {community.avatar ? (
-                                  <img src={community.avatar}></img>
-                                ): (
-                                  <i class="fa-solid fa-people-roof"></i>
-                                )}
+                                <img src={community.avatar ? community.avatar : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}></img>
                                 <h4>{community.name}</h4>
                               </div>
                               <p>Created {calculateTimeDifference(community.createdAt)}</p>

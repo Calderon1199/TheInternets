@@ -177,9 +177,7 @@ function communityReducer(state = initialState, action) {
                         ...state.byId,
                         [action.payload.id]: action.payload
                     },
-                    singleCommunity: {
-                        [action.payload.id]: action.payload
-                    },
+                    singleCommunity: action.payload,
                     userCommunities: state.userCommunities.map((community) =>
                     community.id === action.payload.id ? action.payload : community
                     )

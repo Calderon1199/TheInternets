@@ -94,8 +94,8 @@ function PostView() {
                     )}
                     <LikeComponent postId={post.id} catId={post.categoryId} isProfile={false}/>
                 </div>
-                <p>{post.title}</p>
-                <i className="fa-solid fa-xmark" onClick={() => navigate(-1)}></i>
+                <p id='header-title'>{post.title}</p>
+                <i className="fa-solid fa-xmark" id='post-view-exit' onClick={() => navigate(-1)}></i>
             </div>
             <div className='Post-Back-Drop'>
                 <div className='Single-Post-Container'>

@@ -14,8 +14,6 @@ const removeUser = () => ({
 });
 
 
-
-
 export const thunkAuthenticate = () => async (dispatch) => {
     try{
         const response = await csrfFetch("/api/restore-user");
@@ -28,11 +26,28 @@ export const thunkAuthenticate = () => async (dispatch) => {
     }
 };
 
+export const thunkUserEdit = (newAvatar) => async dispatch => {
+    const response = await csrfFetch("/api/users", {
+        method: "PUT",
+        body: JSON.stringify(newAvatar)
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data.user));
+    } else if (response.status < 500) {
+        const errorMessages = await response.json();
+        return errorMessages
+    } else {
+        return { server: "Something went wrong. Please try again" }
+    }
+};
+
 export const thunkLogin = (credentials) => async dispatch => {
-    const {email, password} = credentials
+    const { email, password } = credentials
     const response = await csrfFetch("/api/session", {
         method: "POST",
-        body: JSON.stringify({credential: email, password})
+        body: JSON.stringify({ credential: email, password })
     });
 
     if (response.ok) {

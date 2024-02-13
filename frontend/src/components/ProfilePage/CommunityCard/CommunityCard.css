@@ -1,0 +1,46 @@
+.User-Comm-Container {
+    width:100%;
+    margin: 10px 2%;
+    background-color: #1D1D1D;
+    border: 1px solid gray;
+}
+
+@media screen and (max-width: 1200px) {
+    .User-Comm-Container {
+        display: none;
+    }
+}
+
+.Comm-Header-Profile {
+    padding: 0px 15px;
+    padding-right: 30px;
+    margin-bottom: 30px;
+}
+
+.User-Comm-Inner {
+    padding: 0px 20px;
+}
+
+.User-Comm-Info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Comm-Img {
+    width: 40px;
+    height: 40px;
+    margin-right: 5%;
+}
+
+.Comm-Img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.User-Comm-Name:hover {
+    color: #8ff0a4;
+    text-decoration: underline;
+}

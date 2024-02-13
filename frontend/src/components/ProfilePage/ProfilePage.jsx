@@ -10,9 +10,12 @@ import { getAllUserLikes, getUserDislikes, getUserLikes } from '../../redux/like
 import { getUserComments } from '../../redux/comment';
 import { getUserPosts } from '../../redux/post';
 import './ProfilePage.css';
+import CommunityCard from './CommunityCard/CommunityCard';
+import { getUserCommunities } from '../../redux/community';
 
 function ProfilePage() {
     const userComments = useSelector(state => state.comments?.allUserComments);
+    const userCommunities = useSelector(state => state.communities?.userCommunities);
     const userDislikes = useSelector(state => state.likes?.userDislikes);
     const userLikes = useSelector(state => state.likes?.userLikes);
     const userPosts = useSelector(state => state.posts?.userPosts);
@@ -28,6 +31,7 @@ function ProfilePage() {
     useEffect(() => {
         const fetchData = async () => {
             await dispatch(getUserPosts());
+            await dispatch(getUserCommunities());
             await dispatch(getUserLikes());
             await dispatch(getUserDislikes());
             setLoading(false)
@@ -104,7 +108,10 @@ function ProfilePage() {
                     )}
                     </>
                 )}
-                <ProfileCard user={user}/>
+                <div className='Right-Profile'>
+                    <ProfileCard user={user}/>
+                    <CommunityCard userCommunities={userCommunities} />
+                </div>
             </div>
         </div>
     );

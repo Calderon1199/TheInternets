@@ -7,6 +7,21 @@ const { User } = require('../../db/models');
 
 const router = express.Router();
 
+const validateImage = [
+    check('profileImg')
+        .exists({ checkFalsy: true})
+        .custom((value) => {
+            if (!value) {
+                // Value doesn't exist, so it's not an image
+                return false;
+            }
+            // Check if the value ends with one of the allowed extensions
+            const allowedExtensions = ['.png', '.jpg', '.jpeg'];
+            return allowedExtensions.some(ext => value.endsWith(ext));
+        })
+        .withMessage('Profile image must be a PNG, JPG, or JPEG file')
+]
+
 //backend validation for signup
 const validateSignup = [
     check('email')
@@ -67,6 +82,26 @@ router.post('/', validateSignup, async (req, res) => {
     });
 });
 
+router.put('/', validateImage, async (req, res) => {
+    const { profileImg, username} = req.body;
+    const userId = req.user.id;
+
+    const user = await User.findByPk(+userId);
+
+    const newUser = await user.update({profileImg, username});
+
+    const safeUser = {
+        id: newUser.id,
+        email: newUser.email,
+        username: newUser.username,
+        profileImg: newUser.profileImg
+    };
+    return res.json({
+        user: safeUser
+    });
+
+});
+
 // Restore session user
 router.get('/', (req, res) => {
     const { user } = req;
@@ -75,6 +110,7 @@ router.get('/', (req, res) => {
             id: user.id,
             email: user.email,
             username: user.username,
+            profileImg: user.profileImg
         };
         return res.json({
             user: safeUser
