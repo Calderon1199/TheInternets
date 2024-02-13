@@ -10,6 +10,8 @@ import { getCommunities, getSingleCommunity, getUserCommunities } from '../../..
 import { getAllUserLikes } from '../../../redux/like';
 import { getPosts } from '../../../redux/post';
 import './CommunityPage.css';
+import CommunityImageModal from '../CommunityImageModal/CommunityImageModal';
+import { useModal } from '../../../context/Modal';
 
 function CommunityPage() {
     const community = useSelector(state => state.communities?.singleCommunity);
@@ -17,6 +19,7 @@ function CommunityPage() {
     const [loading, setLoading] = useState(true);
 
     const {communityId} = useParams();
+    const {setModalContent} = useModal();
     const dispatch = useDispatch();
 
 
@@ -28,7 +31,7 @@ function CommunityPage() {
             await dispatch(getPosts());
             if (user) {
             await dispatch(getUserCommunities())
-            awaitdispatch(getAllUserLikes());
+            await dispatch(getAllUserLikes());
             }
         }
         fetchData();
@@ -56,7 +59,10 @@ function CommunityPage() {
                         {community.avatar ? (
                             <img src={community.avatar}></img>
                         ): (
-                            <i class="fa-solid fa-people-roof"></i>
+                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"></img>
+                        )}
+                        {community.userId === user.id && (
+                            <i class="fa-solid fa-camera" id="comm-camera" onClick={() => setModalContent(<CommunityImageModal community={community} />)}></i>
                         )}
                     </div>
                     <div className='Inner-Community-Header-Img'>
