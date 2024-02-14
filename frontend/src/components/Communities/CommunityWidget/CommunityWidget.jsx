@@ -109,7 +109,7 @@ function CommunityWidget({isPostView}) {
                 <p><i className="fa-solid fa-cake-candles"></i> Created {formattedDate}</p>
             </div>
             <div className='Comm-Options'>
-                <button onClick={() => navigate('/posts/new')} id='Post-Widget-Button'>Create Post</button>
+                <button onClick={() => navigate('/posts/new', { state: { community } })}  id='Post-Widget-Button'>Create Post</button>
                 {isPostView && (
                     <button onClick={() => navigate(`/communities/${community.id}`)} id='Community-Widget-Button'>Visit Community</button>
                 )}
