@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getCommunities } from '../../../redux/community';
 import { createPost } from '../../../redux/post';
@@ -8,12 +8,13 @@ import PostRules from '../PostRules';
 
 import './CreatePostForm.css';
 
-function CreatePostForm() {
+function CreatePostForm({postCommunity}) {
     const communities = useSelector(state => state.communities?.allCommunities);
+    const location = useLocation();
 
     const [errors, setErrors] = useState({postText: "", title: "", images: "", community: ""});
 
-    const [selectedCommunity, setSelectedCommunity] = useState(null);
+    const [selectedCommunity, setSelectedCommunity] = useState(location.state?.community ? location.state?.community : null);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [showDropdown, setShowDropdown] = useState(false);
     const [images, setImages] = useState(['', '', '']);
@@ -165,7 +166,10 @@ function CreatePostForm() {
                 {communities.map((community) => (
                     <div className='Community-Name-Container' key={community.id}>
                         <div className='Community-Name' onClick={() => handleCommunityClick(community)}>
-                            {community.name}
+                          <div className='Comm-Img'>
+                            <img src={community.avatar ? community.avatar : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}></img>
+                          </div>
+                          {community.name}
                         </div>
                     </div>
                 ))}
@@ -205,6 +209,7 @@ function CreatePostForm() {
             ): (
                 <>
                     <h3 id='image-rules'>Choose up to three images</h3>
+                    <p id='post-image-warning'>Images cannot be edited</p>
                     {errors.images && <p className="errorDiv">{errors.images}</p>}
                 {images.map((imageUrl, index) => (
                   <div key={index}>

@@ -74,3 +74,19 @@
     left: 75%;
     top: 70%;
 }
+
+.No-Post-Input {
+    width: 45%;
+}
+
+.No-Posts-Warning {
+    margin-top: 4%;
+    width: 100%;
+    height: 500px;
+    background-color: #1A1A1B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4a4949;
+    border-radius: 5px;
+}

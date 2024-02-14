@@ -232,3 +232,45 @@
 #header-title {
     color: #8ff0a4;
 }
+
+.View-Img-Container {
+    position: relative;
+}
+
+.Image-Switch-Container-View {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: #d7dadc;
+    top: 50%;
+    left: 5%;
+    box-shadow: 0px 0px 10px 4px black;
+    border-radius: 100%;
+}
+
+.Image-Switch-Container-View-Hide {
+    display: none;
+}
+
+.Image-Switch-Container-View-Right {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    background-color: #d7dadc;
+    top: 50%;
+    right: 5%;
+    box-shadow: 0px 0px 10px 4px black;
+    border-radius: 100%;
+}
+
+.Image-Switch-Container-View-Right-Hide {
+    display: none;
+}

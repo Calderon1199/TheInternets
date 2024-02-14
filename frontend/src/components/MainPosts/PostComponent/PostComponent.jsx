@@ -16,7 +16,7 @@ function PostTile({ posts, isProfile }) {
 
     const [loading, setLoading] = useState(true);
     const [postText, setPostText] = useState({});
-    const [editing, setEditing] = useState({});
+    const [currentImageIndex, setCurrentImageIndex] = useState([]);    const [editing, setEditing] = useState({});
     const [newPosts, setPosts] = useState();
     const [type, setType] = useState();
 
@@ -48,6 +48,7 @@ function PostTile({ posts, isProfile }) {
         setPosts(posts);
         setLoading(false);
         sortNew(type);
+        setCurrentImageIndex(Array(posts.length).fill(0));
     }, [posts]);
 
 
@@ -62,6 +63,13 @@ function PostTile({ posts, isProfile }) {
         setEditing((prevEditing) => ({ ...prevEditing, [postId]: false }));
 
         navigate(`/posts/${postId}`);
+    };
+
+     const handleImageIndexChange = (postId, index) => {
+        setCurrentImageIndex((prevIndexes) => ({
+            ...prevIndexes,
+            [postId]: index,
+        }));
     };
 
 
@@ -89,16 +97,44 @@ function PostTile({ posts, isProfile }) {
                     <div className='Post-Text-Tile-Container'>
                         <>
                             <h3 onClick={() => navigate(`/posts/${post.id}`)}>{post.title}</h3>
-                            {post.PostImages?.length > 0 && !editing[post.id] &&(
-                            <div>
+                            {post.PostImages?.length > 0 && (
+                            <div className='Img-Container'>
                                 <img
-                                className='Post-Img'
-                                onClick={() => navigate(`/posts/${post.id}`)}
-                                src={post.PostImages.find((img) => img.preview === true).url}
-                                alt='Post Image'
+                                    className='Post-Img'
+                                    onClick={() => navigate(`/posts/${post.id}`)}
+                                    src={post.PostImages[currentImageIndex[post.id]]?.url}
+                                    alt='Post Image'
                                 ></img>
+                                {post.PostImages.length > 1 && (
+                                    <>
+                                        <div
+                                            className={currentImageIndex[post.id] > 0 ? 'Image-Switch-Container' : 'Image-Switch-Container-Hide'}
+                                            onClick={() => handleImageIndexChange(post.id, currentImageIndex[post.id] - 1)}
+                                        >
+                                            {currentImageIndex[post.id] > 0 && (
+                                                <div className='Image-Switch-Container1'>
+                                                    <i class='fa-solid fa-angle-left'></i>
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div
+                                            className={
+                                                currentImageIndex[post.id] < post.PostImages.length - 1
+                                                    ? 'Image-Switch-Container-Right'
+                                                    : 'Image-Switch-Container-Right-Hide'
+                                            }
+                                            onClick={() => handleImageIndexChange(post.id, currentImageIndex[post.id] + 1)}
+                                        >
+                                            {currentImageIndex[post.id] < post.PostImages.length - 1 && (
+                                                <div className='Image-Switch-Container2'>
+                                                    <i class='fa-solid fa-angle-right'></i>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </>
+                                )}
                             </div>
-                            )}
+                        )}
                             {editing[post.id] ? (
                             <div className='Edit-Card-Container'>
                                 <label>

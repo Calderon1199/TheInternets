@@ -10,6 +10,15 @@ function ProfileCard({user}) {
     const createPost = () => {
         navigate('/posts/new');
     }
+
+    const timestamp = new Date(user?.createdAt); // Replace this with your timestamp
+
+    const formattedDate = timestamp.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+
     return (
         <div className='User-Card'>
             <div className='Handle'>
@@ -25,6 +34,7 @@ function ProfileCard({user}) {
                     </div>
                 )}
                 <h3>Hello {user?.username}</h3>
+                <p><i className="fa-solid fa-cake-candles"></i> {formattedDate}</p>
             </div>
             <div className='User-Card-Button'>
                 <button id='Post-Widget-Button3' onClick={() => createPost()}>New Post</button>
