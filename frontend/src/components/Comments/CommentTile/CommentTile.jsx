@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { editComment, getCommentsForPost } from '../../../redux/comment';
+import { editComment, getCommentsForPost, getUserComments } from '../../../redux/comment';
 import { calculateTimeDifference } from '../../MainPosts/PostComponent';
 
 import DeleteCommentModal from '../DeleteCommentModal';
@@ -55,12 +55,12 @@ function CommentTile({comments, isProfile}) {
   };
 
   useEffect(() => {
-        dispatch(getCommentsForPost(+postId))
-        .then(() => setLoading(false))
-        .catch((error) => {
-            console.error("Error fetching comments:", error);
-            setLoading(false);
-        });
+        if (isProfile) {
+            dispatch(getUserComments());
+        } else {
+            dispatch(getCommentsForPost(+postId))
+        }
+        setLoading(false)
 
   }, [dispatch, postId, user]);
 
@@ -69,7 +69,7 @@ function CommentTile({comments, isProfile}) {
     return (
         <div className={!isProfile ? 'Comment-Container-Outside': 'Comment-Container-Outside-Profile'}>
             {!loading ?
-            comments?.map((comment) => (
+             comments?.map((comment) => (
                 <div key={comment.id} className='Comment-Outer-Container'>
                     {isProfile && (
                         <div className='Comment-Title' onClick={() => navigate(`/posts/${comment.postId}`)}>

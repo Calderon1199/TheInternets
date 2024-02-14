@@ -118,6 +118,10 @@ router.put('/:comment_id', requireAuth, validateComment, async (req, res, next) 
                 {
                     model: User,
                     attributes: ['id', 'username'],
+                },
+                {
+                    model: Post,
+                    attributes: ['id', 'title']
                 }
             ]
         })
