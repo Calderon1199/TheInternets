@@ -38,7 +38,7 @@ const DeleteCommentById = (deletedCommentId) => ({
     payload: deletedCommentId
 });
 
-const initialState = { allComments: [], byId: {}, postComments: [] };
+const initialState = { allComments: [], byId: {}, postComments: [], allUserComments: [] };
 
 
 export const getComments = () => async (dispatch) => {
@@ -176,6 +176,9 @@ function commentReducer(state = initialState, action) {
                     [action.payload.id]: action.payload
                 },
                 postComments: state.postComments.map((comment) =>
+                    comment.id === action.payload.id ? action.payload : comment
+                ),
+                allUserComments: state.allUserComments.map((comment) =>
                     comment.id === action.payload.id ? action.payload : comment
                 ),
             };

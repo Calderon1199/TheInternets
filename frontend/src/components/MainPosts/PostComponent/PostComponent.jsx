@@ -110,7 +110,6 @@ function PostTile({ posts, isProfile }) {
                                     src={post?.PostImages[currentImageIndex[post.id]]?.url}
                                     alt='Post Image'
                                 ></img>
-                                {console.log([post.PostImages[currentImageIndex[post.id]]])}
                                 {post.PostImages.length > 1 && (
                                     <>
                                         <div
