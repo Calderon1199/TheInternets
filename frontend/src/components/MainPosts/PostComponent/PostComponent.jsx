@@ -16,7 +16,8 @@ function PostTile({ posts, isProfile }) {
 
     const [loading, setLoading] = useState(true);
     const [postText, setPostText] = useState({});
-    const [currentImageIndex, setCurrentImageIndex] = useState([]);    const [editing, setEditing] = useState({});
+    const [currentImageIndex, setCurrentImageIndex] = useState([]);
+    const [editing, setEditing] = useState({});
     const [newPosts, setPosts] = useState();
     const [type, setType] = useState();
 
@@ -46,9 +47,13 @@ function PostTile({ posts, isProfile }) {
 
     useEffect(() => {
         setPosts(posts);
-        setLoading(false);
         sortNew(type);
-        setCurrentImageIndex(Array(posts.length).fill(0));
+        const initialIndex = {};
+        posts.forEach(post => {
+            initialIndex[post.id] = 0;
+        });
+        setCurrentImageIndex(initialIndex);
+        setLoading(false);
     }, [posts]);
 
 
@@ -102,9 +107,10 @@ function PostTile({ posts, isProfile }) {
                                 <img
                                     className='Post-Img'
                                     onClick={() => navigate(`/posts/${post.id}`)}
-                                    src={post.PostImages[currentImageIndex[post.id]]?.url}
+                                    src={post?.PostImages[currentImageIndex[post.id]]?.url}
                                     alt='Post Image'
                                 ></img>
+                                {console.log([post.PostImages[currentImageIndex[post.id]]])}
                                 {post.PostImages.length > 1 && (
                                     <>
                                         <div
@@ -113,7 +119,7 @@ function PostTile({ posts, isProfile }) {
                                         >
                                             {currentImageIndex[post.id] > 0 && (
                                                 <div className='Image-Switch-Container1'>
-                                                    <i class='fa-solid fa-angle-left'></i>
+                                                    <i className='fa-solid fa-angle-left'></i>
                                                 </div>
                                             )}
                                         </div>
@@ -127,7 +133,7 @@ function PostTile({ posts, isProfile }) {
                                         >
                                             {currentImageIndex[post.id] < post.PostImages.length - 1 && (
                                                 <div className='Image-Switch-Container2'>
-                                                    <i class='fa-solid fa-angle-right'></i>
+                                                    <i className='fa-solid fa-angle-right'></i>
                                                 </div>
                                             )}
                                         </div>

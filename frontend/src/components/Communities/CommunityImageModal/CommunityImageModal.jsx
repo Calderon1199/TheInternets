@@ -23,7 +23,6 @@ function CommunityImageModal({community}) {
         const contains = allowedExtensions.some(ext => newAvatar.endsWith(ext));
         newErrors.avatar = contains ? '' : 'Avatar must end with .jpg, .jpeg, or .png';
         setErrors(newErrors);
-        console.log(buttonDisabled)
         !newErrors.avatar && !newErrors.banner ?  setButtonDisabled(false) : setButtonDisabled(true);
     }
 
@@ -49,7 +48,7 @@ function CommunityImageModal({community}) {
         <div className="Avatar-Modal-Container">
             <div className="Edit-Avatar-Img">
                 <img src={community.avatar}></img>
-                <i class="fa-solid fa-xmark" id="exit" onClick={() => closeModal()}></i>
+                <i className="fa-solid fa-xmark" id="exit" onClick={() => closeModal()}></i>
             </div>
             <div className="Account-Info">
                 <h4>{community.name}</h4>

@@ -86,15 +86,18 @@ router.put('/', validateImage, async (req, res) => {
     const { profileImg, username} = req.body;
     const userId = req.user.id;
 
-    const user = await User.findByPk(+userId);
+    const user = await User.findByPk(+userId, {
+        attributes: ['id', 'username', 'profileImg', 'createdAt']
+    });
 
-    const newUser = await user.update({profileImg, username});
+    const newUser = await user.update({ profileImg, username });
 
     const safeUser = {
         id: newUser.id,
         email: newUser.email,
         username: newUser.username,
-        profileImg: newUser.profileImg
+        profileImg: newUser.profileImg,
+        createdAt: user.createdAt
     };
     return res.json({
         user: safeUser
@@ -110,7 +113,8 @@ router.get('/', (req, res) => {
             id: user.id,
             email: user.email,
             username: user.username,
-            profileImg: user.profileImg
+            profileImg: user.profileImg,
+            createdAt: user.createdAt
         };
         return res.json({
             user: safeUser

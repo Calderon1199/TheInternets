@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import CreatePostInput from '../../MainPosts/CreatPost';
@@ -20,6 +20,7 @@ function CommunityPage() {
 
     const {communityId} = useParams();
     const {setModalContent} = useModal();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
@@ -62,7 +63,7 @@ function CommunityPage() {
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"></img>
                         )}
                         {community.userId === user.id && (
-                            <i class="fa-solid fa-camera" id="comm-camera" onClick={() => setModalContent(<CommunityImageModal community={community} />)}></i>
+                            <i className="fa-solid fa-camera" id="comm-camera" onClick={() => setModalContent(<CommunityImageModal community={community} />)}></i>
                         )}
                     </div>
                     <div className='Inner-Community-Header-Img'>
@@ -78,7 +79,9 @@ function CommunityPage() {
                         <div className='No-Post-Input'>
                             <CreatePostInput />
                             <div className='No-Posts-Warning'>
-                                <h4>Currently holds no post</h4>
+                                <h3>There are no posts in this community</h3>
+                                <h4>Be the first to share your thoughts!</h4>
+                                <button onClick={() => navigate('/posts/new', { state: { community } })}  id='Post-Widget-Button'>Create Post</button>
                             </div>
                         </div>
                     )}

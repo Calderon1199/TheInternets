@@ -23,7 +23,6 @@ function ImageEditModal() {
         const contains = allowedExtensions.some(ext => newAvatar.endsWith(ext));
         newErrors.avatar = contains ? '' : 'Avatar must end with .jpg, .jpeg, or .png';
         setErrors(newErrors);
-        console.log(buttonDisabled)
         !newErrors.avatar && !newErrors.username ?  setButtonDisabled(false) : setButtonDisabled(true);
     }
 
@@ -56,7 +55,7 @@ function ImageEditModal() {
         <div className="Avatar-Modal-Container">
             <div className="Edit-Avatar-Img">
                 <img alt="Profile Avatar" src={user.profileImg}></img>
-                <i class="fa-solid fa-xmark" id="exit" onClick={() => closeModal()}></i>
+                <i className="fa-solid fa-xmark" id="exit" onClick={() => closeModal()}></i>
             </div>
             <div className="Account-Info">
                 <h4>{user.username}</h4>

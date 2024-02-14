@@ -6,7 +6,14 @@
     align-items: flex-start;
     justify-content: center;
     background-color: #303030;
+    max-width: 1600px;
 }
+
+/* @media screen and (min-width: 1600px) {
+    .Main-Page {
+        width: 80%;
+    }
+} */
 
 body {
     background-color: #242424;

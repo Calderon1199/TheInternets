@@ -77,7 +77,7 @@ function CommunityWidget({isPostView}) {
                             </div>
                         ): (
                             <div className='Community-Widget-Title'>
-                                <i class="fa-solid fa-people-roof"></i>
+                                <i className="fa-solid fa-people-roof"></i>
                                 <h3>{community.name}</h3>
                             </div>
                         )}

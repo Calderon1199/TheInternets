@@ -24,10 +24,6 @@ function CommentTile({comments, isProfile}) {
   const { postId } = useParams();
 
 
-  const setModal = (comment) => {
-    return setModalContent(<DeleteCommentModal comment={comment} />);
-  };
-
   const handleCommentChange = (comment) => {
         setCommentText(comment);
         const newErrors = { ...errors };
@@ -59,12 +55,13 @@ function CommentTile({comments, isProfile}) {
   };
 
   useEffect(() => {
-    dispatch(getCommentsForPost(+postId))
-    .then(() => setLoading(false))
-    .catch((error) => {
-        console.error("Error fetching comments:", error);
-        setLoading(false);
-    });
+        dispatch(getCommentsForPost(+postId))
+        .then(() => setLoading(false))
+        .catch((error) => {
+            console.error("Error fetching comments:", error);
+            setLoading(false);
+        });
+
   }, [dispatch, postId, user]);
 
 //   if (loading) return <img src='../Rolling-1s-200px.svg'></img>;
@@ -121,7 +118,7 @@ function CommentTile({comments, isProfile}) {
                             }}>
                                 Edit Comment
                             </button>
-                            <button onClick={() => setModal(comment)}>
+                            <button onClick={() => setModalContent(<DeleteCommentModal comment={comment}/>)}>
                             Delete Comment
                             </button>
                         </div>
