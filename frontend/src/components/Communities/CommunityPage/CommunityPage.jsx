@@ -75,7 +75,12 @@ function CommunityPage() {
                 {community?.posts?.length ? (
                     <PostTile posts={community?.posts} catId={communityId}/>
                     ): (
-                        <CreatePostInput />
+                        <div className='No-Post-Input'>
+                            <CreatePostInput />
+                            <div className='No-Posts-Warning'>
+                                <h4>Currently holds no post</h4>
+                            </div>
+                        </div>
                     )}
                     <CommunityWidget />
             </div>

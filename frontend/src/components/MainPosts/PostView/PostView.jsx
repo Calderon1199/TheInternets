@@ -23,7 +23,7 @@ function PostView() {
     const community = useSelector(state => state.communities?.singleCommunity)
     const post = useSelector(state => state.posts?.singlePost);
     const user = useSelector(state => state.session.user);
-
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
@@ -36,7 +36,7 @@ function PostView() {
     const dispatch = useDispatch();
     const {postId} = useParams();
 
-    useEffect( () => {
+    useEffect(() => {
             const fetchData = async () => {
             const singlePost = await dispatch(getSinglePost(+postId));
             if (user) dispatch(getAllUserLikes())
@@ -115,8 +115,28 @@ function PostView() {
                                 <div className='Post-Text-Tile-Container' id='post-text-cursor'>
                                     <h3>{post?.title}</h3>
                                     {post.PostImages?.length > 0 && (
-                                        <img src={post.PostImages?.find((img) => img.preview === true)?.url} alt='Post Image'></img>
+                                <div className='View-Img-Container'>
+                                    <img src={post.PostImages[currentImageIndex]?.url} alt='Post Image' />
+                                    {post.PostImages.length > 1 && (
+                                        <>
+                                            <div className={currentImageIndex > 0 ? 'Image-Switch-Container-View' : 'Image-Switch-Container-View-Hide'} onClick={() => setCurrentImageIndex((prevIndex) => prevIndex - 1)}>
+                                                {currentImageIndex > 0 && (
+                                                    <div className='Image-Switch-Container1'>
+                                                        <i className="fa-solid fa-angle-left"></i>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className={currentImageIndex < post.PostImages.length - 1 ? 'Image-Switch-Container-View-Right' : 'Image-Switch-Container-View-Right-Hide'} onClick={() => setCurrentImageIndex((prevIndex) => prevIndex + 1)}>
+                                                {currentImageIndex < post.PostImages.length - 1 && (
+                                                    <div className='Image-Switch-Container2'>
+                                                        <i className="fa-solid fa-angle-right"></i>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </>
                                     )}
+                                </div>
+                            )}
                                     {isEditing ? (
                                         <div className='Post-Edit-Container'>
                                             <h3>Edit your post</h3>
