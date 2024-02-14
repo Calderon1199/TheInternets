@@ -13,11 +13,18 @@ function DeleteCommentModal({ comment }) {
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        dispatch(deleteComment(comment.id))
-        .then(() => {
-            dispatch(getSinglePost(post.id))
-            dispatch(getUserComments())
-        })
+        if (post) {
+            dispatch(deleteComment(comment?.id))
+            .then(() => {
+                dispatch(getSinglePost(post.id))
+                dispatch(getUserComments())
+            })
+        } else {
+            dispatch(deleteComment(comment?.id))
+            .then(() => {
+                dispatch(getUserComments())
+            })
+        }
         closeModal();
     }
 

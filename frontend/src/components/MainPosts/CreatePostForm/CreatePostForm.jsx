@@ -150,7 +150,7 @@ function CreatePostForm({postCommunity}) {
           </div>
           <div className="Community-Dropdown">
             <div className='Community-Dropdown-Input' ref={dropdownRef} onClick={() => setShowDropdown(!showDropdown)}>
-              <i class="fa-solid fa-user-group"></i>
+              <i className="fa-solid fa-user-group"></i>
               <div className='Dropdown-Input'>
                 <input
                     placeholder={!selectedCommunity ? 'Choose a community' : `${selectedCommunity.name}`}
@@ -158,7 +158,7 @@ function CreatePostForm({postCommunity}) {
                 />
               </div>
               <div className='Community-Carrot'>
-                <i class="fa-solid fa-sort-down" onClick={() => setShowDropdown(!showDropdown)}></i>
+                <i className="fa-solid fa-sort-down" onClick={() => setShowDropdown(!showDropdown)}></i>
               </div>
             </div>
             {showDropdown && (

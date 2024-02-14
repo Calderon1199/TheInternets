@@ -27,7 +27,6 @@ function LoginFormModal() {
       })
     );
 
-    console.log(serverResponse)
 
     serverResponse ? setErrors(serverResponse) : closeModal();
 

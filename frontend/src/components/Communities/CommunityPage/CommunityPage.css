@@ -89,4 +89,18 @@
     justify-content: center;
     border: 1px solid #4a4949;
     border-radius: 5px;
+    flex-direction: column;
+}
+
+.No-Posts-Warning h3 {
+    margin-bottom: 0px;
+}
+
+.No-Posts-Warning button {
+    width:30%;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
 }

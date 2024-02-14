@@ -30,7 +30,7 @@ function HomePageWidget() {
                 <h3>Home</h3>
             </div>
             <div className='Home-Widget-Text'>
-                <p>Your personal InstaChat frontpage. Come here to check in with your favorite communities.</p>
+                <p>Connected to The Internets. Come here to check in with your favorite communities.</p>
             </div>
             <div className='Home-Widget-Buttons'>
                 <button onClick={() => visitCreate()} id='Post-Widget-Button'>Create Post</button>

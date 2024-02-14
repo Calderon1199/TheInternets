@@ -56,6 +56,7 @@ function CommunityCreateModal() {
         <div className='Community-Modal-Container'>
             <div className='Community-Modal-Header'>
                 <h3>Create a community</h3>
+                <i className="fa-solid fa-xmark" id='post-view-exit' onClick={() => closeModal()}></i>
             </div>
             <div className='Community-Name-Container'>
                 <h4>Name</h4>

@@ -25,7 +25,7 @@ function CommunityCard({userCommunities}) {
             </div>
             <div className="User-Comm-Inner">
                 {userCommunities?.map((comm) => (
-                    <div className="User-Comm-Info" onClick={() => navigate(`/communities/${comm.id}`)}>
+                    <div className="User-Comm-Info" key={comm.id} onClick={() => navigate(`/communities/${comm.id}`)}>
                         <div className="Comm-Img">
                             <img src={comm.avatar ? comm.avatar : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'}></img>
                         </div>

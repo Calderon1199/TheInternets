@@ -46,7 +46,7 @@
 .Search-Dropdown h3 {
     padding: 10px 0px;
     margin: 0px 0px;
-    height: 20px;
+    height: auto;
     color:#99c1f1;
     border-bottom: 1px solid white;
     width: 100%;
