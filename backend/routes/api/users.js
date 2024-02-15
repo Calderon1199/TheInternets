@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -66,6 +67,28 @@ router.post('/', validateSignup, async (req, res) => {
 
     const { email, password, username } = req.body;
 
+    const existingUser = await User.findOne({
+        where: {
+            username: {
+                [Op.iLike]: username
+            }
+        }
+    });
+
+    const existingEmail = await User.findOne({
+        where: {
+            email: {
+                [Op.iLike]: email
+            }
+        }
+    });
+    if (existingUser) {
+        return res.status(400).json({ message: 'Username already exists' });
+    }
+    if (existingEmail) {
+        return res.status(418).json({ message: 'Email already exists' });
+    }
+
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({ email, username, hashedPassword });
 
@@ -77,7 +100,7 @@ router.post('/', validateSignup, async (req, res) => {
 
     await setTokenCookie(res, safeUser);
 
-    return res.json({
+    return res.status(200).json({
         user: safeUser
     });
 });
