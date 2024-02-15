@@ -61,8 +61,6 @@ function SignupFormModal() {
     newErrors.password = 'Password must be 6 characters or more'
   }
 
-
-
   if (password.startsWith(' ') || password.endsWith(' ')) {
     newErrors.password = 'Password cannot start or end with spaces';
   }
@@ -72,18 +70,30 @@ function SignupFormModal() {
   } else {
     setErrors({});
 
-    const serverResponse = await dispatch(
-      thunkSignup({
-        email,
-        username,
-        password,
-      })
-    );
+    try {
+      const serverResponse = await dispatch(
+        thunkSignup({
+            email,
+            username,
+            password,
+        })
+      );
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      closeModal();
+      if (serverResponse?.status === 400) {
+        throw ({message: "Username already exists"})
+      } else if (serverResponse?.status === 418) {
+        throw ({message2: "Email already exists"})
+      } else {
+        newErrors.username = ''
+        closeModal()
+      }
+    } catch (error) {
+        if (error.message) {
+            newErrors.username = error.message;
+        } else if (error.message2) {
+          newErrors.email = error.message2
+        }
+        setErrors(newErrors)
     }
   }
 };

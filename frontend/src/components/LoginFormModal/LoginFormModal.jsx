@@ -18,18 +18,26 @@ function LoginFormModal() {
 
 
   const handleSubmit = async (e) => {
+    const newErrors = {};
     e.preventDefault();
 
-    const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
-    );
+    try {
+      const serverResponse = await dispatch(
+        thunkLogin({
+          email,
+          password,
+        })
+      );
 
+      if (serverResponse.status === 200) {
+          closeModal();
+      }
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+      newErrors.credential = 'Invalid credentials';
+    }
 
-    serverResponse ? setErrors(serverResponse) : closeModal();
-
+  setErrors(newErrors);
   };
 
   const handleDemoUserSubmit = async () => {
@@ -51,7 +59,10 @@ function LoginFormModal() {
       <div className="Login-Form">
         <form onSubmit={handleSubmit}>
           <div className="Email-Input">
-            <p>Email Address</p>
+            <div className="Email-Error">
+              <p>Email Address</p>
+              {errors.credential && <p className="errorDivEmail">{errors.credential}</p>}
+            </div>
             <label>
               <input
                 type="text"
@@ -60,7 +71,6 @@ function LoginFormModal() {
                 required
               />
             </label>
-            {errors.credential && <p>{errors.credential}</p>}
           </div>
           <div className="Email-Input">
             <p>Password</p>

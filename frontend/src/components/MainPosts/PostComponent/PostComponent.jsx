@@ -93,7 +93,7 @@ function PostTile({ posts, isProfile }) {
                     <div className='Post-Tile-Inner-Container' key={post.id}>
                         <div className='Post-Info-Container'>
                             <div className='Post-Info-Left'>
-                                <h5 onClick={() => navigate(`/communities/${post?.Group?.id}`)} id='group-name'>{post.Group?.name}</h5>
+                                <h5 onClick={() => navigate(`/communities/${post.Group.id}`)} id='group-name'>{post.Group?.name}</h5>
                                 <span>&#x2022;</span>
                                 <p onClick={() => alert("feature coming soon...")} id='post-owner-name'>Posted by {post.User?.username}</p>
                             </div>

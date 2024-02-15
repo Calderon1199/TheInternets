@@ -96,3 +96,21 @@
     padding: 0px 10px;
     margin-bottom: 15px;
 }
+
+.Email-Error {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.errorDivEmail {
+    color: #ff7b63;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    height: 100%;
+}
+
+.errorDivEmail p {
+    margin-bottom: 0px;
+}

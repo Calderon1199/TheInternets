@@ -62,20 +62,27 @@ export const thunkLogin = (credentials) => async dispatch => {
 };
 
 export const thunkSignup = (user) => async (dispatch) => {
-    const response = await csrfFetch("/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user)
-    });
+    try {
+        const response = await csrfFetch("/api/users", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user)
+        });
 
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setUser(data.user));
-    } else if (response.status < 500) {
-        const errorMessages = await response.json();
-        return errorMessages
-    } else {
-        return { server: "Something went wrong. Please try again" }
+        if (response.ok) {
+            const data = await response.json();
+            dispatch(setUser(data.user));
+        } else {
+            const errorMessages = await response.json();
+            console.log(errorMessages, '-------')
+            throw errorMessages;
+        }
+    } catch (error) {
+        if (error.message) {
+            return { server: error.message };
+        } else {
+            return error;
+        }
     }
 };
 

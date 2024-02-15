@@ -12,6 +12,7 @@ import { getPosts } from '../../../redux/post';
 import './CommunityPage.css';
 import CommunityImageModal from '../CommunityImageModal/CommunityImageModal';
 import { useModal } from '../../../context/Modal';
+import LoginFormModal from '../../LoginFormModal';
 
 function CommunityPage() {
     const community = useSelector(state => state.communities?.singleCommunity);
@@ -26,7 +27,7 @@ function CommunityPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            await dispatch(getSingleCommunity(communityId));
+            await dispatch(getSingleCommunity(+communityId));
             setLoading(false);
             await dispatch(getCommunities())
             await dispatch(getPosts());
@@ -62,7 +63,7 @@ function CommunityPage() {
                         ): (
                             <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"></img>
                         )}
-                        {community.userId === user.id && (
+                        {community.userId === user?.id && (
                             <i className="fa-solid fa-camera" id="comm-camera" onClick={() => setModalContent(<CommunityImageModal community={community} />)}></i>
                         )}
                     </div>
@@ -81,7 +82,7 @@ function CommunityPage() {
                             <div className='No-Posts-Warning'>
                                 <h3>There are no posts in this community</h3>
                                 <h4>Be the first to share your thoughts!</h4>
-                                <button onClick={() => navigate('/posts/new', { state: { community } })}  id='Post-Widget-Button'>Create Post</button>
+                                <button onClick={() => user ? navigate('/posts/new', { state: { community } }) : setModalContent(<LoginFormModal />)}  id='Post-Widget-Button'>Create Post</button>
                             </div>
                         </div>
                     )}
