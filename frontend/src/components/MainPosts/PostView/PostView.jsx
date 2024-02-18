@@ -105,7 +105,7 @@ function PostView() {
                         <div className='Single-Post-Inner-Container'>
                             <div className='Single-Post-Info-Container' id='post-info-cursor'>
                                 <div className='Post-Info-Left'>
-                                    <p onClick={() => navigate(`/communities/${post.communityId}`)}>{community?.name}</p>
+                                    <p onClick={() => navigate(`/communities/${post.categoryId}`)}>{community?.name}</p>
                                     <span>&#8226;</span>
                                     <p onClick={() => alert('Feature coming soon...')}>Posted by {post.User?.username}</p>
                                 </div>
