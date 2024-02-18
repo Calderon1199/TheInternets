@@ -36,6 +36,5 @@ const makeGroupSeeds = () => {
     return seeders;
 }
 
-console.log(makeGroupSeeds());
 
 module.exports = { makePostSeeds }
