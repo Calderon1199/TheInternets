@@ -97,7 +97,7 @@ function PostTile({ posts, isProfile }) {
                                 <span>&#x2022;</span>
                                 <p onClick={() => alert("feature coming soon...")} id='post-owner-name'>Posted by {post.User?.username}</p>
                             </div>
-                            <p>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
+                            <p id='time-stamp'>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
                         </div>
                     <div className='Post-Text-Tile-Container'>
                         <>
