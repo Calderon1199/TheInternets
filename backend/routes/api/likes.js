@@ -16,7 +16,7 @@ router.get('/user/all-likes', requireAuth, async (req, res, next) => {
             }
         });
 
-        if (userLikes.length === 0) res.status(200).send({message: "User has no likes or dislikes"})
+        if (userLikes.length === 0) return res.status(200).json({message: "User has no likes or dislikes"})
 
         res.status(200).json({ Likes: userLikes });
     } catch (error) {
