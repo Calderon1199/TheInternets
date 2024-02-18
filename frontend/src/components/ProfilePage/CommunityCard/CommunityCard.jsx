@@ -6,12 +6,12 @@ import { useModal } from "../../../context/Modal";
 
 function CommunityCard({userCommunities}) {
     const [loading, setLoading] = useState(true);
-    const {setModalContent} = useModal()
+    const { setModalContent } = useModal();
     const navigate = useNavigate();
 
     useEffect(() => {
         if (userCommunities) setLoading(false)
-    },[])
+    },[userCommunities])
 
     if (loading) {
         return (
@@ -25,10 +25,10 @@ function CommunityCard({userCommunities}) {
         <div className="User-Comm-Container">
             <div className="Comm-Header-Profile">
                 {userCommunities.length ? (
-                    <h4>You're an owner of these communities</h4>
+                    <h4>You are an owner of these communities</h4>
                 ) : (
                     <div className='Home-Widget-Buttons-Profile'>
-                        <h4>You don't own any communities yet</h4>
+                        <h4>You do not own any communities yet</h4>
                         <button onClick={() => setModalContent(<CommunityCreateModal />)} id='Community-Widget-Button-Profile'>Create Community</button>
                     </div>
                 )}

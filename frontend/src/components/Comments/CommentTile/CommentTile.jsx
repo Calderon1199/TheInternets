@@ -79,7 +79,7 @@ function CommentTile({comments, isProfile}) {
                 <div className='User-Comment-Header'>
                     <h4>{comment.User?.username}</h4>
                     <span>&#8226;</span>
-                    <p>{calculateTimeDifference(comment.createdAt)}</p>
+                    <p>{calculateTimeDifference(comment.createdAt, comment.updatedAt)}</p>
                 </div>
                 {isEditing[comment.id] ? (
                     <div className='Edit-Comment-Textarea'>

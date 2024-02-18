@@ -88,7 +88,7 @@ function PostView() {
             <div className='Post-View-Banner'>
                 <div className='Like'>
                     {!loading ? (
-                        <p>{post.Likes.filter(like => like.isLiked).length - post.Likes.filter(like => !like.isLiked).length}</p>
+                        <p>{post?.Likes?.filter(like => like.isLiked).length - post?.Likes?.filter(like => !like.isLiked).length}</p>
                     ): (
                         <img src='../Rolling-1s-200px.svg' id='Like-Load'></img>
                     )}
@@ -109,7 +109,7 @@ function PostView() {
                                     <span>&#8226;</span>
                                     <p onClick={() => alert('Feature coming soon...')}>Posted by {post.User?.username}</p>
                                 </div>
-                                <p>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
+                                <p id='time-stamp'>{calculateTimeDifference(post.createdAt, post.updatedAt)}</p>
                             </div>
                             <div className='Post-Info-Outer-Container'>
                                 <div className='Post-Text-Tile-Container' id='post-text-cursor'>
