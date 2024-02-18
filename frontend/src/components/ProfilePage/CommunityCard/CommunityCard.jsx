@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import "./CommunityCard.css"
 import { useNavigate } from "react-router-dom";
+import CommunityCreateModal from "../../Communities/CommunityCreateModal";
+import { useModal } from "../../../context/Modal";
 
 function CommunityCard({userCommunities}) {
     const [loading, setLoading] = useState(true);
+    const {setModalContent} = useModal()
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,7 +24,14 @@ function CommunityCard({userCommunities}) {
     return (
         <div className="User-Comm-Container">
             <div className="Comm-Header-Profile">
-                <h4>You're an owner of these communities</h4>
+                {userCommunities.length ? (
+                    <h4>You're an owner of these communities</h4>
+                ) : (
+                    <div className='Home-Widget-Buttons-Profile'>
+                        <h4>You don't own any communities yet</h4>
+                        <button onClick={() => setModalContent(<CommunityCreateModal />)} id='Community-Widget-Button-Profile'>Create Community</button>
+                    </div>
+                )}
             </div>
             <div className="User-Comm-Inner">
                 {userCommunities?.map((comm) => (

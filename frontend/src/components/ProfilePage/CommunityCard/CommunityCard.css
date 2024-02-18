@@ -12,8 +12,7 @@
 }
 
 .Comm-Header-Profile {
-    padding: 0px 15px;
-    padding-right: 30px;
+    padding: 0px 20px;
     margin-bottom: 30px;
 }
 
@@ -43,4 +42,32 @@
 .User-Comm-Name:hover {
     color: #8ff0a4;
     text-decoration: underline;
+}
+
+.Home-Widget-Buttons-Profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#Community-Widget-Button-Profile {
+    border: 2px solid #4a4949;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    border-radius: 15px;
+    background: none;
+    background-color: #94e044;
+    border: 1px solid #4a4949;
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+}
+
+#Community-Widget-Button-Profile:hover {
+    background-color: #649e27;
 }
