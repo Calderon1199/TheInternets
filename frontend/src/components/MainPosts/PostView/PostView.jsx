@@ -88,7 +88,7 @@ function PostView() {
             <div className='Post-View-Banner'>
                 <div className='Like'>
                     {!loading ? (
-                        <p>{post.Likes.filter(like => like.isLiked).length - post.Likes.filter(like => !like.isLiked).length}</p>
+                        <p>{post?.Likes?.filter(like => like.isLiked).length - post?.Likes?.filter(like => !like.isLiked).length}</p>
                     ): (
                         <img src='../Rolling-1s-200px.svg' id='Like-Load'></img>
                     )}
