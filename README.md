@@ -76,6 +76,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+<img width="1116" alt="Screenshot 2024-02-18 152612" src="https://github.com/Calderon1199/TheInternets/assets/109112847/4b4df2d7-d871-42a7-90b7-503298c5e112">
+
 
 Welcome to the The Internets, an ambitious endeavor to recreate the essence of Reddit, one of the internet's most iconic and engaging social platforms. Our Reddit Clone strives to capture the spirit of community-driven discussions, diverse content, and user-generated curation. Whether you're a casual browser or a dedicated Redditor, this project aims to provide a feature-rich and immersive experience that mirrors the dynamics of the original platform.
 
@@ -106,20 +108,41 @@ Key Features:
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
 1. Clone the repo
    ```sh
    git clone https://github.com/Calderon1199/TheInternets
+   ```
+
+### Backend Installation
+
+1. Change directory to backend
+   ```sh
+   cd backend
    ```
 2. Install NPM packages
    ```sh
    npm install
    ```
 3. Enter your ENV VARIABLES by following /backend/.env.example
+4. Start Backend
+   ```sh
+   npm start
+   ```
+
+
+### Frontend Installation
+1. Change directory to frontend
+   ```sh
+   cd frontend
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+2. Start Frontend
+   ```sh
+   npm start
+   ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -128,7 +151,7 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-<img width="1115" alt="Screenshot 2024-02-04 213931" src="https://github.com/Calderon1199/TheInternets/assets/109112847/a74154b0-cae7-4e53-83c3-2139fe3bc991">
+https://github.com/Calderon1199/TheInternets/assets/109112847/d78dd36b-e739-475e-9906-a7d78814eb98
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -137,8 +160,8 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Add community moderators
-- [] Add instant messaging
+- [ ] Add community moderators
+- [ ] Add instant messaging
 
 See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
