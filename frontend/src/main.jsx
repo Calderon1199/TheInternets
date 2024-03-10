@@ -7,6 +7,12 @@ import { router } from "./router";
 import * as sessionActions from "./redux/session";
 import "./index.css";
 import { csrfFetch, restoreCSRF } from "./redux/csrf";
+import ReactGA from 'react-ga';
+
+
+const TRACKING_ID = import.meta.env.VITE_TRACKING_ID;
+console.log(TRACKING_ID); // YOUR_OWN_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
 const store = configureStore();
 
