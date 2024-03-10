@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { createCommunity } from '../../../redux/community';
 import { useModal } from '../../../context/Modal';
 import "./CommunityCreateModal.css";
+import ReactGA from 'react-ga'
 
 function CommunityCreateModal() {
     const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -50,6 +51,11 @@ function CommunityCreateModal() {
 
         closeModal();
         navigate(`/communities/${newCommunity.id}`)
+        ReactGA.event({
+            category: 'Community',
+            action: 'Created an community'
+        });
+
     }
 
     return (
