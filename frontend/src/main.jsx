@@ -10,7 +10,7 @@ import { csrfFetch, restoreCSRF } from "./redux/csrf";
 import ReactGA from 'react-ga';
 
  // YOUR_OWN_TRACKING_ID
-ReactGA.initialize(import.meta.env.VITE_TRACKING_ID);
+ReactGA.initialize(`${import.meta.env.VITE_TRACKING_ID}`);
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 const store = configureStore();
