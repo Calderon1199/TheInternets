@@ -1,5 +1,5 @@
 .Site-Search {
-    width: 60%;
+    width: 39%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
 }
 
 .Site-Search label {
-    width: 61%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,6 +41,40 @@
     overflow-y: scroll;
     background-color: #1A1A1B;
 }
+
+@media screen and (max-width: 890px) {
+    .Search-Dropdown {
+        width: 50%;
+    }
+
+    .Other-Communities {
+        width: 100%;
+    }
+
+    .Site-Search {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 675px) {
+    .Search-Dropdown {
+        display: flex;
+        width: 80%;
+        align-self: center;
+        justify-self: center;
+        left: 0;
+        right: 0;
+    }
+
+    .Other-Communities {
+        width: 100%;
+    }
+
+    .Site-Search {
+        width: 50%;
+    }
+}
+
 
 
 .Search-Dropdown h3 {

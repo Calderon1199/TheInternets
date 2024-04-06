@@ -13,6 +13,34 @@
     height: 150px;
 }
 
+#right-logo {
+    word-break: keep-all;
+}
+
+/* @media screen and (max-width: 675px) {
+
+} */
+
+@media screen and (max-width: 890px) {
+
+    #right-logo {
+        display: none;
+    }
+    .Nav-Options {
+        padding-left: 0px;
+    }
+
+    .NavLinkLogo {
+        display: none;
+    }
+
+    .NavLink {
+        display: none;
+    }
+
+
+}
+
 
 .Dropdown-Info {
     padding: 0px 10px 0px 10px;
