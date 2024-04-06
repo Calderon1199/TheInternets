@@ -22,6 +22,7 @@
     }
 }
 
+
 .Post-Tile-Inner-Container:hover {
     border: 1px solid white;
 
@@ -365,3 +366,4 @@
 .Image-Switch-Container-Right-Hide {
     display: none;
 }
+

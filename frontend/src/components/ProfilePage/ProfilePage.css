@@ -40,6 +40,12 @@
     }
 }
 
+@media screen and (max-width: 430px) {
+    .Post-Tile-Container {
+        width: 100%;
+    }
+}
+
 .Profile-Type-Buttons {
     display: flex;
     align-items: center;
