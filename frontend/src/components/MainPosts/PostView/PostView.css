@@ -274,3 +274,20 @@
 .Image-Switch-Container-View-Right-Hide {
     display: none;
 }
+
+@media screen and (max-width: 430px) {
+    .Single-Post {
+        width: 100%;
+    }
+
+    .Post-View-Banner {
+        padding: 0px 22px;
+    }
+
+    #header-title {
+        font-size: 12px;
+    }
+    .Post-Back-Drop {
+        width: 100%
+    };
+}

@@ -39,7 +39,9 @@ function PostView() {
     useEffect(() => {
             const fetchData = async () => {
             const singlePost = await dispatch(getSinglePost(+postId));
-            if (user) dispatch(getAllUserLikes())
+            if (user) {
+                dispatch(getAllUserLikes())
+            }
             await dispatch(getSingleCommunity(singlePost.categoryId));
             await dispatch(getCommentsForPost(postId));
             setLoading(false);
@@ -84,7 +86,7 @@ function PostView() {
 
 
     return (
-        <div>
+        <div className='Single-Post'>
             <div className='Post-View-Banner'>
                 <div className='Like'>
                     {!loading ? (
