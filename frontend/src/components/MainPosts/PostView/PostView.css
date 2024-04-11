@@ -152,6 +152,38 @@
     align-items: center;
 }
 
+.More-Post-Options {
+    display: none;
+}
+
+
+
+@media screen and (max-width: 730px) {
+    #option-button-container2 {
+        display: none;
+    }
+    .More-Post-Options {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .More-Options-Button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .More-Options-Button:hover {
+        transition-duration: 50ms;
+        font-size: 22px;
+    }
+}
+
+
+
 .Post-Edit-Buttons {
     display: flex;
     align-items: center;
