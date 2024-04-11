@@ -34,15 +34,28 @@
     justify-content: center;
 }
 
-@media screen and (max-width: 1200px) {
+
+.Right-Profile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: 2%;
+    max-width: 30%;
+}
+/* @media screen and (max-width: 1200px) {
     .Post-Tile-Container {
         width: 75%
     }
-}
+} */
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 500px) {
     .Post-Tile-Container {
-        width: 100%;
+        width: 95%;
+    }
+    .Right-Profile {
+        display: none;
+        margin: 0;
     }
 }
 
@@ -78,12 +91,4 @@
 
 .Profile-Type-Buttons .enabled {
     border-bottom: 2px solid whitesmoke;
-}
-
-.Right-Profile {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    margin-left: 2%;
 }

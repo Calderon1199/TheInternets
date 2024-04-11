@@ -9,11 +9,11 @@
     height: fit-content;
 }
 
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
     .Comm-Widget {
         display: none;
     }
-}
+} */
 
 .Comm-Widget2 {
     display: flex;
