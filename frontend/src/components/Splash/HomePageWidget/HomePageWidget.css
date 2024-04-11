@@ -21,7 +21,7 @@
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .Home-Widget-Container {
         display: none;
     }

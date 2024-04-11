@@ -22,6 +22,7 @@
     }
 }
 
+
 .Post-Tile-Inner-Container:hover {
     border: 1px solid white;
 
@@ -71,7 +72,7 @@
 }
 
 #time-stamp {
-    width: 70%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -95,6 +96,7 @@
 
 #group-name:hover {
     text-decoration: underline;
+    color: #8ff0a4;
 }
 
 #post-owner-name:hover {
@@ -111,6 +113,7 @@
     flex-direction: row;
     width: fit-content;
     word-break: keep-all;
+    font-size: 13px;
 }
 
 .Post-Text-Tile-Container {

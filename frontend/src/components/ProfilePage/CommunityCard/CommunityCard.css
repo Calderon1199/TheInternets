@@ -5,7 +5,7 @@
     border: 1px solid gray;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .User-Comm-Container {
         display: none;
     }

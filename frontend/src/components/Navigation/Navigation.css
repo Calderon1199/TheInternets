@@ -13,6 +13,41 @@
     height: 150px;
 }
 
+#right-logo {
+    word-break: keep-all;
+}
+
+/* @media screen and (max-width: 675px) {
+
+} */
+
+.NavLink2 {
+    display: none;
+}
+
+@media screen and (max-width: 890px) {
+
+    #right-logo {
+        display: none;
+    }
+    .Nav-Options {
+        padding-left: 0px;
+    }
+
+    .NavLinkLogo {
+        display: none;
+    }
+
+    .NavLink {
+        display: none;
+    }
+    .NavLink2 {
+        display: block;
+        color: white;
+        font-size: 20px;
+    }
+}
+
 
 .Dropdown-Info {
     padding: 0px 10px 0px 10px;
@@ -128,16 +163,51 @@
 }
 
 .Profile-Img img{
-    width: 50px;
     height: 30px;
-    margin-right: 5%;
+    width: 40px;
+    /* margin-right: 5%; */
     border-radius: 100%;
     object-fit: cover;
 }
 
 .Profile-Img p {
-    width: 100%;
+    width: 100px;
     font-size: 16px;
+}
+
+@media screen and (max-width: 1135px) {
+    .Profile-Img p {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .Profile-Img p {
+        display: none;
+    }
+
+    .Profile-Button Button:hover {
+        border: none;
+    }
+
+    .profile-dropdown {
+        position: absolute;
+        top: 49px;
+        right: 0px;
+    }
+
+    #profile-chevron {
+        display: none;
+    }
+
+    .Profile-Img img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .profile-button {
+        border: none;
+    }
 }
 
 .Profile-Img i {

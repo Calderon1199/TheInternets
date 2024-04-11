@@ -44,6 +44,9 @@ function Navigation() {
             <h4 className="NavLink" onClick={handleNavLinkClick}>
               Create a post
             </h4>
+            <h4 className="NavLink2" onClick={handleNavLinkClick}>
+              <i class="fa-solid fa-plus"></i>
+            </h4>
           </li>
           <li className="Profile-Button-Container">
             {user ? (

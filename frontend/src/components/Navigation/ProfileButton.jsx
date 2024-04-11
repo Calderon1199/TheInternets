@@ -62,7 +62,7 @@ function ProfileButton() {
             <h3>...loading</h3>
           )}
         </div>
-        <i className="fa-solid fa-chevron-down"></i>
+        <i className="fa-solid fa-chevron-down" id="profile-chevron"></i>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
