@@ -37,13 +37,13 @@ function PostTile({ posts, isProfile }) {
           return commentsComparison !== 0 ? commentsComparison : a.id % 2 === 0 ? 1 : -1;
         })
         setPosts(sortedPosts)
-    } else if (type === 'like'){
-        const sortedLikes = posts
-        .filter(post => post.Likes && post.Likes.length > 0 && post.Likes[0].isLiked === true)
-        .sort((a, b) => b.Likes.length - a.Likes.length);
-        setPosts(sortedLikes)
+        } else if (type === 'like'){
+            const sortedLikes = posts
+            .filter(post => post.Likes && post.Likes.length > 0 && post.Likes[0].isLiked === true)
+            .sort((a, b) => b.Likes.length - a.Likes.length);
+            setPosts(sortedLikes)
+        }
     }
-}
 
     useEffect(() => {
         setPosts(posts);
@@ -191,7 +191,7 @@ function PostTile({ posts, isProfile }) {
                         </div>
                         </div>
                         {post.userId === user?.id && (
-                        <div className='Option-Button-Container'>
+                        <div className='Option-Button-Container' id='option-button-container2'>
                             <button onClick={() => setModalContent(<DeletePostModal post={post}/>)}>
                             Remove Post
                             </button>
@@ -202,6 +202,9 @@ function PostTile({ posts, isProfile }) {
                             )}
                         </div>
                         )}
+                        <div className='More-Post-Options'>
+                            <button className='More-Options-Button'><i class="fa-solid fa-ellipsis"></i></button>
+                        </div>
                     </div>
                     </div>
                 ))}
