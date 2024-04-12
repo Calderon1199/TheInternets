@@ -48,17 +48,6 @@
         width: 75%
     }
 } */
-
-@media screen and (max-width: 500px) {
-    .Post-Tile-Container {
-        width: 95%;
-    }
-    .Right-Profile {
-        display: none;
-        margin: 0;
-    }
-}
-
 .Profile-Type-Buttons {
     display: flex;
     align-items: center;
@@ -84,6 +73,28 @@
     height: 100%;
     width: fit-content;
 }
+
+@media screen and (max-width: 500px) {
+    .Post-Tile-Container {
+        width: 95%;
+    }
+    .Right-Profile {
+        display: none;
+        margin: 0;
+    }
+    .Profile-Type-Buttons {
+        padding: 0;
+        font-size: 10px;
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .Profile-Type-Buttons button {
+        font-size: 15px;
+    }
+}
+
+
 
 .Profile-Type-Buttons button:hover {
     color: white;
