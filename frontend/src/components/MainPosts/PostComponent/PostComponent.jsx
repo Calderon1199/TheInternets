@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useModal } from '../../../context/Modal';
 import DeletePostModal from '../DeletePostModal';
@@ -16,34 +16,49 @@ function PostTile({ posts, isProfile }) {
 
     const [loading, setLoading] = useState(true);
     const [postText, setPostText] = useState({});
+    const [sort, setSort] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState([]);
     const [editing, setEditing] = useState({});
     const [newPosts, setPosts] = useState();
     const [type, setType] = useState();
 
     const navigate = useNavigate();
+    const dropdownRef = useRef(null);
     const { setModalContent } = useModal();
     const dispatch = useDispatch();
 
     const sortNew = (type) => {
         setType(type);
-        if (type === 'new') {
+        if (type === 'New') {
             setPosts(posts.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-        } else if (type === 'old') {
+        } else if (type === 'Old') {
             setPosts(posts.slice().sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)));
-        } else if (type === 'con'){
+        } else if (type === 'Controversial'){
             const sortedPosts = posts.slice().sort((a, b) => {
           const commentsComparison = b.Comments?.length - a.Comments?.length;
           return commentsComparison !== 0 ? commentsComparison : a.id % 2 === 0 ? 1 : -1;
         })
         setPosts(sortedPosts)
-        } else if (type === 'like'){
+        } else if (type === 'Most Liked'){
             const sortedLikes = posts
             .filter(post => post.Likes && post.Likes.length > 0 && post.Likes[0].isLiked === true)
             .sort((a, b) => b.Likes.length - a.Likes.length);
             setPosts(sortedLikes)
         }
     }
+
+    useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setSort(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     useEffect(() => {
         setPosts(posts);
@@ -83,10 +98,19 @@ function PostTile({ posts, isProfile }) {
             <div className='Post-Tile-Container'>
                 {user && !isProfile && <CreatePostInput user={user} />}
                 <div className='Sort-Button-Container'>
-                <button onClick={() => sortNew('new')} className={type === 'new' ? "enabled" : "disabled"}>New</button>
-                <button onClick={() => sortNew('old')} className={type === 'old' ? "enabled" : "disabled"}>Old</button>
-                <button onClick={() => sortNew('like')} className={type === 'like' ? "enabled" : "disabled"}>Most Liked</button>
-                <button onClick={() => sortNew('con')} className={type === 'con' ? "enabled" : "disabled"}>Controversial</button>
+                    <button onClick={() => sortNew('New')} className={type === 'New' ? "enabled" : "disabled"}>New</button>
+                    <button onClick={() => sortNew('Old')} className={type === 'Old' ? "enabled" : "disabled"}>Old</button>
+                    <button onClick={() => sortNew('Most Liked')} className={type === 'Most Liked' ? "enabled" : "disabled"}>Most Liked</button>
+                    <button onClick={() => sortNew('Controversial')} className={type === 'Controversial' ? "enabled" : "disabled"}>Controversial</button>
+                    <button className='Sort-Dropdown enabled1' onClick={() => setSort(!sort)}>{`${type ? type : 'Sort'}`} <i class="fa-solid fa-sort-down"></i></button>
+                    {sort && (
+                        <div className='Sort-Dropdown-Buttons' ref={dropdownRef}>
+                            <button onClick={() => { sortNew('New'); setSort(false); }}><i class="fa-solid fa-rocket"></i> New</button>
+                            <button onClick={() => { sortNew('Old'); setSort(false); }}><i class="fa-brands fa-pied-piper-hat"></i> Old</button>
+                            <button onClick={() => { sortNew('Most Liked'); setSort(false); }}><i class="fa-solid fa-heart"></i> Most Liked</button>
+                            <button onClick={() => { sortNew('Controversial'); setSort(false); }}><i class="fa-solid fa-fire-flame-curved"></i> Controversial</button>
+                        </div>
+                    )}
                 </div>
                 {!loading &&
                 newPosts?.map((post) => (
