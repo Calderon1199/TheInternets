@@ -12,11 +12,31 @@
     justify-content: center;
 }
 
+.Single-Post-Inner-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    background-color: #1a1a1b;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
 @media screen and (max-width: 1000px) {
     .Single-Post-Container {
         margin-right: 5%;
-        width: 100%;
+        width: 100%
     }
+}
+
+@media screen and (max-width: 400px) {
+    .Single-Post-Container {
+        width: 80%;
+    }
+
 }
 
 #Like-Load {
@@ -72,19 +92,6 @@
 
 .Post-View-Banner p {
     margin: 0px;
-}
-
-.Single-Post-Inner-Container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 100%;
-    background-color: #1a1a1b;
-    overflow: hidden;
-    margin: 10px 0;
 }
 
 .Single-Post-Info-Container {
@@ -313,11 +320,14 @@
     }
 
     .Post-View-Banner {
-        padding: 0px 22px;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 96%;
     }
 
     #header-title {
-        font-size: 12px;
+        font-size: 10px;
+        width: 50%;
     }
     .Post-Back-Drop {
         width: 100%
