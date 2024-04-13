@@ -32,9 +32,16 @@
     }
 }
 
+@media screen and (max-width: 578px) {
+    .Single-Post-Container {
+            width: 80%;
+    }
+}
+
 @media screen and (max-width: 400px) {
     .Single-Post-Container {
-        width: 80%;
+        width: 79%;
+        padding: 0 5%;
     }
 
 }
@@ -322,7 +329,8 @@
     .Post-View-Banner {
         padding-left: 10px;
         padding-right: 10px;
-        width: 96%;
+        width: 94.3%;
+        margin: 0;
     }
 
     #header-title {
